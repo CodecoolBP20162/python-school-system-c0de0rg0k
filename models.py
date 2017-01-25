@@ -5,7 +5,7 @@ from set_connection import SetConnection
 # database name = should be your username on your laptop
 # database user = should be your username on your laptop
 
-connected = SetConnection
+connected = SetConnection()
 
 db = PostgresqlDatabase(connected.username, user=connected.username)
 
@@ -20,36 +20,36 @@ class School(BaseModel):
     city = CharField()
 
 
+class City(BaseModel):
+    city_name = CharField()
+    nearest_school = ForeignKeyField(School, related_name='city_school_cities')
+
+
 class Applicant(BaseModel):
     first_name = CharField()
     last_name = CharField()
-    applicant_city = ForeignKeyField(City, related='city_name')
+    applicant_city = ForeignKeyField(City, related_name='applicant_city_city_name')
     applicant_code = CharField()
-    applied_school = ForeignKeyField(School, related_name='id')
+    applied_school = CharField()
     status = CharField()
-
-
-class City(BaseModel):
-    city_name = PrimaryKeyField()
-    nearest_school = ForeignKeyField(School, related='id')
 
 
 class Mentor(BaseModel):
     first_name = CharField()
     last_name = CharField()
-    school = ForeignKeyField(School, related='id')
+    school = ForeignKeyField(School, related_name='mentor_school_city')
 
 
 class InterviewSlot(BaseModel):
     start_time = DateField()
     end_time = DateField()
     reserved = CharField()
-    mentor = ForeignKeyField(Mentor, related='id')
+    mentor = ForeignKeyField(Mentor, related_name='interviewslot_mentor_id')
 
 
 class Interview(BaseModel):
-    slot_id = ForeignKeyField(InterviewSlot, related='id')
-    applicant_code = ForeignKeyField(Applicant, related='applicant_code')
+    slot_id = ForeignKeyField(InterviewSlot, related_name='interview_interviewslot_id')
+    applicant_code = ForeignKeyField(Applicant, related_name='interview_applicant_code')
 
 
 
