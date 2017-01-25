@@ -17,16 +17,16 @@ class BaseModel(Model):
 
 
 class School(BaseModel):
-    name = CharField()
     city = CharField()
 
 
 class Applicant(BaseModel):
     first_name = CharField()
     last_name = CharField()
-    applicant_city = CharField()
+    applicant_city = ForeignKeyField(City, related='city_name')
     applicant_code = CharField()
     applied_school = ForeignKeyField(School, related_name='id')
+    status = CharField()
 
 
 class City(BaseModel):
@@ -40,7 +40,7 @@ class Mentor(BaseModel):
     school = ForeignKeyField(School, related='id')
 
 
-class Interview_slot(BaseModel):
+class InterviewSlot(BaseModel):
     start_time = DateField()
     end_time = DateField()
     reserved = CharField()
@@ -48,9 +48,8 @@ class Interview_slot(BaseModel):
 
 
 class Interview(BaseModel):
-    date_time = DateField()
-    applicant_code = CharField()
-    applicant_name = CharField()
-    mentor = ForeignKeyField(Mentor, related='id')
+    slot_id = ForeignKeyField(InterviewSlot, related='id')
+    applicant_code = ForeignKeyField(Applicant, related='applicant_code')
+
 
 
