@@ -2,11 +2,12 @@
 
 from models import *
 
+# Update the school table
+CC_Budapest = School.create(city='Budapest')
+CC_Miskolc = School.create(city='Miskolc')
+CC_Krakow = School.create(city='Krakow')
 
-CC_Budapest = School.create( city='Budapest')
-CC_Miskolc = School.create( city='Miskolc')
-CC_Krakow = School.create( city='Krakow')
-
+# Update the city table
 Budapest = City.create(city_name='Budapest', nearest_school=CC_Budapest)
 Vac = City.create(city_name='Vác', nearest_school=CC_Budapest)
 Erd = City.create(city_name='Érd', nearest_school=CC_Budapest)
@@ -24,7 +25,8 @@ Wadowice = City.create(city_name='Wadowice', nearest_school=CC_Krakow)
 Zawoja = City.create(city_name='Zawoja', nearest_school=CC_Krakow)
 Iwkowa = City.create(city_name='Iwkowa', nearest_school=CC_Krakow)
 
-Zozi =  Mentor.create(first_name='A', last_name='Zozi', school=CC_Budapest)
+# Update the mentor table
+Zozi = Mentor.create(first_name='A', last_name='Zozi', school=CC_Budapest)
 Immi = Mentor.create(first_name='B', last_name='Immi', school=CC_Budapest)
 Laci = Mentor.create(first_name='C', last_name='Laci', school=CC_Budapest)
 Matyi = Mentor.create(first_name='D', last_name='Matyi', school=CC_Budapest)
@@ -36,27 +38,70 @@ Agnieszka = Mentor.create(first_name='I', last_name='Agnieszka', school=CC_Krako
 Marcin = Mentor.create(first_name='H', last_name='Marcin', school=CC_Krakow)
 Mateusz = Mentor.create(first_name='J', last_name='Mateusz', school=CC_Krakow)
 
-Kovacs_Bela = Applicant.create(first_name='Béla', last_name='Kovács', applicant_city='Eger', applicant_code='', applied_school='', status='')
-Keli_Geri = Applicant.create(first_name='Geri', last_name='Keli', applicant_city='Vac', applicant_code='', applied_school='', status='')
-Kovari_Ivett = Applicant.create(first_name='Ivett', last_name='Kővári', applicant_city='Tokaj', applicant_code='', applied_school='', status='')
-Szucs_Zoltan = Applicant.create(first_name='Zoltán', last_name='Szűcs', applicant_city='Eger', applicant_code='', applied_school='', status='')
-Toth_Lajos = Applicant.create(first_name='Lajos', last_name='Tóth', applicant_city='Miskolc', applicant_code='', applied_school='', status='')
-Lompos_Ferenc = Applicant.create(first_name='Ferenc', last_name='Lompos', applicant_city='Budapest', applicant_code='', applied_school='', status='')
-Pinter_Akos = Applicant.create(first_name='Ákos', last_name='Pintér', applicant_city='Tiszaújváros', applicant_code='', applied_school='', status='')
-Egri_Laura = Applicant.create(first_name='Laura', last_name='Egri', applicant_city='Szerencs', applicant_code='', applied_school='', status='')
-Pici_Kati = Applicant.create(first_name='Kati', last_name='Pici', applicant_city='Budapest', applicant_code='', applied_school='', status='')
-Toth_Kriszti = Applicant.create(first_name='Kriszti', last_name='Tóth', applicant_city='Budapest', applicant_code='', applied_school='', status='')
-Varga_Dora = Applicant.create(first_name='Dora', last_name='Varga', applicant_city='Vac', applicant_code='', applied_school='', status='')
-Tahin_Nora = Applicant.create(first_name='Nora', last_name='Tahin', applicant_city='Tokaj', applicant_code='', applied_school='', status='')
-Molnar_Mari = Applicant.create(first_name='Mari', last_name='Molnár', applicant_city='Eger', applicant_code='', applied_school='', status='')
-Toth_Lilla = Applicant.create(first_name='Lilla', last_name='Tóth', applicant_city='Miskolc', applicant_code='', applied_school='', status='')
-Lompos_Fanni = Applicant.create(first_name='Fanni', last_name='Lompos', applicant_city='Budapest', applicant_code='', applied_school='', status='')
-Pinter_Adri = Applicant.create(first_name='Adri', last_name='Pintér', applicant_city='Tiszaújváros', applicant_code='', applied_school='', status='')
-Egri_Agi = Applicant.create(first_name='Agi', last_name='Egri', applicant_city='Szerencs', applicant_code='', applied_school='', status='')
-Pap_Mira = Applicant.create(first_name='Mira', last_name='Pap', applicant_city='Budapest', applicant_code='', applied_school='', status='')
-Mrszky_Weronika = Applicant.create(first_name='Weronika', last_name='Mrszky', applicant_city='Krakow', applicant_code='', applied_school='', status='')
-Zrsky_Magdalena = Applicant.create(first_name='Magdalena', last_name='Zrsky', applicant_city='Krakow', applicant_code='', applied_school='', status='')
-Trsky_Lena = Applicant.create(first_name='Lena', last_name='Trsky', applicant_city='Krakow', applicant_code='', applied_school='', status='')
-Knilky_Karolina = Applicant.create(first_name='Karolina', last_name='Knilky', applicant_city='Wadowice', applicant_code='', applied_school='', status='')
-Zrwzky_Nadia = Applicant.create(first_name='Nadia', last_name='Zrwzky', applicant_city='Zawoja', applicant_code='', applied_school='', status='')
-Trwurinsky_Milena = Applicant.create(first_name='Milena', last_name='Trwurinsky', applicant_city='Katowice', applicant_code='', applied_school='', status='')
+# Update the interviewslot table
+slot1 = InterviewSlot.create(start_time=datetime(2017, 1, 16, 12, 00),
+                             end_time=datetime(2017, 1, 16, 13, 00),
+                             reserved=True, mentor=Zozi)
+slot2 = InterviewSlot.create(start_time=datetime(2017, 1, 16, 14, 00),
+                             end_time=datetime(2017, 1, 16, 15, 00),
+                             reserved=True, mentor=Matyi)
+slot3 = InterviewSlot.create(start_time=datetime(2017, 1, 30, 12, 00),
+                             end_time=datetime(2017, 1, 30, 13, 00),
+                             reserved=False, mentor=Immi)
+slot4 = InterviewSlot.create(start_time=datetime(2017, 1, 30, 14, 00),
+                             end_time=datetime(2017, 1, 30, 15, 00),
+                             reserved=False, mentor=Laci)
+slot5 = InterviewSlot.create(start_time=datetime(2017, 1, 30, 12, 00),
+                             end_time=datetime(2017, 1, 30, 13, 00),
+                             reserved=False, mentor=Robi)
+slot6 = InterviewSlot.create(start_time=datetime(2017, 1, 30, 14, 00),
+                             end_time=datetime(2017, 1, 30, 15, 00),
+                             reserved=False, mentor=Imre)
+slot7 = InterviewSlot.create(start_time=datetime(2017, 1, 30, 12, 00),
+                             end_time=datetime(2017, 1, 30, 13, 00),
+                             reserved=False, mentor=Attila)
+slot8 = InterviewSlot.create(start_time=datetime(2017, 1, 30, 14, 00),
+                             end_time=datetime(2017, 1, 30, 15, 00),
+                             reserved=False, mentor=Pál)
+slot9 = InterviewSlot.create(start_time=datetime(2017, 1, 30, 12, 00),
+                             end_time=datetime(2017, 1, 30, 13, 00),
+                             reserved=False, mentor=Agnieszka)
+slot10 = InterviewSlot.create(start_time=datetime(2017, 1, 30, 14, 00),
+                              end_time=datetime(2017, 1, 30, 15, 00),
+                              reserved=False, mentor=Marcin)
+slot11 = InterviewSlot.create(start_time=datetime(2017, 1, 30, 14, 00),
+                              end_time=datetime(2017, 1, 30, 15, 00),
+                              reserved=False, mentor=Mateusz)
+slot12 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 12, 00),
+                              end_time=datetime(2017, 2, 16, 13, 00),
+                              reserved=False, mentor=Zozi)
+slot13 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 14, 00),
+                              end_time=datetime(2017, 2, 16, 15, 00),
+                              reserved=False, mentor=Matyi)
+slot14 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 12, 00),
+                              end_time=datetime(2017, 2, 16, 13, 00),
+                              reserved=False, mentor=Immi)
+slot15 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 14, 00),
+                              end_time=datetime(2017, 2, 16, 15, 00),
+                              reserved=False, mentor=Laci)
+slot16 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 12, 00),
+                              end_time=datetime(2017, 2, 16, 13, 00),
+                              reserved=False, mentor=Robi)
+slot17 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 14, 00),
+                              end_time=datetime(2017, 2, 16, 15, 00),
+                              reserved=False, mentor=Imre)
+slot18 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 12, 00),
+                              end_time=datetime(2017, 2, 16, 13, 00),
+                              reserved=False, mentor=Attila)
+slot19 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 14, 00),
+                              end_time=datetime(2017, 2, 16, 15, 00),
+                              reserved=False, mentor=Pál)
+slot20 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 12, 00),
+                              end_time=datetime(2017, 2, 16, 13, 00),
+                              reserved=False, mentor=Agnieszka)
+slot21 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 14, 00),
+                              end_time=datetime(2017, 2, 16, 15, 00),
+                              reserved=False, mentor=Marcin)
+slot22 = InterviewSlot.create(start_time=datetime(2017, 2, 16, 14, 00),
+                              end_time=datetime(2017, 2, 16, 15, 00),
+                              reserved=False, mentor=Mateusz)
