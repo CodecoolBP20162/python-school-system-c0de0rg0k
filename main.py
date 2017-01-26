@@ -1,5 +1,8 @@
 import os
 from applicants_status import applicants_status
+from build import BuildTable
+from example_data import GenerateExampleData
+from new_applicants import GenerateApplicants
 
 
 def clear_sreen():
@@ -23,25 +26,34 @@ def main():
             clear_sreen()
             chosen_administrator_menu = 'q'
             while chosen_administrator_menu != 0:
-                print("- - - School system - Administrator Menu - - -")
-                print("1. ")
-                print("2. ")
-                print("3. ")
+                print("\n- - - School system - Administrator Menu - - -")
+                print("1. Create tables")
+                print("2. Generate data")
+                print("3. Generate applicants")
                 print("0. Exit")
                 print("-------------------------------------")
                 chosen_administrator_menu = int(input("Please choose an Administrator menu number: "))
 
                 if chosen_administrator_menu == 1:
-                    # call administrator menu
-                    pass
+                    try:
+                        BuildTable()
+                        print("Tables created succcessfully")
+                    except:
+                        print("I can't create tables")
 
                 elif chosen_administrator_menu == 2:
-                    # call administrator menu
-                    pass
+                    try:
+                        GenerateExampleData()
+                        print("Data successfully generated and inserted")
+                    except:
+                        print("I can't Generate example data")
 
                 elif chosen_administrator_menu == 3:
-                    # call administrator menu
-                    pass
+                    try:
+                        GenerateApplicants()
+                        print("Applicants data successfully generated and inserted")
+                    except:
+                        print("I can't Generate applicants")
 
                 elif chosen_administrator_menu == 0:
                     clear_sreen()
