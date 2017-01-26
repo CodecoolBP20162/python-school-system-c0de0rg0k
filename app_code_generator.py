@@ -8,8 +8,8 @@ class GenerateAppCode:
     """This class generate the application code"""
 
     def __init__(self):
-        # First, generate the application_code, then compare the earlier password with the current and
-        # append the current to the earlier password list
+        # First, generate the application_code, then compare the earlier password
+        # if tha current app code equal with the earlier, generate a new one
         self.__earlier_app_code = []
         self.__query_the_earliest_app_code()
         self.__is_valid_pass = False
@@ -30,7 +30,8 @@ class GenerateAppCode:
         self.__check_earlier_app_code()
 
     def __check_earlier_app_code(self):
-        # if the current password in the earlier, add plus 1 to the current
+        # if the current password in the earlier,call the code generator again,
+        # what check the earlier app code again
         while self.__is_valid_pass is False:
             if self.application_code not in self.__earlier_app_code:
                 self.__is_valid_pass = True
