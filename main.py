@@ -43,6 +43,7 @@ def main():
                     pass
 
                 elif chosen_administrator_menu == 0:
+                    clear_sreen()
                     break
 
                 else:
@@ -75,6 +76,7 @@ def main():
                     pass
 
                 elif chosen_mentor_menu == 0:
+                    clear_sreen()
                     break
 
                 else:
@@ -105,6 +107,7 @@ def main():
                     pass
 
                 elif chosen_menu == 0:
+                    clear_sreen()
                     break
 
                 else:
