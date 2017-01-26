@@ -30,7 +30,7 @@ class Applicant(BaseModel):
     last_name = CharField()
     applicant_city = CharField()
     applicant_code = CharField(null=True)
-    applied_school = ForeignKeyField(School, null=True, related_name='school_ids')
+    applied_school = ForeignKeyField(School, null=True, related_name='applicants')
     status = CharField(null=True)
 
 
