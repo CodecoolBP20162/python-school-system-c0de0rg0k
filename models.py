@@ -41,12 +41,12 @@ class Mentor(BaseModel):
 
 
 class InterviewSlot(BaseModel):
-    start_time = DateField()
-    end_time = DateField()
+    start_time = DateTimeField()
+    end_time = DateTimeField()
     reserved = CharField()
     mentor = ForeignKeyField(Mentor, related_name='interviewslot_mentor_id')
 
 
 class Interview(BaseModel):
-    slot_id = ForeignKeyField(InterviewSlot, related_name='interview_interviewslot_id')
+    slot_id = ForeignKeyField(InterviewSlot, null=True, related_name='interview_interviewslot_id')
     applicant_code = ForeignKeyField(Applicant, related_name='interview_applicant_code')
