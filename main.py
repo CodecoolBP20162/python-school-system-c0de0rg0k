@@ -3,6 +3,7 @@ from applicants_status import applicants_status
 from build import BuildTable
 from example_data import GenerateExampleData
 from new_applicants import GenerateApplicants
+from applicants_school import applicants_school
 
 
 def clear_sreen():
@@ -113,8 +114,9 @@ def main():
                     print("Your application status is", status)
 
                 elif chosen_applicant_menu == 2:
-                    # call applicant menu
-                    pass
+                    app_code = input("Please tell me your application code: ")
+                    school = applicants_school(app_code)
+                    print("Your applied school is", school.city)
 
                 elif chosen_applicant_menu == 3:
                     # call applicant menu
