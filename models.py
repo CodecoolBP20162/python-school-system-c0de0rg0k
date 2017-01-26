@@ -43,7 +43,7 @@ class Mentor(BaseModel):
 class InterviewSlot(BaseModel):
     start_time = DateTimeField()
     end_time = DateTimeField()
-    reserved = CharField()
+    reserved = BooleanField()
     mentor = ForeignKeyField(Mentor, related_name='interviewslot_mentor_id')
 
 
