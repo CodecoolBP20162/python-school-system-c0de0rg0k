@@ -98,7 +98,7 @@ def main():
                 if chosen_applicant_menu == 1:
                     app_code = input("Please tell me your application code: ")
                     status = applicants_status(app_code)
-                    print("Your application status is ", status)
+                    print("Your application status is", status)
 
                 elif chosen_applicant_menu == 2:
                     # call applicant menu
