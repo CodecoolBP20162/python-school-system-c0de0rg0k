@@ -28,10 +28,10 @@ class City(BaseModel):
 class Applicant(BaseModel):
     first_name = CharField()
     last_name = CharField()
-    applicant_city = ForeignKeyField(City, related_name='applicant_city_city_name')
-    applicant_code = CharField()
-    applied_school = ForeignKeyField(School, related_name='school_ids')
-    status = CharField()
+    applicant_city = CharField()
+    applicant_code = CharField(null=True)
+    applied_school = ForeignKeyField(School, null=True, related_name='school_ids')
+    status = CharField(null=True)
 
 
 class Mentor(BaseModel):
@@ -50,6 +50,3 @@ class InterviewSlot(BaseModel):
 class Interview(BaseModel):
     slot_id = ForeignKeyField(InterviewSlot, related_name='interview_interviewslot_id')
     applicant_code = ForeignKeyField(Applicant, related_name='interview_applicant_code')
-
-
-
