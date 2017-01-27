@@ -4,7 +4,6 @@ from build import BuildTable
 from example_data import GenerateExampleData
 from new_applicants import GenerateApplicants
 from applicants_school import applicants_school
-#from sort_applicants import sort_applicants
 from closest_interview import ApplicantGenerator
 from applicant_interview_details import *
 from applicant_interview_date import MentorInterviewDate
@@ -69,38 +68,6 @@ def main():
                     except:
                         print("Something went wrong. I can't generate interview dates to applicants")
 
-                elif chosen_administrator_menu == 5:
-                    clear_sreen()
-                    print("\n- - - School system - Administrator Menu - Sort applicants - - -\n-------------------------------------")
-                    print("1. By Status")
-                    print("2. By Time")
-                    print("3. By Location")
-                    print("4. By Personal data (name, email)")
-                    print("5. By School")
-                    print("6. By Mentor name")
-                    print("0. Exit")
-                    print("-------------------------------------")
-                    chosen_sort_menu = input("Choose a menu number to sort applicants: ")
-                    if chosen_sort_menu == 1:
-                        ordered_applicants = sort_applicants("status")
-                    elif chosen_sort_menu == 2:
-                        pass
-                    elif chosen_sort_menu == 3:
-                        ordered_applicants = sort_applicants()
-                        print(ordered_applicants)
-                        for applicant in ordered_applicants:
-                            print(applicant.id, applicant.first_name, applicant.last_name, applicant.applicant_city /
-                                  applicant.applicant_code, applicant.status)
-                    elif chosen_sort_menu == 4:
-                        pass
-                    elif chosen_sort_menu == 5:
-                        pass
-                    elif chosen_sort_menu == 6:
-                        pass
-                    elif chosen_sort_menu == 0:
-                        clear_sreen()
-                        break
-
                 elif chosen_administrator_menu == 0:
                     clear_sreen()
                     break
@@ -116,8 +83,6 @@ def main():
             while chosen_mentor_menu != 0:
                 print("\n- - - School system - Mentor Menu - - -\n-------------------------------------")
                 print("1. Interviews")
-                print("2. ")
-                print("3. ")
                 print("0. Exit")
                 print("-------------------------------------")
                 chosen_mentor_menu = int(input("Please choose a Mentor menu number: "))
@@ -127,14 +92,6 @@ def main():
                         MentorInterviewDate(mentor_id)
                     except:
                         print("There is no mentor with that id")
-
-                elif chosen_mentor_menu == 2:
-                    # call mentor menu
-                    pass
-
-                elif chosen_mentor_menu == 3:
-                    # call mentor menu
-                    pass
 
                 elif chosen_mentor_menu == 0:
                     clear_sreen()
@@ -151,7 +108,6 @@ def main():
                 print("1. Interview details")
                 print("2. Status details")
                 print("3. School details")
-                print("4. Questions")
                 print("0. Exit")
                 print("-------------------------------------")
                 chosen_applicant_menu = int(input("Please choose an Applicant menu number: "))
