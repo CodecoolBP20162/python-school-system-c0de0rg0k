@@ -7,6 +7,7 @@ from applicants_school import applicants_school
 #from sort_applicants import sort_applicants
 from closest_interview import ApplicantGenerator
 from applicant_interview_details import *
+from applicant_interview_date import MentorInterviewDate
 
 
 def clear_sreen():
@@ -114,16 +115,18 @@ def main():
             chosen_mentor_menu = 'q'
             while chosen_mentor_menu != 0:
                 print("\n- - - School system - Mentor Menu - - -\n-------------------------------------")
-                print("1. ")
+                print("1. Interviews")
                 print("2. ")
                 print("3. ")
                 print("0. Exit")
                 print("-------------------------------------")
                 chosen_mentor_menu = int(input("Please choose a Mentor menu number: "))
-
                 if chosen_mentor_menu == 1:
-                    # call mentor menu
-                    pass
+                    mentor_id = int(input("Please tell me your mentor id: "))
+                    try:
+                        MentorInterviewDate(mentor_id)
+                    except:
+                        print("There is no mentor with that id")
 
                 elif chosen_mentor_menu == 2:
                     # call mentor menu
