@@ -2,7 +2,7 @@ from models import *
 
 #Write the queries, which give back the applicants's school, date time and the interviewing mentor name
 
-def Interview_details():
+def interview_details():
     application_code = input("Please, enter your application code: ")
     query = Interview.select().join(Applicant).where(Applicant.applicant_code==application_code)
     if len(query)==0:
