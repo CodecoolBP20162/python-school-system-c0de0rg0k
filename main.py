@@ -110,13 +110,19 @@ def main():
 
                 if chosen_applicant_menu == 1:
                     app_code = input("Please tell me your application code: ")
-                    status = applicants_status(app_code)
-                    print("Your application status is", status)
+                    try:
+                        status = applicants_status(app_code)
+                        print("Your application status is", status)
+                    except:
+                        print("There is no application code like that in the database. Please try again")
 
                 elif chosen_applicant_menu == 2:
                     app_code = input("Please tell me your application code: ")
-                    school = applicants_school(app_code)
-                    print("Your applied school is", school.city)
+                    try:
+                        school = applicants_school(app_code)
+                        print("Your applied school is", school.city)
+                    except:
+                        print("There is no application code like that in the database. Please try again")
 
                 elif chosen_applicant_menu == 3:
                     # call applicant menu
