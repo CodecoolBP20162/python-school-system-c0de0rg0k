@@ -1,5 +1,5 @@
 import os
-#from applicants_status import applicants_status
+from applicants_status import applicants_status
 from build import BuildTable
 from example_data import GenerateExampleData
 from new_applicants import GenerateApplicants
@@ -148,26 +148,31 @@ def main():
             chosen_applicant_menu = 'q'
             while chosen_applicant_menu != 0:
                 print("\n- - - School system - Applicant Menu - - -\n-------------------------------------")
-                print("1. Application details")
-                print("2. School details")
-                print("3. Questions")
+                print("1. Interview details")
+                print("2. Status details")
+                print("3. School details")
+                print("4. Questions")
                 print("0. Exit")
                 print("-------------------------------------")
                 chosen_applicant_menu = int(input("Please choose an Applicant menu number: "))
 
                 if chosen_applicant_menu == 1:
-                        Interview_details()
-
+                    interview_details()
                 elif chosen_applicant_menu == 2:
+                    application_code = input("Please, enter your application code: ")
                     try:
-                        pass
+                        status = applicants_status(application_code)
+                        print("Your application status is", status)
                     except:
                         print("There is no application code like that in the database. Please try again")
 
                 elif chosen_applicant_menu == 3:
-                    # call applicant menu
-                    pass
-
+                    application_code = input("Please, enter your application code: ")
+                    try:
+                        school = applicants_school(application_code)
+                        print("Your applied school is", school.city)
+                    except:
+                        print("There is no application code like that in the database. Please try again")
                 elif chosen_applicant_menu == 0:
                     clear_sreen()
                     break
