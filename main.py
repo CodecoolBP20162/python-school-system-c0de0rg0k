@@ -35,7 +35,6 @@ def main():
                 print("2. Generate data")
                 print("3. Generate applicants")
                 print("4. Generate interview date to applicants")
-                print("5. List all applicants")
                 print("0. Exit")
                 print("-------------------------------------")
                 chosen_administrator_menu = int(input("Please choose an Administrator menu number: "))
