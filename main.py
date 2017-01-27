@@ -1,11 +1,12 @@
 import os
-from applicants_status import applicants_status
+#from applicants_status import applicants_status
 from build import BuildTable
 from example_data import GenerateExampleData
 from new_applicants import GenerateApplicants
 from applicants_school import applicants_school
-from sort_applicants import sort_applicants
+#from sort_applicants import sort_applicants
 from closest_interview import ApplicantGenerator
+from applicant_interview_details import *
 
 
 def clear_sreen():
@@ -152,18 +153,11 @@ def main():
                 chosen_applicant_menu = int(input("Please choose an Applicant menu number: "))
 
                 if chosen_applicant_menu == 1:
-                    app_code = input("Please tell me your application code: ")
-                    try:
-                        status = applicants_status(app_code)
-                        print("Your application status is", status)
-                    except:
-                        print("There is no application code like that in the database. Please try again")
+                        Interview_details()
 
                 elif chosen_applicant_menu == 2:
-                    app_code = input("Please tell me your application code: ")
                     try:
-                        school = applicants_school(app_code)
-                        print("Your applied school is", school.city)
+                        pass
                     except:
                         print("There is no application code like that in the database. Please try again")
 
