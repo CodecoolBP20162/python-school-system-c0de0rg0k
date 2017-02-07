@@ -1,6 +1,6 @@
 import os
 from applicants_status import applicants_status
-from build import BuildTable
+from generator.build_table import BuildTable
 from example_data import GenerateExampleData
 from new_applicants import GenerateApplicants
 from applicants_school import applicants_school
@@ -27,6 +27,8 @@ def main():
         chosen_menu = int(input("Please choose a menu number: "))
 
         if chosen_menu == 1:
+            # Create instance
+            build_and_upload_tables = BuildTable()
             clear_sreen()
             chosen_administrator_menu = 'q'
             while chosen_administrator_menu != 0:
@@ -41,14 +43,14 @@ def main():
 
                 if chosen_administrator_menu == 1:
                     try:
-                        BuildTable()
+                        build_and_upload_tables.build_table()
                         print("Tables created succcessfully")
                     except:
                         print("I can't create tables")
 
                 elif chosen_administrator_menu == 2:
                     try:
-                        GenerateExampleData()
+                        build_and_upload_tables.generate_example_data()
                         print("Data successfully generated and inserted")
                     except:
                         print("I can't Generate example data")
