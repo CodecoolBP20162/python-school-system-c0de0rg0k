@@ -1,0 +1,16 @@
+Budapest;1
+Vác;1
+Érd;1
+Szolnok;1
+Százhalombatta;1
+Miskolc;2
+Eger;2
+Szerencs;2
+Tiszaújváros;2
+Tokaj;2
+Mád;2
+Krakow;3
+Katowice;3
+Wadowice;3
+Zawoja;3
+Iwkowa;3
