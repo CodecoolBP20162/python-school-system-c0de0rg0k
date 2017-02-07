@@ -42,16 +42,16 @@ class BuildTable:
 
     def generate_example_data(self):
         schools_list = self.__read_data_from_file(self.school_file_name)
-        self.__update_school_table(schools_list)
+        self.__upload_school_table(schools_list)
 
         cities_list = self.__read_data_from_file(self.city_file_name)
-        self.__update_city_table(cities_list)
+        self.__upload_city_table(cities_list)
 
         mentors_list = self.__read_data_from_file(self.mentors_file_name)
-        self.__update_mentor_table(mentors_list)
+        self.__upload_mentor_table(mentors_list)
 
         interview_slot_list = self.__read_data_from_file(self.interviewslot_file_name)
-        self.__update_interviewslot_table(interview_slot_list)
+        self.__upload_interviewslot_table(interview_slot_list)
 
     def __read_data_from_file(self, file_name):
         with open(file_name, "r") as f:
@@ -62,18 +62,18 @@ class BuildTable:
 
         return data_list
 
-    def __update_school_table(self, schools_list):
+    def __upload_school_table(self, schools_list):
         for school in schools_list:
             School.create(city=school[0])
 
-    def __update_city_table(self, cities_list):
+    def __upload_city_table(self, cities_list):
         for city in cities_list:
             City.create(city_name=city[0], nearest_school_id=city[1])
 
-    def __update_mentor_table(self, mentors_list):
+    def __upload_mentor_table(self, mentors_list):
         for mentor in mentors_list:
             Mentor.create(first_name=mentor[0], last_name=mentor[1], school=mentor[2])
 
-    def __update_interviewslot_table(self, interview_slot_list):
+    def __upload_interviewslot_table(self, interview_slot_list):
         for slot in interview_slot_list:
             x = InterviewSlot.create(start_time=slot[0], end_time=slot[1], reserved=bool(int(slot[2])), mentor=slot[3])
