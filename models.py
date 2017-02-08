@@ -6,8 +6,7 @@ from set_connection import SetConnection
 # database user = should be your username on your laptop
 
 connected = SetConnection()
-
-db = PostgresqlDatabase(connected.username, user=connected.username)
+db = PostgresqlDatabase(database=connected.dbname, user=connected.username)
 
 
 class BaseModel(Model):

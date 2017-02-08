@@ -4,8 +4,8 @@ from generator.build_table import BuildTable
 from new_applicants import GenerateApplicants
 from applicants_school import applicants_school
 from closest_interview import ApplicantGenerator
-from applicant_interview_details import *
 from applicant_interview_date import MentorInterviewDate
+from administrator_queries import AdministratorQueries
 
 
 def clear_sreen():
@@ -68,14 +68,19 @@ def main():
                     except:
                         print("Something went wrong. I can't generate interview dates to applicants")
 
+                elif chosen_administrator_menu == 5:
+                    try:
+                        # AdministratorQueries()
+                        # kell még nekem egy új admin menupont, azon belul pedig
+                    except:
+                        print("Something went wrong. I can't generate interview dates to applicants")
+
                 elif chosen_administrator_menu == 0:
                     clear_sreen()
                     break
 
                 else:
                     print("Wrong menu number was given")
-
-
 
         elif chosen_menu == 2:
             clear_sreen()
