@@ -5,7 +5,7 @@ from new_applicants import GenerateApplicants
 from applicants_school import applicants_school
 from closest_interview import ApplicantGenerator
 from applicant_interview_details import *
-from applicant_interview_date import MentorInterviewDate
+from mentor_queries import MentorQueries
 
 
 def clear_sreen():
@@ -87,7 +87,7 @@ def main():
                 print("-------------------------------------")
                 chosen_mentor_menu = int(input("Please choose a Mentor menu number: "))
                 if chosen_mentor_menu == 1:
-                    mentor_id = int(input("Please tell me your mentor id: "))
+                    mentor_id = MentorQueries()
                     try:
                         MentorInterviewDate(mentor_id)
                     except:
@@ -144,4 +144,12 @@ def main():
             print("Wrong menu number was given")
 
 
-main()
+#main()
+
+#build = BuildTable()
+#build.build_table()
+#build.generate_example_data()
+
+city_schools = City.select(City, School).join(School).where(City.city_name.contains('e'))
+for city in city_schools:
+    print(city.city_name, city.nearest_school.city)
