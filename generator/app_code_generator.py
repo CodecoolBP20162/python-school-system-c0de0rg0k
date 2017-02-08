@@ -1,10 +1,8 @@
 from random import randint
 from models import *
-# az erliar_app_code mindig lekérdezhetné az application code-okat
-# és tegyem ciklusba a probálkozást, és addig ne hozzon létre, amíg van olyan appcode a listában
 
 
-class GenerateAppCode:
+class AppCodeGenerator:
     """This class generate the application code"""
 
     def __init__(self):
@@ -25,7 +23,7 @@ class GenerateAppCode:
     def __code_generator(self):
         counter = 0
         while counter != 6:
-            self.application_code += str(randint(0, 10))
+            self.application_code += str(randint(0, 9))
             counter += 1
         self.__check_earlier_app_code()
 

@@ -1,11 +1,10 @@
 import os
 from applicants_status import applicants_status
 from generator.build_table import BuildTable
-from new_applicants import GenerateApplicants
+# from new_applicants import GenerateApplicants
 from applicants_school import applicants_school
-from closest_interview import ApplicantGenerator
-from administrator_queries import AdministratorQueries
-
+# from closest_interview import ApplicantGenerator
+from generator.applicant_generator import ApplicantGenerator
 
 def clear_sreen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -13,6 +12,8 @@ def clear_sreen():
 
 def main():
     chosen_menu = 'q'
+    build_table = BuildTable()
+    applicant_generator = ApplicantGenerator()
 
     clear_sreen()
     while chosen_menu != 0:
@@ -39,28 +40,29 @@ def main():
 
                 if chosen_administrator_menu == 1:
                     try:
-                        BuildTable()
+                        build_table.build_table()
                         print("Tables created succcessfully")
                     except:
                         print("I can't create tables")
 
                 elif chosen_administrator_menu == 2:
                     try:
-                        GenerateExampleData()
+                        build_table.generate_example_data()
                         print("Data successfully generated and inserted")
                     except:
                         print("I can't Generate example data")
 
                 elif chosen_administrator_menu == 3:
                     try:
-                        GenerateApplicants()
+                        applicant_generator.generate_applicant()
+                        applicant_generator.generate_nearest_school()
                         print("Applicants data successfully generated and inserted")
                     except:
                         print("I can't Generate applicants")
 
                 elif chosen_administrator_menu == 4:
                     try:
-                        ApplicantGenerator()
+                        applicant_generator.generate_interview_for_applicants()
                         print("Interview dates successfully generated to applicants")
                     except:
                         print("Something went wrong. I can't generate interview dates to applicants")
@@ -111,6 +113,7 @@ def main():
 
                 if chosen_applicant_menu == 1:
                     # calling the interview seacrh by app code
+                    pass
                 elif chosen_applicant_menu == 2:
                     application_code = input("Please, enter your application code: ")
                     try:
