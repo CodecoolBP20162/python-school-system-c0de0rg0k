@@ -4,15 +4,18 @@ from datetime import datetime
 
 class AdministratorQueries:
 
-    def filter_by_school(self, school_id):
+    def filter_by_school(self):
+        school_id = self.__input_id("school id")
         self.__check_school_id(school_id)
         self.__print_interview_by_school_id(school_id)
 
-    def filter_by_applicant_code(self, applicant_code):
+    def filter_by_applicant_code(self):
+        applicant_code = self.__input_id("application code")
         self.__check_applicant_code(applicant_code)
         self.__print_interview_by_app_code(applicant_code)
 
-    def filter_by_mentor_code(self, mentor_id):
+    def filter_by_mentor_code(self):
+        mentor_id = self.__input_id("mentor id")
         self.__check_mentor_id(mentor_id)
         self.__print_interview_by_mentor_id(mentor_id)
 
@@ -21,11 +24,9 @@ class AdministratorQueries:
         date_to = self.__input_datetime()
         self.__print_interview_by_date(date_from, date_to)
 
-    def __print_interview_by_date(self, date_from, date_to):
-        interviews_slot = InterviewSlot.select()
-        for slot in interviews_slot:
-            if slot.start_time > date_from and slot.end_time < date_to:
-                print("{0} --> {1}".format(slot.start_time, slot.end_time))
+    def __input_id(self, id_type):
+        id_ = input("Please add me the {0}: ".format(id_type))
+        return id_
 
     def __input_datetime(self):
         y = int(input("Please add a year: "))
@@ -54,6 +55,12 @@ class AdministratorQueries:
                 if int(mentor_id) == int_slot.mentor.id:
                     print("Mentor: {0} --> {1}".format(int_slot.mentor.last_name, int_slot.start_time))
 
+    def __print_interview_by_date(self, date_from, date_to):
+        interviews_slot = InterviewSlot.select()
+        for slot in interviews_slot:
+            if slot.start_time > date_from and slot.end_time < date_to:
+                print("Mentor: {0}: {1} --> {2}".format(slot.mentor.last_name, slot.start_time, slot.end_time))
+
     def __check_school_id(self, school_id):
         schools = School.select().where(School.id == school_id)
         if len(schools) == 0:
@@ -68,11 +75,3 @@ class AdministratorQueries:
         mentors = Mentor.select().where(mentor_id == Mentor.id)
         if len(mentors) == 0:
             raise ValueError
-
-
-
-# AdministratorQueries().filter_by_school(3)
-# AdministratorQueries().filter_by_applicant_code(5621057)
-# AdministratorQueries().filter_by_mentor_code(5)
-AdministratorQueries().filter_by_date()
-
