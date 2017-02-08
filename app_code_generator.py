@@ -1,10 +1,8 @@
 from random import randint
 from models import *
-# az erliar_app_code mindig lekérdezhetné az application code-okat
-# és tegyem ciklusba a probálkozást, és addig ne hozzon létre, amíg van olyan appcode a listában
 
 
-class GenerateAppCode:
+class AppCodeGenerator:
     """This class generate the application code"""
 
     def __init__(self):
