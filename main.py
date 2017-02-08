@@ -4,7 +4,6 @@ from generator.build_table import BuildTable
 from new_applicants import GenerateApplicants
 from applicants_school import applicants_school
 from closest_interview import ApplicantGenerator
-from applicant_interview_date import MentorInterviewDate
 from administrator_queries import AdministratorQueries
 
 
@@ -94,7 +93,7 @@ def main():
                 if chosen_mentor_menu == 1:
                     mentor_id = int(input("Please tell me your mentor id: "))
                     try:
-                        MentorInterviewDate(mentor_id)
+                        pass
                     except:
                         print("There is no mentor with that id")
 
@@ -118,7 +117,7 @@ def main():
                 chosen_applicant_menu = int(input("Please choose an Applicant menu number: "))
 
                 if chosen_applicant_menu == 1:
-                    interview_details()
+                    # calling the interview seacrh by app code
                 elif chosen_applicant_menu == 2:
                     application_code = input("Please, enter your application code: ")
                     try:
