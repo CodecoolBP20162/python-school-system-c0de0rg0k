@@ -1,10 +1,9 @@
 import os
 from applicants_status import applicants_status
 from generator.build_table import BuildTable
-# from new_applicants import GenerateApplicants
 from applicants_school import applicants_school
-# from closest_interview import ApplicantGenerator
 from generator.applicant_generator import ApplicantGenerator
+from mentor_queries import MentorQueries
 
 def clear_sreen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -74,9 +73,8 @@ def main():
                 else:
                     print("Wrong menu number was given")
 
-
-
         elif chosen_menu == 2:
+            mentor_queries = MentorQueries()
             clear_sreen()
             chosen_mentor_menu = 'q'
             while chosen_mentor_menu != 0:
@@ -86,9 +84,8 @@ def main():
                 print("-------------------------------------")
                 chosen_mentor_menu = int(input("Please choose a Mentor menu number: "))
                 if chosen_mentor_menu == 1:
-                    mentor_id = int(input("Please tell me your mentor id: "))
                     try:
-                        pass
+                        mentor_queries.mentor_date_time()
                     except:
                         print("There is no mentor with that id")
 
