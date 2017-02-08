@@ -1,10 +1,8 @@
 from models import *
+from datetime import datetime
 
 
 class AdministratorQueries:
-
-    def __init__(self):
-        pass
 
     def filter_by_school(self, school_id):
         self.__check_school_id(school_id)
@@ -17,6 +15,23 @@ class AdministratorQueries:
     def filter_by_mentor_code(self, mentor_id):
         self.__check_mentor_id(mentor_id)
         self.__print_interview_by_mentor_id(mentor_id)
+
+    def filter_by_date(self):
+        date_from = self.__input_datetime()
+        date_to = self.__input_datetime()
+        self.__print_interview_by_date(date_from, date_to)
+
+    def __print_interview_by_date(self, date_from, date_to):
+        interviews_slot = InterviewSlot.select()
+        for slot in interviews_slot:
+            if slot.start_time > date_from and slot.end_time < date_to:
+                print("{0} --> {1}".format(slot.start_time, slot.end_time))
+
+    def __input_datetime(self):
+        y = int(input("Please add a year: "))
+        m = int(input("Please add a month: "))
+        d = int(input("Please add a day: "))
+        return datetime(y, m, d)
 
     def __print_interview_by_school_id(self, school_id):
         interview_slot = InterviewSlot.select()
@@ -54,13 +69,10 @@ class AdministratorQueries:
         if len(mentors) == 0:
             raise ValueError
 
-    def filter_by_date(self):
-        pass
 
 
 # AdministratorQueries().filter_by_school(3)
 # AdministratorQueries().filter_by_applicant_code(5621057)
-AdministratorQueries().filter_by_mentor_code(5)
+# AdministratorQueries().filter_by_mentor_code(5)
+AdministratorQueries().filter_by_date()
 
-# x.filter_by_school(4)
-# x.filter_by_applicant_code("100650")
