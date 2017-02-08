@@ -8,16 +8,15 @@ class AdministratorQueries:
 
     def filter_by_school(self, school_id):
         self.__check_school_id(school_id)
-        self.__print_interview_by_school_id()
+        self.__print_interview_by_school_id(school_id)
 
     def filter_by_applicant_code(self, applicant_code):
         self.__check_applicant_code(applicant_code)
-        self.__print_interview_details_by_app_code(applicant_code)
+        self.__print_interview_by_app_code(applicant_code)
 
     def filter_by_mentor_code(self, mentor_id):
         self.__check_mentor_id(mentor_id)
         self.__print_interview_by_mentor_id(mentor_id)
-
 
     def __print_interview_by_school_id(self, school_id):
         interview_slot = InterviewSlot.select()
@@ -29,19 +28,16 @@ class AdministratorQueries:
         interview_slot = InterviewSlot.select()
         for slot in interview_slot:
             for interview in slot.interviews:
-                if applicant_code == interview.applicant_code.applicant_code:
-                    print(interview.applicant_code.first_name,
-                           interview.applicant_code.last_name)
-                    # ide még kiírni az interviewslot adatais is!!
+                if str(applicant_code) == interview.applicant_code.applicant_code:
+                    print("Applicant: {0} {1} --> start time: {2}".format(interview.applicant_code.first_name, interview.applicant_code.last_name,
+                                                                          slot.start_time))
 
     def __print_interview_by_mentor_id(self, mentor_id):
         mentors = Mentor.select()
         for mentor in mentors:
             for int_slot in mentor.interview_slots:
-                # ezt itt befejezni!! még nem addoltam!
-                if int(mentor_id)
-                print (int_slot.start_time)
-
+                if int(mentor_id) == int_slot.mentor.id:
+                    print("Mentor: {0} --> {1}".format(int_slot.mentor.last_name, int_slot.start_time))
 
     def __check_school_id(self, school_id):
         schools = School.select().where(School.id == school_id)
@@ -62,7 +58,9 @@ class AdministratorQueries:
         pass
 
 
-x = AdministratorQueries()
+# AdministratorQueries().filter_by_school(3)
+# AdministratorQueries().filter_by_applicant_code(5621057)
+AdministratorQueries().filter_by_mentor_code(5)
+
 # x.filter_by_school(4)
 # x.filter_by_applicant_code("100650")
-x.filter_by_mentor_code(2)
