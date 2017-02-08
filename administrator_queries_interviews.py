@@ -2,7 +2,7 @@ from models import *
 from datetime import datetime
 
 
-class AdministratorQueries:
+class AdministratorQueriesInterviews:
 
     def filter_by_school(self):
         school_id = self.__input_id("school id")
