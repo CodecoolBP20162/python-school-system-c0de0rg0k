@@ -71,7 +71,7 @@ def main():
                 elif chosen_administrator_menu == 5:
                     try:
                         # AdministratorQueries()
-                        # kell még nekem egy új admin menupont, azon belul pedig 
+                        # kell még nekem egy új admin menupont, azon belul pedig
                     except:
                         print("Something went wrong. I can't generate interview dates to applicants")
 
