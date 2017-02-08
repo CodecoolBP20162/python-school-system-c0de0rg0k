@@ -4,6 +4,7 @@ from generator.build_table import BuildTable
 from applicants_school import applicants_school
 from generator.applicant_generator import ApplicantGenerator
 from mentor_queries import MentorQueries
+from administrator_queries import AdministratorQueries
 
 def clear_sreen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -33,10 +34,10 @@ def main():
                 print("2. Generate data")
                 print("3. Generate applicants")
                 print("4. Generate interview date to applicants")
+                print("5. Interviews details")
                 print("0. Exit")
                 print("-------------------------------------")
                 chosen_administrator_menu = int(input("Please choose an Administrator menu number: "))
-
                 if chosen_administrator_menu == 1:
                     try:
                         build_table.build_table()
@@ -66,12 +67,53 @@ def main():
                     except:
                         print("Something went wrong. I can't generate interview dates to applicants")
 
+
+                elif chosen_administrator_menu == 5:
+                    chosen_adm_submenu = 'q'
+
+                    while chosen_adm_submenu != '0':
+                        print("\n- - - School system - Administrator Menu - - -\n-------------------------------------")
+                        print("1. Filter by school")
+                        print("2. Filter by applicant code")
+                        print("3. Filter by mentor code")
+                        print("4. Filter by date (from - to (year - month - day))")
+                        print("0. Exit")
+                        print("-------------------------------------")
+
+                        chosen_adm_submenu = input("Please choose a number: ")
+                        if chosen_adm_submenu == '1':
+                            try:
+                                AdministratorQueries().filter_by_school()
+                            except:
+                                print("Wrong number")
+
+                        elif chosen_adm_submenu == '2':
+                            try:
+                                AdministratorQueries().filter_by_applicant_code()
+                            except:
+                                print("Wrong number")
+
+                        elif chosen_adm_submenu == '3':
+                            try:
+                                AdministratorQueries().filter_by_mentor_code()
+                            except:
+                                print("Wrong number")
+
+                        elif chosen_adm_submenu == '4':
+                            try:
+                                AdministratorQueries().filter_by_date()
+                            except:
+                                print("Wrong number")
+                        else:
+                            print ("Wrong number")
+
                 elif chosen_administrator_menu == 0:
                     clear_sreen()
                     break
 
                 else:
                     print("Wrong menu number was given")
+
 
         elif chosen_menu == 2:
             mentor_queries = MentorQueries()
