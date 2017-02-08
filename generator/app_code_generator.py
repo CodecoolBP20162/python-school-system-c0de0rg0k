@@ -23,7 +23,7 @@ class AppCodeGenerator:
     def __code_generator(self):
         counter = 0
         while counter != 6:
-            self.application_code += str(randint(0, 10))
+            self.application_code += str(randint(0, 9))
             counter += 1
         self.__check_earlier_app_code()
 
