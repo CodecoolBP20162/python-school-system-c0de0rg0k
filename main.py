@@ -4,7 +4,7 @@ from generator.build_table import BuildTable
 from applicants_school import applicants_school
 from generator.applicant_generator import ApplicantGenerator
 from mentor_queries import MentorQueries
-from administrator_queries import AdministratorQueries
+from administrator_queries_interviews import AdministratorQueriesInterviews
 
 def clear_sreen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -83,25 +83,25 @@ def main():
                         chosen_adm_submenu = input("Please choose a number: ")
                         if chosen_adm_submenu == '1':
                             try:
-                                AdministratorQueries().filter_by_school()
+                                AdministratorQueriesInterviews().filter_by_school()
                             except:
                                 print("Wrong number")
 
                         elif chosen_adm_submenu == '2':
                             try:
-                                AdministratorQueries().filter_by_applicant_code()
+                                AdministratorQueriesInterviews().filter_by_applicant_code()
                             except:
                                 print("Wrong number")
 
                         elif chosen_adm_submenu == '3':
                             try:
-                                AdministratorQueries().filter_by_mentor_code()
+                                AdministratorQueriesInterviews().filter_by_mentor_code()
                             except:
                                 print("Wrong number")
 
                         elif chosen_adm_submenu == '4':
                             try:
-                                AdministratorQueries().filter_by_date()
+                                AdministratorQueriesInterviews().filter_by_date()
                             except:
                                 print("Wrong number")
                         else:
