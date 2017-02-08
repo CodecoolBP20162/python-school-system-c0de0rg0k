@@ -1,12 +1,11 @@
 import os
 from applicants_status import applicants_status
-from build import BuildTable
-from example_data import GenerateExampleData
+from generator.build_table import BuildTable
 from new_applicants import GenerateApplicants
 from applicants_school import applicants_school
 from closest_interview import ApplicantGenerator
-from applicant_interview_details import *
 from applicant_interview_date import MentorInterviewDate
+from administrator_queries import AdministratorQueries
 
 
 def clear_sreen():
@@ -27,6 +26,8 @@ def main():
         chosen_menu = int(input("Please choose a menu number: "))
 
         if chosen_menu == 1:
+            # Create instance
+            build_and_upload_tables = BuildTable()
             clear_sreen()
             chosen_administrator_menu = 'q'
             while chosen_administrator_menu != 0:
@@ -41,14 +42,14 @@ def main():
 
                 if chosen_administrator_menu == 1:
                     try:
-                        BuildTable()
+                        build_and_upload_tables.build_table()
                         print("Tables created succcessfully")
                     except:
                         print("I can't create tables")
 
                 elif chosen_administrator_menu == 2:
                     try:
-                        GenerateExampleData()
+                        build_and_upload_tables.generate_example_data()
                         print("Data successfully generated and inserted")
                     except:
                         print("I can't Generate example data")
@@ -67,14 +68,19 @@ def main():
                     except:
                         print("Something went wrong. I can't generate interview dates to applicants")
 
+                elif chosen_administrator_menu == 5:
+                    try:
+                        # AdministratorQueries()
+                        # kell még nekem egy új admin menupont, azon belul pedig
+                    except:
+                        print("Something went wrong. I can't generate interview dates to applicants")
+
                 elif chosen_administrator_menu == 0:
                     clear_sreen()
                     break
 
                 else:
                     print("Wrong menu number was given")
-
-
 
         elif chosen_menu == 2:
             clear_sreen()
