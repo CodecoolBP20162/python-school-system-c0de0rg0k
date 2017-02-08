@@ -1,7 +1,6 @@
 import os
 from applicants_status import applicants_status
 from generator.build_table import BuildTable
-from example_data import GenerateExampleData
 from new_applicants import GenerateApplicants
 from applicants_school import applicants_school
 from closest_interview import ApplicantGenerator
