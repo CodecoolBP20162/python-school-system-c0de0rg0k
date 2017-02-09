@@ -47,8 +47,15 @@ class ApplicantQueries:
 
     def ask_question(self):
         applicant = ApplicantQueries()._check_app_code()
-        question = input("What is your stupid question {}? ".format(applicant.first_name))
-        saved_question = Q_A.create(applicant=applicant, question=question, answered=False)
-        print("Thank you! Your stupid question will be ansvered soon")
+        question = input("\nWhat is your stupid question {}? ".format(applicant.first_name))
+        saved_question = Q_A.create(applicant=applicant, question=question, answer="Not answered yet", answered=False)
+        print("\nThank you! Your stupid question will be ansvered soon")
+
+    def check_question(self):
+        applicant = ApplicantQueries()._check_app_code()
+        query = Q_A.select().join(Applicant).where(Q_A.applicant_id == applicant.id)
+        for i in query:
+            print("\nYour stupid question was: {0} The answer is: {1}".format(i.question, i.answer))
 
 #ApplicantQueries().ask_question()
+#ApplicantQueries().check_question()
