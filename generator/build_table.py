@@ -77,3 +77,4 @@ class BuildTable:
     def __upload_interviewslot_table(self, interview_slot_list):
         for slot in interview_slot_list:
             x = InterviewSlot.create(start_time=slot[0], end_time=slot[1], reserved=bool(int(slot[2])), mentor=slot[3])
+
