@@ -20,6 +20,7 @@ class UserInterface():
         print("2. Generate data")
         print("3. Generate applicants")
         print("4. Generate interview date to applicants")
+        print("5. Filter scheduled interviews")
         print("0. Exit")
         print("-------------------------------------")
 
@@ -34,6 +35,15 @@ class UserInterface():
         print("1. Interview details")
         print("2. Status details")
         print("3. School details")
+        print("0. Exit")
+        print("-------------------------------------")
+
+    def administrator_filter_interviews(self):
+        print("\n- - - School system - Administrator Menu - Filter interviews - - -\n-------------------------------------")
+        print("1. Filter by school")
+        print("2. Filter by applicant code")
+        print("3. Filter by mentor code")
+        print("4. Filter by date (from - to (year - month - day))")
         print("0. Exit")
         print("-------------------------------------")
 
@@ -64,6 +74,9 @@ class UserInterface():
 
     def print_wrong_menu_chosen(self):
         print("Wrong menu number was given")
+
+    def print_wrong_data(self, data_type):
+        print("Wrong {0} was given".format(data_type))
 
     def print_exit_program(self):
         print("\n------------------------------------------------------------")
