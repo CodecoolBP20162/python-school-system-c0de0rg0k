@@ -1,4 +1,5 @@
 from models import *
+import datetime
 
 
 class ApplicantQueries:
@@ -48,14 +49,18 @@ class ApplicantQueries:
     def ask_question(self):
         applicant = ApplicantQueries()._check_app_code()
         question = input("\nWhat is your stupid question {}? ".format(applicant.first_name))
-        saved_question = Q_A.create(applicant=applicant, question=question, answer="Not answered yet", answered=False)
+        saved_question = Q_A.create(applicant=applicant, 
+                                    question=question, 
+                                    answer="Not answered yet", 
+                                    answered=False, 
+                                    timestamp=datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
         print("\nThank you! Your stupid question will be ansvered soon")
 
     def check_question(self):
         applicant = ApplicantQueries()._check_app_code()
         query = Q_A.select().join(Applicant).where(Q_A.applicant_id == applicant.id)
         for i in query:
-            print("\nYour stupid question was: {0} The answer is: {1}".format(i.question, i.answer))
+            print("\n At {0} Your stupid question was: {1} The answer is: {2}".format(i.timestamp, i.question, i.answer))
 
 #ApplicantQueries().ask_question()
 #ApplicantQueries().check_question()

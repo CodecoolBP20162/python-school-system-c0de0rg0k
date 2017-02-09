@@ -56,4 +56,5 @@ class Q_A(BaseModel):
     question = CharField()
     answer = CharField(null=True)
     answered = BooleanField()
+    timestamp = DateTimeField()
 
