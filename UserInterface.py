@@ -35,6 +35,7 @@ class UserInterface():
         print("1. Interview details")
         print("2. Status details")
         print("3. School details")
+        print("4. Ask question")
         print("0. Exit")
         print("-------------------------------------")
 
