@@ -1,7 +1,5 @@
 import os
-from applicants_status import applicants_status
 from generator.build_table import BuildTable
-from applicants_school import applicants_school
 from generator.applicant_generator import ApplicantGenerator
 from mentor_queries import MentorQueries
 from administrator_queries_interviews import AdministratorQueriesInterviews
@@ -182,10 +180,15 @@ def main():
         else:
             print("Wrong menu number was given")
 
-dfgdfgdfg
-dfgd
-main()
-sdfdrfgd
-dfdfgdfg d
-gdfgdfgdfg
-dfgdfgdfg
+
+#main()
+
+my_list = [1, 2, 3, 554, 23, 565, 33]
+
+sum = 0
+
+for n in my_list:
+    sum = sum + n
+
+print(sum)
+
