@@ -27,3 +27,24 @@ class MentorQueries:
                 for interview in Interview.select().where(Interview.slot_id == slot.id):
                     print(slot.start_time, interview.applicant_code.first_name, interview.applicant_code.last_name,
                           interview.applicant_code.applicant_code)
+
+    def get_mentor(self):
+        mentor_id = input("Please tell me your mentor id: ")
+        mentor = Mentor.select().where(Mentor.id == mentor_id).get()
+        if mentor.id == "":
+            raise ValueError
+        else:
+            self.mentor_id = mentor.id
+            print(mentor.last_name)
+            return mentor
+
+
+    def list_questions(self):
+        mentor = MentorQueries().get_mentor()
+        query = Q_A.select().where(Q_A.answered == False)
+        for n,i in enumerate(query):
+            print(n+1, "{0}({1}) asked at {2}: {3}".format(i.applicant.first_name,i.applicant.applicant_code, i.timestamp, i.question))
+
+
+MentorQueries().list_questions()
+#MentorQueries().get_mentor()
