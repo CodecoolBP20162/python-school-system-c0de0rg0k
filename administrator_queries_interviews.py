@@ -116,7 +116,3 @@ class AdministratorQueriesInterviews:
             for element in sublist:
                 print(str(element).center(max_length), end=", ")
         print()
-
-
-x = AdministratorQueriesInterviews()
-x.filter_by_date()
