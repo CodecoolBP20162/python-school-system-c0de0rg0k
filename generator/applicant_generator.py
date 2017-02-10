@@ -19,7 +19,7 @@ class ApplicantGenerator:
         self.__generate_application_code()
 
     def generate_nearest_school(self):
-        applicants = Applicant.select()
+        applicants = Applicant.select().where(Applicant.applied_school.is_null(True))
         for applicant in applicants:
             closest_city = self.__search_nearest_school(applicant.applicant_city)
             applicant.applied_school = closest_city
