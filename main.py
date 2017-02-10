@@ -171,6 +171,10 @@ class Main:
                 self.applicant_queries.status_details()
             elif chosen_applicant_menu == '3':
                 self.applicant_queries.school_details()
+            elif chosen_applicant_menu == '4':
+                self.applicant_queries.ask_question()
+            elif chosen_applicant_menu == '5':
+                self.applicant_queries.check_question()
             elif chosen_applicant_menu == '0':
                 self.ui.clear_sreen()
                 break
