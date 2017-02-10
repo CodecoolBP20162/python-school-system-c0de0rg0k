@@ -21,6 +21,7 @@ class UserInterface():
         print("3. Generate applicants")
         print("4. Generate interview date to applicants")
         print("5. Filter scheduled interviews")
+        print("6. Filter scheduled applicants")
         print("0. Exit")
         print("-------------------------------------")
 
@@ -44,6 +45,17 @@ class UserInterface():
         print("2. Filter by applicant code")
         print("3. Filter by mentor code")
         print("4. Filter by date (from - to (year - month - day))")
+        print("0. Exit")
+        print("-------------------------------------")
+
+    def administrator_filter_applicants(self):
+        print("\n- - - School system - Administrator Menu - Filter applicants - - -\n-------------------------------------")
+        print("1. Filter by status")
+        print("2. Filter by time")
+        print("3. Filter by location")
+        print("4. Filter by fullname")
+        print("5. Filter by school id")
+        print("6. Filter by mentor name")
         print("0. Exit")
         print("-------------------------------------")
 
