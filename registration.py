@@ -1,4 +1,5 @@
 from models import *
+from generate_data_for_new_registered_applicant import NewApplicantCode
 
 
 class Register:
@@ -20,7 +21,13 @@ class Register:
         self.first_name = input("Tell me your first name: ")
         self.last_name = input("Tell me your last name: ")
         self.applicant_city = input("Where do you live: ")
-        Applicant.create(first_name=self.first_name, last_name=self.last_name, applicant_city=self.applicant_city, status=self.status)
+        try:
+            Applicant.create(first_name=self.first_name, last_name=self.last_name, applicant_city=self.applicant_city, \
+                         status=self.status)
+            NewApplicantCode()
+            print("Registration was successful.")
+        except:
+            print("Something went wrong. Registration failed")
 
     def __input_mentor_data(self):
         self.first_name = input("Tell me your first name: ")
