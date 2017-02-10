@@ -4,6 +4,7 @@ from Applicant import ApplicantQueries
 from generator.applicant_generator import ApplicantGenerator
 from mentor_queries import MentorQueries
 from administrator_queries_interviews import AdministratorQueriesInterviews
+from administrator_queries_applicants import AdministratorQueriesApplicants
 
 
 class Main:
@@ -15,6 +16,8 @@ class Main:
         self.applicant_queries = ApplicantQueries()
         self.mentor_queries = MentorQueries()
         self.administrator_filter_interviews = AdministratorQueriesInterviews()
+        self.administrator_filter_applicants = AdministratorQueriesApplicants()
+
 
     def main(self):
         self.ui.clear_sreen()
@@ -88,6 +91,47 @@ class Main:
                     elif administrator_filter_submenu == '4':
                         try:
                             self.administrator_filter_interviews.filter_by_date()
+                        except:
+                            self.ui.print_wrong_data("date")
+                    elif administrator_filter_submenu == '0':
+                        self.ui.clear_sreen()
+                        break
+                    else:
+                        self.ui.print_wrong_menu_chosen()
+            elif chosen_administrator_menu == '6':
+                self.ui.clear_sreen()
+                chosen_administrator_filter_menu = ''
+                while chosen_administrator_filter_menu != '0':
+                    self.ui.administrator_filter_applicants()
+                    administrator_filter_submenu = self.ui.print_choose_menu("administrator - applicant filter")
+                    if administrator_filter_submenu == '1':
+                        try:
+                            self.administrator_filter_applicants.filter_by_status()
+                        except:
+                            self.ui.print_wrong_data("school id")
+                    elif administrator_filter_submenu == '2':
+                        try:
+                            self.administrator_filter_applicants.filter_by_time()
+                        except:
+                            self.ui.print_wrong_data("applicant code")
+                    elif administrator_filter_submenu == '3':
+                        try:
+                            self.administrator_filter_applicants.filter_by_location()
+                        except:
+                            self.ui.print_wrong_data("mentor id")
+                    elif administrator_filter_submenu == '4':
+                        try:
+                            self.administrator_filter_applicants.filter_by_name()
+                        except:
+                            self.ui.print_wrong_data("date")
+                    elif administrator_filter_submenu == '5':
+                        try:
+                            self.administrator_filter_applicants.filter_by_school()
+                        except:
+                            self.ui.print_wrong_data("date")
+                    elif administrator_filter_submenu == '6':
+                        try:
+                            self.administrator_filter_applicants.filter_by_mentor_name()
                         except:
                             self.ui.print_wrong_data("date")
                     elif administrator_filter_submenu == '0':
