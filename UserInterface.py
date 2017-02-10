@@ -1,7 +1,7 @@
 import os
 
 
-class UserInterface():
+class UserInterface:
 
     def clear_sreen(self):
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -11,6 +11,7 @@ class UserInterface():
         print("1. I am an administrator")
         print("2. I am a mentor")
         print("3. I am an applicant")
+        print("4. I am new. I want to register")
         print("0. Exit")
         print("-------------------------------")
 
@@ -44,6 +45,13 @@ class UserInterface():
         print("2. Filter by applicant code")
         print("3. Filter by mentor code")
         print("4. Filter by date (from - to (year - month - day))")
+        print("0. Exit")
+        print("-------------------------------------")
+
+    def print_registration_menu(self):
+        print("\n- - - School system - Registration menu - - -\n-------------------------------------")
+        print("1. Register as new applicant")
+        print("2. Register as new mentor")
         print("0. Exit")
         print("-------------------------------------")
 

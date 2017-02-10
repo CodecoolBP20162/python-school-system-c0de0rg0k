@@ -1,7 +1,7 @@
 from models import *
 
 
-class ApplicantQueries():
+class ApplicantQueries:
 
     def __init__(self):
         self.applicant_code = ""

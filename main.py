@@ -4,6 +4,7 @@ from Applicant import ApplicantQueries
 from generator.applicant_generator import ApplicantGenerator
 from mentor_queries import MentorQueries
 from administrator_queries_interviews import AdministratorQueriesInterviews
+from registration import Register
 
 
 class Main:
@@ -15,6 +16,7 @@ class Main:
         self.applicant_queries = ApplicantQueries()
         self.mentor_queries = MentorQueries()
         self.administrator_filter_interviews = AdministratorQueriesInterviews()
+        self.registration = Register()
 
     def main(self):
         self.ui.clear_sreen()
@@ -28,6 +30,8 @@ class Main:
                 self.mentor_menu()
             elif chosen_menu == '3':
                 self.applicant_menu()
+            elif chosen_menu == '4':
+                self.registration_menu()
             elif chosen_menu == '0':
                 self.ui.print_exit_program()
             else:
@@ -128,6 +132,22 @@ class Main:
             elif chosen_applicant_menu == '3':
                 self.applicant_queries.school_details()
             elif chosen_applicant_menu == '0':
+                self.ui.clear_sreen()
+                break
+            else:
+                self.ui.print_wrong_menu_chosen()
+
+    def registration_menu(self):
+        self.ui.clear_sreen()
+        chosen_registration_menu = ''
+        while chosen_registration_menu !='0':
+            self.ui.print_registration_menu()
+            chosen_registration_menu = self.ui.print_choose_menu("registration")
+            if chosen_registration_menu == '1':
+                self.registration.register_applicant()
+            elif chosen_registration_menu == '2':
+                self.registration.register_mentor()
+            elif chosen_registration_menu == '0':
                 self.ui.clear_sreen()
                 break
             else:
