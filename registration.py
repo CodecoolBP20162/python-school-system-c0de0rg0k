@@ -28,15 +28,15 @@ class Register:
         self.last_name = input("Tell me your last name: ")
         self.applicant_city = input("Where do you live: ")
         self.applied_school = ApplicantGenerator().search_nearest_school(self.applicant_city)
-        #try:
-        new_applicant = Applicant.create(first_name=self.first_name, last_name=self.last_name,
-                                        applicant_city=self.applicant_city, applicant_code=self.app_code,
-                                        applied_school= self.applied_school, status=self.status)
-        new_applicant.save()
-        SendEmail().send_email(new_applicant)
-        print("Registration was successful. E-mail was sent!")
-        #except:
-         #   print("Something went wrong. Registration failed")
+        try:
+            new_applicant = Applicant.create(first_name=self.first_name, last_name=self.last_name,
+                                            applicant_city=self.applicant_city, applicant_code=self.app_code,
+                                            applied_school= self.applied_school, status=self.status)
+            new_applicant.save()
+            SendEmail().send_email(new_applicant)
+            print("Registration was successful. E-mail was sent!")
+        except:
+            print("Something went wrong. Registration failed")
 
     def __input_mentor_data(self):
         self.first_name = input("Tell me your first name: ")
