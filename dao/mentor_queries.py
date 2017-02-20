@@ -38,7 +38,6 @@ class MentorQueries:
             self.mentor_id = mentor.id
             return mentor
 
-
     def list_questions(self):
         '''list all unanswered questions'''
         mentor = MentorQueries().get_mentor()
