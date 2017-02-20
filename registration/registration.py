@@ -32,7 +32,7 @@ class Register:
                                             applicant_city=self.applicant_city, applicant_code=self.app_code,
                                             applied_school= self.applied_school, status=self.status)
             new_applicant.save()
-            SendEmail().send_email(new_applicant)
+            SendEmail().send_applicant_email(new_applicant)
             print("Registration was successful. E-mail was sent!")
         except:
             print("Something went wrong. Registration failed")
@@ -43,12 +43,21 @@ class Register:
         self.school_id = input("Which school would you like to attend (Budapest, Miskolc or Krakow): ")
         if self.school_id == "Budapest":
             self.school_id = "1"
-            Mentor.create(first_name=self.first_name, last_name=self.last_name, school=self.school_id)
+            new_mentor = Mentor.create(first_name=self.first_name, last_name=self.last_name, school=self.school_id)
+            new_mentor.save()
+            SendEmail().send_mentor_email(new_mentor)
+            print("Registration was successful. E-mail was sent!")
         elif self.school_id == "Miskolc":
             self.school_id = "2"
-            Mentor.create(first_name=self.first_name, last_name=self.last_name, school=self.school_id)
+            new_mentor = Mentor.create(first_name=self.first_name, last_name=self.last_name, school=self.school_id)
+            new_mentor.save()
+            SendEmail().send_mentor_email(new_mentor)
+            print("Registration was successful. E-mail was sent!")
         elif self.school_id == "Krakow":
             self.school_id = "3"
-            Mentor.create(first_name=self.first_name, last_name=self.last_name, school=self.school_id)
+            new_mentor = Mentor.create(first_name=self.first_name, last_name=self.last_name, school=self.school_id)
+            new_mentor.save()
+            SendEmail().send_mentor_email(new_mentor)
+            print("Registration was successful. E-mail was sent!")
         else:
             print("There is no Codecool school at", self.school_id)
