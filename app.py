@@ -24,10 +24,13 @@ def init_db():
 
 
 @app.route('/')
+def index():
+    return render_template('index_temp.html')
+
 
 
 @app.route('/admin/list_applicants')
-def index():
+def list_applicants():
     applicants = Applicant.select().order_by(Applicant.id)
     return render_template('applicants.html', applicants=applicants)
 
