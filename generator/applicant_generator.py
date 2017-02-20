@@ -21,7 +21,7 @@ class ApplicantGenerator:
     def generate_nearest_school(self):
         applicants = Applicant.select().where(Applicant.applied_school.is_null(True))
         for applicant in applicants:
-            closest_city = self.__search_nearest_school(applicant.applicant_city)
+            closest_city = self.search_nearest_school(applicant.applicant_city)
             applicant.applied_school = closest_city
             applicant.save()
 
@@ -47,7 +47,7 @@ class ApplicantGenerator:
             Applicant.create(first_name=applicant[0], last_name=applicant[1], applicant_city=applicant[2],
                              status=applicant[3])
 
-    def __search_nearest_school(self, application_city):
+    def search_nearest_school(self, application_city):
         current_city = City.get(city_name=application_city)
         return current_city.nearest_school
 
