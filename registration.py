@@ -43,4 +43,4 @@ class Register:
             self.school_id = "3"
             Mentor.create(first_name=self.first_name, last_name=self.last_name, school=self.school_id)
         else:
-            ("There is no Codecool school at", self.school_id)
+            print("There is no Codecool school at", self.school_id)

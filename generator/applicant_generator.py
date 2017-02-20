@@ -69,5 +69,5 @@ class ApplicantGenerator:
         for applicant in applicants:
             # Create an instance, and the current applicant (from the table) get the generated application_code
             new_app_code = AppCodeGenerator()
-            applicant.applicant_code = new_app_code.application_code
+            applicant.applicant_code = new_app_code.code_generator()
             applicant.save()

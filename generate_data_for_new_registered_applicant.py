@@ -1,6 +1,6 @@
-from models import *
 from generator.app_code_generator import AppCodeGenerator
 from generator.applicant_generator import ApplicantGenerator
+from models import *
 
 
 class NewApplicantCode:
@@ -14,6 +14,6 @@ class NewApplicantCode:
         applicants = Applicant.select().where(Applicant.applicant_code.is_null(True))
         for app in applicants:
             new_code = self.app_code_generator
-            app.applicant_code = new_code.application_code
+            app.applicant_code = new_code.code_generator()
             app.save()
         self.generate_nearest_school_id.generate_nearest_school()
