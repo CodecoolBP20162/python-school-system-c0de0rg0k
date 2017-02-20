@@ -1,5 +1,6 @@
 from peewee import *
-from set_connection import SetConnection
+
+from generator.set_connection import SetConnection
 
 # Configure your database connection here
 # database name = should be your username on your laptop

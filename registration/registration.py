@@ -1,7 +1,7 @@
-from models import *
 from generator.app_code_generator import AppCodeGenerator
-from email_for_new_users import SendEmail
 from generator.applicant_generator import ApplicantGenerator
+from models import *
+from registration.email_for_new_users import SendEmail
 
 
 class Register:
