@@ -1,5 +1,4 @@
 from models import *
-from generate_data_for_new_registered_applicant import NewApplicantCode
 from generator.app_code_generator import AppCodeGenerator
 from email_for_new_users import SendEmail
 from generator.applicant_generator import ApplicantGenerator
@@ -13,9 +12,9 @@ class Register:
         self.applicant_city = ""
         self.status = "new"
         self.school_id = ""
-        self.app_code=AppCodeGenerator().code_generator()
-        self.nearest_school=""
-        self.applied_school=""
+        self.app_code = AppCodeGenerator().code_generator()
+        self.nearest_school = ""
+        self.applied_school = ""
 
     def register_applicant(self):
         self.__input_applicant_data()
