@@ -7,7 +7,7 @@ from set_connection import SetConnection
 
 connected = SetConnection()
 
-db = PostgresqlDatabase(connected.dbname, user=connected.username)
+db = PostgresqlDatabase(database="school_system")
 
 
 class BaseModel(Model):
