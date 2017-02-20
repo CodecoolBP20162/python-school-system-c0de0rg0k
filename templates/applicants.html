@@ -1,0 +1,77 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>School system - Applicants</title>
+        <style>
+
+        body {
+            background-color: lightgrey;
+        }
+       
+        table, th, td {
+        border: 1px solid black;
+        }
+        
+        .header {
+        color:blue;
+        font-weight: bold;
+        }
+        
+        table {
+        width:100%;
+        table-layout:auto;
+
+        }
+       
+        td {
+        word-wrap: break-word;
+        max-width: 300px;
+        
+        }
+        </style>
+    </head>
+    <body>
+        <p><h1>Applicants</h1></p>
+
+        <!--form action="/story">
+            <input id="add_story" type="submit" value="Add new story" />
+        </form-->
+        
+        <table>
+        <TR>
+        <TD style="width:15px;"><SPAN class="header">ID</SPAN></TD>
+        <TD><SPAN class="header">First name</SPAN></TD>
+        <TD><SPAN class="header">Last name</SPAN></TD>
+        <TD><SPAN class="header">City</SPAN></TD>
+        <TD><SPAN class="header">Applicant code</SPAN></TD>
+        <TD><SPAN class="header">School</SPAN></TD>
+        <TD><SPAN class="header">Status</SPAN></TD>
+        <TD><SPAN class="header">Edit</SPAN></TD>
+        <TD><SPAN class="header">Del</SPAN></TD>
+        </TR>
+        {% for applicant in applicants %}
+        <TR>
+        <TD>{{applicant.id}}</TD>
+        <TD>{{applicant.first_name}}</TD>
+        <TD>{{applicant.last_name}}</TD>
+        <TD>{{applicant.applicant_city}}</TD>
+        <TD>{{applicant.applicant_code}}</TD>
+        <TD>{{applicant.applied_school.city}}</TD>
+        <TD>{{applicant.status}}</TD>
+        <TD>
+            <form method="GET" action="/story">
+            <input id="edit_story" name="edit_story" type="submit" value="Edit" />
+            </form>
+        </TD>
+        <TD>
+            <form method="POST" action="/del_story">
+            <input id="del_story" name="del_story"  type="submit" value="Del" />
+            </form>
+        </TD>
+        </TR>
+        {% endfor %}
+        </table>
+        
+        
+    </body>
+</html>
