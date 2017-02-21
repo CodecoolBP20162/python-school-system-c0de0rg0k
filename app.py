@@ -18,6 +18,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/admin/')
+def show_admin_menu():
+    return redirect(url_for('index'))
+
+
 @app.route('/admin/list_applicants')
 def list_applicants():
     applicants = Applicant.select().order_by(Applicant.id)
@@ -31,8 +36,8 @@ def list_applicants():
 
 @app.route("/admin/e-mail-log", methods=["GET"])
 def show_sent_email():
-    applicant = Applicant.select()
-    return render_template('show_email.html', header="List of all emails", object=applicant)
+    emails_list = EmailDetails.select().order_by(EmailDetails.date)
+    return render_template('show_email.html', header="List of all emails", emails=emails_list)
 
 if __name__ == '__main__':
     init_db()
