@@ -1,6 +1,6 @@
 from generator.app_code_generator import AppCodeGenerator
 from models import *
-
+from unidecode import unidecode
 
 class ApplicantGenerator:
     """ First, generate the applicants: read from the file, then update the Applicant table with the applicants_list
@@ -44,8 +44,10 @@ class ApplicantGenerator:
 
     def __update_applicant_table(self, applicants_list):
         for applicant in applicants_list:
+            full_name = unidecode(applicant[0]) + unidecode(applicant[1])
             Applicant.create(first_name=applicant[0], last_name=applicant[1], applicant_city=applicant[2],
-                             status=applicant[3])
+                             status=applicant[3],
+                             email='tesztfiok.codeorgok+{0}@gmail.com'.format(full_name))
 
     def search_nearest_school(self, application_city):
         current_city = City.get(city_name=application_city)
