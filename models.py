@@ -3,12 +3,8 @@ from peewee import *
 from generator.set_connection import SetConnection
 
 # Configure your database connection here
-# database name = should be your username on your laptop
-# database user = should be your username on your laptop
-
 connected = SetConnection()
-
-db = PostgresqlDatabase(database="school_system")
+db = PostgresqlDatabase(database=connected.dbname, user=connected.username)
 
 
 class BaseModel(Model):
