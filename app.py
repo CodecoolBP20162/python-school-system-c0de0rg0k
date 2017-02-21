@@ -10,7 +10,6 @@ from generator.applicant_generator import ApplicantGenerator
 app = Flask(__name__)  # create the application instance :)
 
 
-
 def init_db():
     db.connect()
 
@@ -34,7 +33,6 @@ def list_applicants():
                            applicants=applicants,
                            cities=cities,
                            schools=schools)
-
 
 
 @app.route('/registration', methods=['GET'])
