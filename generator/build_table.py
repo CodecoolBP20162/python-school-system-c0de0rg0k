@@ -41,7 +41,10 @@ class BuildTable:
         if Q_A.table_exists():
             Q_A.drop_table(cascade=True)
 
-        db.create_tables([School, Applicant, City, Mentor, InterviewSlot, Interview, Q_A], safe=True)
+        if EmailDetails.table_exists():
+            EmailDetails.drop_table(cascade=True)
+
+        db.create_tables([School, Applicant, City, Mentor, InterviewSlot, Interview, Q_A, EmailDetails], safe=True)
 
     def generate_example_data(self):
         schools_list = self.__read_data_from_file(self.school_file_name)

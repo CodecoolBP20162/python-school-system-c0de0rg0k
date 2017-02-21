@@ -1,3 +1,5 @@
+{% extends "layout.html" %}
+{% block content %}
 <!DOCTYPE>
 <html>
     <head>
@@ -56,6 +58,7 @@
 
             <input id="filter_button" type="submit" value="Filter" />
         </form>
+
         
         <table>
         <TR>
@@ -91,7 +94,5 @@
         </TR>
         {% endfor %}
         </table>
-        
-        
-    </body>
-</html>
+
+{% endblock %}
