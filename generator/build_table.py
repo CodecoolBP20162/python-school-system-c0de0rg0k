@@ -1,5 +1,5 @@
 from models import *
-
+from unidecode import unidecode
 
 class BuildTable:
     """This class create table and generate the example data from files (example_data/)"""
@@ -41,7 +41,10 @@ class BuildTable:
         if Q_A.table_exists():
             Q_A.drop_table(cascade=True)
 
-        db.create_tables([School, Applicant, City, Mentor, InterviewSlot, Interview, Q_A], safe=True)
+        if EmailDetails.table_exists():
+            EmailDetails.drop_table(cascade=True)
+
+        db.create_tables([School, Applicant, City, Mentor, InterviewSlot, Interview, Q_A, EmailDetails], safe=True)
 
     def generate_example_data(self):
         schools_list = self.__read_data_from_file(self.school_file_name)
@@ -75,7 +78,9 @@ class BuildTable:
 
     def __upload_mentor_table(self, mentors_list):
         for mentor in mentors_list:
-            Mentor.create(first_name=mentor[0], last_name=mentor[1], school=mentor[2])
+            full_name = unidecode(mentor[0]) + unidecode(mentor[1])
+            Mentor.create(first_name=mentor[0], last_name=mentor[1], school=mentor[2],
+                          email='tesztfiok.codeorgok+{0}@gmail.com'.format(full_name))
 
     def __upload_interviewslot_table(self, interview_slot_list):
         for slot in interview_slot_list:
