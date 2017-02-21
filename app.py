@@ -15,7 +15,7 @@ def init_db():
 
 @app.route('/')
 def index():
-    return render_template('index_temp.html')
+    return render_template('index.html')
 
 
 @app.route('/admin/list_applicants')

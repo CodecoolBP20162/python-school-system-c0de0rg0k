@@ -1,30 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ header }}</title>
-</head>
-<body>
+{% extends "layout.html" %}
 
-    <table>
-        <tr>
-            <td>Subject</td>
-            <td>Message (140 character)</td>
-            <td>Person</td>
-            <td>Email address</td>
-            <td>Email type</td>
-            <td>Date</td>
-        </tr>
-        {% for applicant in object %}
-            <td>{{ applicant.first_name }}</td>
-            <td>{{ applicant.last_name }}</td>
-            <td>{{ applicant.applicant_city }}</td>
-            <td>{{ applicant.applied_school.city }}</td>
-            <td>{{ applicant.applicant_code }}</td>
-            <td>{{ applicant.status }}</td>
-        {% endfor %}
+    {% block content %}
+        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"/>
 
-    </table>
+        <h1>{{ header }}</h1>
+        <table style="width: 75%; border: 1px solid black;">
+            <tr>
+                <th>Subject</th>
+                <th>Message (140 character)</th>
+                <th>Person</th>
+                <th>Email address</th>
+                <th>Email type</th>
+                <th>Date</th>
+            </tr>
+            {% for applicant in object %}
+                <tr style="border: 1px solid grey;">
+                    <td>{{ applicant.first_name }}</td>
+                    <td>{{ applicant.last_name }}</td>
+                    <td>{{ applicant.applicant_city }}</td>
+                    <td>{{ applicant.applied_school.city }}</td>
+                    <td>{{ applicant.applicant_code }}</td>
+                    <td>{{ applicant.status }}</td>
+                </tr>
+            {% endfor %}
 
-</body>
-</html>
+        </table>
+
+    {% endblock %}
