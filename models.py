@@ -33,6 +33,7 @@ class Applicant(BaseModel):
     applicant_code = CharField(null=True)
     applied_school = ForeignKeyField(School, null=True, related_name='applicants')
     status = CharField(null=True)
+    email = CharField()
 
 
 class Mentor(BaseModel):
