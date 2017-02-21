@@ -35,6 +35,19 @@ def list_applicants():
     return render_template('applicants.html', applicants=applicants)
 
 
+@app.route('/admin/list_interviews')
+def list_interviews():
+    interviews= Interview.select().join(InterviewSlot).join(Mentor)
+    dates = InterviewSlot.select(fn.Distinct(InterviewSlot.start_time))
+    applicant_codes = Applicant.select(fn.Distinct(Applicant.applicant_code)).order_by(Applicant.applicant_code)
+    mentors = Mentor.select(fn.Distinct(Mentor.last_name)).join(InterviewSlot).join(Interview)
+    schools = School.select(fn.Distinct(School.city)) # .order_by(Applicant.applied_school.city)
+    return render_template('interviews.html',
+                           interviews=interviews,
+                           dates=dates,
+                           applicant_codes=applicant_codes,
+                           mentors=mentors,
+                           schools=schools)
 
 
 if __name__ == '__main__':
