@@ -33,9 +33,30 @@
     <body>
         <p><h1>Applicants</h1></p>
 
-        <!--form action="/story">
-            <input id="add_story" type="submit" value="Add new story" />
-        </form-->
+        <p><h1>Applicants</h1></p>
+
+        <form action="/filter">
+            <p><label for="filter_input_name">Name:</label></p>
+            <p><input id="filter_input_name" name="filter_input_name" type="text" size="50" /></p>
+
+            <p><label for="filter_input_city">City:</label></p>
+            <p><select name="filter_input_city" id="filter_input_city">
+                <option name="all" selected >All</option>
+                {% for city in cities %}
+                    <option name="city" >{{ city.applicant_city }}</option>
+                {% endfor %}
+            </select></p>
+
+            <p><label for="filter_input_school">School:</label></p>
+            <p><select name="filter_input_school" id="filter_input_school">
+                <option name="all" selected >All</option>
+                {% for school in schools %}
+                    <option name="city" >{{ school.city }}</option>
+                {% endfor %}
+            </select></p>
+
+            <input id="filter_button" type="submit" value="Filter" />
+        </form>
         
         <table>
         <TR>
