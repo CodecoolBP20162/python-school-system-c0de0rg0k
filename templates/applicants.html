@@ -41,6 +41,9 @@
             <p><label for="filter_input_name">Name:</label></p>
             <p><input id="filter_input_name" name="filter_input_name" type="text" size="50" /></p>
 
+            <p><label for="filter_input_email">E-mail:</label></p>
+            <p><input id="filter_input_email" name="filter_input_email" type="text" size="50" value="tesztfiok.codeorgok+<username>@gmail.com"/></p>
+
             <p><label for="filter_input_city">City:</label></p>
             <p><select name="filter_input_city" id="filter_input_city">
                 <option name="all" selected >All</option>
@@ -75,6 +78,7 @@
         <TD><SPAN class="header">Name</SPAN></TD>
         <TD><SPAN class="header">City</SPAN></TD>
         <TD><SPAN class="header">Applicant code</SPAN></TD>
+        <TD><SPAN class="header">Email</SPAN></TD>
         <TD><SPAN class="header">School</SPAN></TD>
         <TD><SPAN class="header">Status</SPAN></TD>
         <TD><SPAN class="header">Edit</SPAN></TD>
@@ -86,6 +90,7 @@
         <TD>{{applicant.first_name}} {{applicant.last_name}}</TD>
         <TD>{{applicant.applicant_city}}</TD>
         <TD>{{applicant.applicant_code}}</TD>
+        <TD>{{applicant.email}}</TD>
         <TD>{{applicant.applied_school.city}}</TD>
         <TD>{{applicant.status}}</TD>
         <TD>
