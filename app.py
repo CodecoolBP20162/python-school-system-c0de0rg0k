@@ -5,6 +5,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 from generator.app_code_generator import AppCodeGenerator
 from generator.applicant_generator import ApplicantGenerator
+import re
 
 
 app = Flask(__name__)  # create the application instance :)
@@ -72,6 +73,22 @@ def applicant_registration():
 def show_sent_email():
     emails_list = EmailDetails.select().order_by(EmailDetails.date)
     return render_template('show_email.html', header="List of all emails", emails=emails_list)
+
+
+@app.route("/admin/filter_applicants", methods=["GET", "POST"])
+def filter_applicants():
+    query = None
+    if request.form['filter_input_name']:
+        name_list = []
+        foo = request.form['filter_input_name']
+        subquery = Applicant.select()
+        for i in subquery:
+            match = re.search(foo, i.first_name)
+            if match:
+                name_list.append(i)
+        return render_template('applicants.html', applicants=name_list)
+    else:
+        return redirect(url_for('list_applicants'))
 
 
 if __name__ == '__main__':
