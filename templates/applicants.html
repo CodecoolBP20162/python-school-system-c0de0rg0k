@@ -1,38 +1,8 @@
-<!DOCTYPE>
-<html>
-    <head>
-        <title>School system - Applicants</title>
-        <style>
-
-        body {
-            background-color: lightgrey;
-        }
-       
-        table, th, td {
-        border: 1px solid black;
-        }
-        
-        .header {
-        color:blue;
-        font-weight: bold;
-        }
-        
-        table {
-        width:100%;
-        table-layout:auto;
-
-        }
-       
-        td {
-        word-wrap: break-word;
-        max-width: 300px;
-        
-        }
-        </style>
-    </head>
-    <body>
-        <p><h1>Applicants</h1></p>
-
+{% extends "layout.html" %}
+{% block content %}
+<h1>Applicants</h1>
+    <a class="btn btn-primary" href="{{ url_for('list_applicants') }}">Applicants</a>
+<br/>
         <!--form action="/story">
             <input id="add_story" type="submit" value="Add new story" />
         </form-->
@@ -71,7 +41,5 @@
         </TR>
         {% endfor %}
         </table>
-        
-        
-    </body>
-</html>
+
+{% endblock %}
