@@ -58,6 +58,7 @@ class SendEmail:
         self.__save_email_details_to_table(msg['Subject'], message, 'Mentor registration',
                                            new_mentor.first_name + ' ' + new_mentor.last_name, msg['To'])
 
+
     def __save_email_details_to_table(self, subject, msg, email_type, person, email_address):
         new_email_to_table = EmailDetails(subject=subject, message=msg[0:140], date=datetime.now(), email_type=email_type,
                      person=person, email_address=email_address)
