@@ -36,7 +36,8 @@
 
         <p><h1>Applicants</h1></p>
 
-        <form action="/filter">
+        <form method="post" action="filter_applicants">
+            
             <p><label for="filter_input_name">Name:</label></p>
             <p><input id="filter_input_name" name="filter_input_name" type="text" size="50" /></p>
 
@@ -52,7 +53,15 @@
             <p><select name="filter_input_school" id="filter_input_school">
                 <option name="all" selected >All</option>
                 {% for school in schools %}
-                    <option name="city" >{{ school.city }}</option>
+                    <option name="city" >{{ school.applied_school.city }}</option>
+                {% endfor %}
+            </select></p>
+
+            <p><label for="filter_input_status">Status:</label></p>
+            <p><select name="filter_input_status" id="filter_input_status">
+                <option name="all" selected >All</option>
+                {% for status in statuses %}
+                    <option name="city" >{{ status.status }}</option>
                 {% endfor %}
             </select></p>
 
@@ -63,8 +72,7 @@
         <table>
         <TR>
         <TD style="width:15px;"><SPAN class="header">ID</SPAN></TD>
-        <TD><SPAN class="header">First name</SPAN></TD>
-        <TD><SPAN class="header">Last name</SPAN></TD>
+        <TD><SPAN class="header">Name</SPAN></TD>
         <TD><SPAN class="header">City</SPAN></TD>
         <TD><SPAN class="header">Applicant code</SPAN></TD>
         <TD><SPAN class="header">School</SPAN></TD>
@@ -75,8 +83,7 @@
         {% for applicant in applicants %}
         <TR>
         <TD>{{applicant.id}}</TD>
-        <TD>{{applicant.first_name}}</TD>
-        <TD>{{applicant.last_name}}</TD>
+        <TD>{{applicant.first_name}} {{applicant.last_name}}</TD>
         <TD>{{applicant.applicant_city}}</TD>
         <TD>{{applicant.applicant_code}}</TD>
         <TD>{{applicant.applied_school.city}}</TD>
