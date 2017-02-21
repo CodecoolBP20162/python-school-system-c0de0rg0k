@@ -1,11 +1,64 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Applicants</h1>
-    <a class="btn btn-primary" href="{{ url_for('list_applicants') }}">Applicants</a>
-<br/>
-        <!--form action="/story">
-            <input id="add_story" type="submit" value="Add new story" />
-        </form-->
+<!DOCTYPE>
+<html>
+    <head>
+        <title>School system - Applicants</title>
+        <style>
+
+        body {
+            background-color: lightgrey;
+        }
+       
+        table, th, td {
+        border: 1px solid black;
+        }
+        
+        .header {
+        color:blue;
+        font-weight: bold;
+        }
+        
+        table {
+        width:100%;
+        table-layout:auto;
+
+        }
+       
+        td {
+        word-wrap: break-word;
+        max-width: 300px;
+        
+        }
+        </style>
+    </head>
+    <body>
+
+        <p><h1>Applicants</h1></p>
+
+        <form action="/filter">
+            <p><label for="filter_input_name">Name:</label></p>
+            <p><input id="filter_input_name" name="filter_input_name" type="text" size="50" /></p>
+
+            <p><label for="filter_input_city">City:</label></p>
+            <p><select name="filter_input_city" id="filter_input_city">
+                <option name="all" selected >All</option>
+                {% for city in cities %}
+                    <option name="city" >{{ city.applicant_city }}</option>
+                {% endfor %}
+            </select></p>
+
+            <p><label for="filter_input_school">School:</label></p>
+            <p><select name="filter_input_school" id="filter_input_school">
+                <option name="all" selected >All</option>
+                {% for school in schools %}
+                    <option name="city" >{{ school.city }}</option>
+                {% endfor %}
+            </select></p>
+
+            <input id="filter_button" type="submit" value="Filter" />
+        </form>
+
         
         <table>
         <TR>
