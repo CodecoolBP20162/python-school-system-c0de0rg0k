@@ -23,11 +23,13 @@ def index():
 def list_applicants():
     applicants = Applicant.select().order_by(Applicant.id)
     cities = Applicant.select(fn.Distinct(Applicant.applicant_city)).order_by(Applicant.applicant_city)
-    schools = Applicant.select(fn.Distinct(Applicant.applied_school)).join(School) # .order_by(Applicant.applied_school.city)
+    schools = Applicant.select(fn.Distinct(Applicant.applied_school)).order_by(Applicant.applied_school)
+    statuses = Applicant.select(fn.Distinct(Applicant.status)).order_by(Applicant.status)
     return render_template('applicants.html',
                            applicants=applicants,
                            cities=cities,
-                           schools=schools)
+                           schools=schools,
+                           statuses=statuses)
 
 
 
