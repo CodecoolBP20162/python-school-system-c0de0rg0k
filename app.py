@@ -27,8 +27,7 @@ def list_applicants():
 @app.route("/admin/e-mail-log", methods=["GET"])
 def show_sent_email():
     applicant = Applicant.select()
-    render_template('show_email.html', header="List of all emails", object=applicant)
-
+    return render_template('show_email.html', header="List of all emails", object=applicant)
 
 if __name__ == '__main__':
     init_db()
