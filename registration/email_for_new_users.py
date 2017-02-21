@@ -1,13 +1,14 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from models import *
+from _datetime import datetime
 
 
 class SendEmail:
 
     def __init__(self):
         self.fromaddr = "tesztfiok.codeorgok@gmail.com"
-        self.toaddrs = "tesztfiok.codeorgok@gmail.com"
         self.username = 'tesztfiok.codeorgok@gmail.com'
         self.password = 'Codeorgok123'
 
@@ -30,7 +31,7 @@ class SendEmail:
     def send_applicant_email(self, new_applicant):
         msg = MIMEMultipart()
         msg['From'] = self.fromaddr
-        msg['To'] = self.toaddrs
+        msg['To'] = new_applicant.email
         msg['Subject'] = 'New applicant registration'
         message = self.__applicant_message_text(new_applicant)
         msg.attach(MIMEText(message, 'plain'))
@@ -39,11 +40,13 @@ class SendEmail:
         server.login(self.username, self.password)
         server.sendmail(msg['From'], msg['To'], msg.as_string())
         server.quit()
+        self.__save_email_details_to_table(msg['Subject'], message, 'Applicant registration',
+                                           new_applicant.first_name + ' ' + new_applicant.last_name, msg['To'])
 
     def send_mentor_email(self, new_mentor):
         msg = MIMEMultipart()
         msg['From'] = self.fromaddr
-        msg['To'] = self.toaddrs
+        msg['To'] = new_mentor.email
         msg['Subject'] = 'New mentor registration'
         message = self.__mentor_message_text(new_mentor)
         msg.attach(MIMEText(message, 'plain'))
@@ -52,3 +55,10 @@ class SendEmail:
         server.login(self.username, self.password)
         server.sendmail(msg['From'], msg['To'], msg.as_string())
         server.quit()
+        self.__save_email_details_to_table(msg['Subject'], message, 'Mentor registration',
+                                           new_mentor.first_name + ' ' + new_mentor.last_name, msg['To'])
+
+    def __save_email_details_to_table(self, subject, msg, email_type, person, email_address):
+        new_email_to_table = EmailDetails(subject=subject, message=msg[0:140], date=datetime.now(), email_type=email_type,
+                     person=person, email_address=email_address)
+        new_email_to_table.save()
