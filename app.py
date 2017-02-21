@@ -22,7 +22,12 @@ def index():
 @app.route('/admin/list_applicants')
 def list_applicants():
     applicants = Applicant.select().order_by(Applicant.id)
-    return render_template('applicants.html', applicants=applicants)
+    cities = Applicant.select(fn.Distinct(Applicant.applicant_city)).order_by(Applicant.applicant_city)
+    schools = Applicant.select(fn.Distinct(Applicant.applied_school)).join(School) # .order_by(Applicant.applied_school.city)
+    return render_template('applicants.html',
+                           applicants=applicants,
+                           cities=cities,
+                           schools=schools)
 
 
 
