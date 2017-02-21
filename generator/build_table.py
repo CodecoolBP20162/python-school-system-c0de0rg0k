@@ -1,5 +1,5 @@
 from models import *
-
+from unidecode import unidecode
 
 class BuildTable:
     """This class create table and generate the example data from files (example_data/)"""
@@ -78,7 +78,9 @@ class BuildTable:
 
     def __upload_mentor_table(self, mentors_list):
         for mentor in mentors_list:
-            Mentor.create(first_name=mentor[0], last_name=mentor[1], school=mentor[2])
+            full_name = unidecode(mentor[0]) + unidecode(mentor[1])
+            Mentor.create(first_name=mentor[0], last_name=mentor[1], school=mentor[2],
+                          email='tesztfiok.codeorgok+{0}@gmail.com'.format(full_name))
 
     def __upload_interviewslot_table(self, interview_slot_list):
         for slot in interview_slot_list:
