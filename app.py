@@ -57,6 +57,7 @@ def show_sent_email():
     emails_list = EmailDetails.select().order_by(EmailDetails.date)
     return render_template('show_email.html', header="List of all emails", emails=emails_list)
 
+
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
