@@ -33,4 +33,5 @@ def list_applicants():
 
 
 if __name__ == '__main__':
-    db.close()
+    init_db
+    app.run()
