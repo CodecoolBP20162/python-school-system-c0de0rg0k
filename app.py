@@ -2,7 +2,7 @@ import os
 from peewee import *
 from models import *
 from flask import Flask, request, session, g, redirect, url_for, abort, \
-     render_template, flash
+     render_template, flash, session
 from generator.app_code_generator import AppCodeGenerator
 from generator.applicant_generator import ApplicantGenerator
 from registration.email_for_new_users import SendEmail
@@ -10,10 +10,38 @@ from validate_email import validate_email
 
 
 app = Flask(__name__)  # create the application instance :)
+app.config.from_object(__name__)  # load config from this file , flaskr.py
+
+# Load default config and override config from an environment variable
+app.config.update(dict(
+    DATABASE=os.path.join(app.root_path, 'school_system.db'),
+    SECRET_KEY='development key',
+    USERNAME='admin',
+    PASSWORD='default'
+))
+# app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
 def init_db():
     db.connect()
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    print(app.config['USERNAME'])
+    print(app.config['PASSWORD'])
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != app.config['USERNAME']:
+            error = 'Invalid username'
+        elif request.form['password'] != app.config['PASSWORD']:
+            error = 'Invalid password'
+        else:
+            session['logged_in'] = True
+            flash('You were logged in')
+            return redirect(url_for('show_admin_menu'))
+
+    return render_template('login.html', error=error)
 
 
 @app.route('/')
@@ -22,6 +50,14 @@ def index():
 
 
 @app.route('/admin/', methods=["GET"])
+def check_login():
+    if session['logged_in'] is True:
+        return redirect(url_for('login'))
+    else:
+        return redirect(url_for('show_admin_menu'))
+
+
+@app.route('/admin-login/', methods=["GET"])
 def show_admin_menu():
     return render_template("admin_interface.html")
 
@@ -91,6 +127,17 @@ def show_sent_email():
     emails_list = EmailDetails.select().order_by(EmailDetails.date)
     return render_template('show_email.html', header="List of all emails", emails=emails_list)
 
+
+@app.route('/applicant', methods=["GET"])
+def show_applicants_interface():
+    return render_template('applicant_interface.html')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    flash('You were logged out')
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     init_db()
