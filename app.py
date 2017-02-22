@@ -19,9 +19,9 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/admin/')
+@app.route('/admin/', methods=["GET"])
 def show_admin_menu():
-    return redirect(url_for('index'))
+    return render_template("admin_interface.html")
 
 
 @app.route('/admin/list_applicants')
@@ -37,7 +37,7 @@ def list_applicants():
 
 @app.route('/admin/list_interviews')
 def list_interviews():
-    interviews= Interview.select().join(InterviewSlot).join(Mentor)
+    interviews = Interview.select().join(InterviewSlot).join(Mentor)
     dates = InterviewSlot.select(fn.Distinct(InterviewSlot.start_time))
     applicant_codes = Applicant.select(fn.Distinct(Applicant.applicant_code)).order_by(Applicant.applicant_code)
     mentors = Mentor.select(fn.Distinct(Mentor.last_name)).join(InterviewSlot).join(Interview)

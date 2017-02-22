@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Admin interface</h1>
+
+    <form action="{{ url_for('list_applicants') }}">
+        <input class="btn btn-primary" id="list_applicants" type="submit" value="List applicants">
+    </form><br>
+
+    <form action="{{ url_for('list_interviews') }}">
+        <input class="btn btn-primary" id="list_interviews" type="submit" value="List interviews">
+    </form><br>
+
+    <form action="{{ url_for('show_sent_email') }}">
+        <input class="btn btn-primary" id="list_emails" type="submit" value="List emails">
+    </form><br>
+
+    <form action="{{ url_for('index') }}">
+        <input class="btn btn-primary" id="back_to_home" type="submit" value="Back to the home page">
+    </form>
+
+{% endblock %}

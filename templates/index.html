@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-    <p><h1>Admin interface</h1></p>
+    <p><h1>Home page</h1></p><br>
 
-        <form action='/admin/list_applicants'>
-            <input id="list_applicants" type="submit" value="Admin" />
+        <form action='/admin/'>
+            <input class="btn btn-primary" id="admin_menu" type="submit" value="Admin"/>
         </form>
 
         <form action='/registration' method="GET">
-            <br><input id="applicant_registration" type="submit" value="Applicant registration" />
+            <br><input class="btn btn-primary" id="applicant_registration" type="submit" value="Applicant registration" />
         </form>
 
 
