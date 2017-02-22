@@ -62,7 +62,7 @@ class Q_A(BaseModel):
 class EmailDetails(BaseModel):
     subject = CharField()
     message = TextField()
-    date = DateField()
+    date = DateTimeField()
     email_type = CharField()
     person = CharField()
     email_address = CharField()
