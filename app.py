@@ -26,6 +26,11 @@ def init_db():
     db.connect()
 
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     print(app.config['USERNAME'])
@@ -38,54 +43,57 @@ def login():
             error = 'Invalid password'
         else:
             session['logged_in'] = True
-            flash('You were logged in')
             return redirect(url_for('show_admin_menu'))
 
     return render_template('login.html', error=error)
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
-@app.route('/admin/', methods=["GET"])
+@app.route('/admin-login/', methods=["GET"])
 def check_login():
-    if session['logged_in'] is True:
+    if not session.get('logged_in'):
         return redirect(url_for('login'))
     else:
         return redirect(url_for('show_admin_menu'))
 
 
-@app.route('/admin-login/', methods=["GET"])
+@app.route('/admin/', methods=["GET"])
 def show_admin_menu():
-    return render_template("admin_interface.html")
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    else:
+        return render_template("admin_interface.html")
 
 
 @app.route('/admin/list_applicants')
 def list_applicants():
-    applicants = Applicant.select().order_by(Applicant.id)
-    cities = Applicant.select(fn.Distinct(Applicant.applicant_city)).order_by(Applicant.applicant_city)
-    schools = Applicant.select(fn.Distinct(Applicant.applied_school)).join(School) # .order_by(Applicant.applied_school.city)
-    return render_template('applicants.html',
-                           applicants=applicants,
-                           cities=cities,
-                           schools=schools)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    else:
+        applicants = Applicant.select().order_by(Applicant.id)
+        cities = Applicant.select(fn.Distinct(Applicant.applicant_city)).order_by(Applicant.applicant_city)
+        schools = Applicant.select(fn.Distinct(Applicant.applied_school)).join(School) # .order_by(Applicant.applied_school.city)
+        return render_template('applicants.html',
+                               applicants=applicants,
+                               cities=cities,
+                               schools=schools)
 
 
 @app.route('/admin/list_interviews')
 def list_interviews():
-    interviews = Interview.select().join(InterviewSlot).join(Mentor)
-    dates = InterviewSlot.select(fn.Distinct(InterviewSlot.start_time))
-    applicant_codes = Applicant.select(fn.Distinct(Applicant.applicant_code)).order_by(Applicant.applicant_code)
-    mentors = Mentor.select(fn.Distinct(Mentor.last_name)).join(InterviewSlot).join(Interview)
-    schools = School.select(fn.Distinct(School.city)) # .order_by(Applicant.applied_school.city)
-    return render_template('interviews.html',
-                           interviews=interviews,
-                           dates=dates,
-                           applicant_codes=applicant_codes,
-                           mentors=mentors,
-                           schools=schools)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    else:
+        interviews = Interview.select().join(InterviewSlot).join(Mentor)
+        dates = InterviewSlot.select(fn.Distinct(InterviewSlot.start_time))
+        applicant_codes = Applicant.select(fn.Distinct(Applicant.applicant_code)).order_by(Applicant.applicant_code)
+        mentors = Mentor.select(fn.Distinct(Mentor.last_name)).join(InterviewSlot).join(Interview)
+        schools = School.select(fn.Distinct(School.city)) # .order_by(Applicant.applied_school.city)
+        return render_template('interviews.html',
+                               interviews=interviews,
+                               dates=dates,
+                               applicant_codes=applicant_codes,
+                               mentors=mentors,
+                               schools=schools)
 
 
 @app.route('/registration', methods=['GET'])
@@ -124,19 +132,21 @@ def applicant_registration():
 
 @app.route("/admin/e-mail-log", methods=["GET"])
 def show_sent_email():
-    emails_list = EmailDetails.select().order_by(EmailDetails.date)
-    return render_template('show_email.html', header="List of all emails", emails=emails_list)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    else:
+        emails_list = EmailDetails.select().order_by(EmailDetails.date)
+        return render_template('show_email.html', header="List of all emails", emails=emails_list)
 
 
 @app.route('/applicant', methods=["GET"])
 def show_applicants_interface():
-    return render_template('applicant_interface.html')
+    return redirect(url_for('index'))
 
 
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
-    flash('You were logged out')
     return redirect(url_for('login'))
 
 if __name__ == '__main__':

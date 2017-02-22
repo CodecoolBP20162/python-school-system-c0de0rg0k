@@ -9,10 +9,10 @@
       <dd><input type=text name=username>
       <dt>Password:
       <dd><input type=password name=password><br><br>
-      <dd><input type=submit class="btn btn-primary" value=Login><br><br>
+      <dd><input type=submit class="btn btn-primary" value=Login><br>
     </dl>
   </form>
-    <a href="{{ url_for('show_applicants_interface') }}" methods="GET">
-        <button type="submit" class="btn btn-primary">Back to applicant page</button>
+    <a href="{{ url_for('index') }}" methods="GET">
+        <button type="submit" class="btn btn-primary">Back to home page</button>
     </a>
 {% endblock %}
