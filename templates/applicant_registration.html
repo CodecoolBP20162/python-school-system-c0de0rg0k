@@ -1,15 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1> Applicant registration </h1>
+<p>{{ message }}</p>
     <form action="/registration" method="POST">
         <label for="first_name">First name:</label><br>
-        <input type=text size=50 name="first_name" id="first_name"><br>
+        <input type=text size=50 name="first_name" id="first_name" value="{{ first_name }}"><br>
         <label for="last_name">Last name</label><br>
-        <input type=text size=50 name="last_name" id="last_name"><br>
+        <input type=text size=50 name="last_name" id="last_name" value="{{ last_name }}"><br>
         <label for="applicant_city">Your city</label><br>
-        <input type=text size=50 name="applicant_city" id="applicant_city"><br>
+        <input type=text size=50 name="applicant_city" id="applicant_city" value="{{ applicant_city }}"><br>
         <label for="email_address">E-mail address</label><br>
-        <input type=text size=50 name="email_address" id="email_address"><br><br>
+        <input type=text size=50 name="email_address" id="email_address" value="{{ email_address }}"><br><br>
         <button class="btn btn-primary" type="submit" id="submit_registration_button">Register</button>
     </form>
 
