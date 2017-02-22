@@ -84,9 +84,13 @@ def filter_applicants():
     subquery = Applicant.select()
     if request.form['filter_input_name']:
         for i in request.form['filter_input_name'].split():
-            foo = Applicant.select().where((fn.lower(Applicant.first_name) == i.lower()) | (fn.lower(Applicant.last_name) == i.lower())).get()
-            if foo not in name_list:
-                name_list.append(foo)
+            i.lower()
+            try:
+                foo = Applicant.select().where((fn.lower(Applicant.first_name) == i) | (fn.lower(Applicant.last_name) == i)).get()
+                if foo not in name_list:
+                    name_list.append(foo)
+            except:
+                continue
         return list_applicants(applicants=name_list)
     else:
         return list_applicants()
