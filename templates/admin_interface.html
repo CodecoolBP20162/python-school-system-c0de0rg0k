@@ -3,20 +3,28 @@
 {% block content %}
     <h1>Admin interface</h1>
 
-    <form action="{{ url_for('list_applicants') }}">
-        <input class="btn btn-primary" id="list_applicants" type="submit" value="List applicants">
-    </form><br>
+    <a href="{{ url_for('list_applicants') }}">
+        <button type="submit" class="btn btn-primary" id="list_applicants" type="submit">
+        List applicants
+        </button>
+    </a><br><br>
 
-    <form action="{{ url_for('list_interviews') }}">
-        <input class="btn btn-primary" id="list_interviews" type="submit" value="List interviews">
-    </form><br>
+    <a href="{{ url_for('list_interviews') }}">
+        <button type="submit" class="btn btn-primary" id="list_interviews">
+            List interviews
+        </button>
+    </a><br><br>
 
-    <form action="{{ url_for('show_sent_email') }}">
-        <input class="btn btn-primary" id="list_emails" type="submit" value="List emails">
-    </form><br>
+    <a href="{{ url_for('show_sent_email') }}">
+        <button type="submit" class="btn btn-primary" id="list_emails">
+        List emails
+        </button>
+    </a><br><br>
 
-    <form action="{{ url_for('index') }}">
-        <input class="btn btn-primary" id="back_to_home" type="submit" value="Back to the home page">
-    </form>
+    <a href="{{ url_for('index') }}">
+        <button class="btn btn-primary" id="back_to_home" type="submit">
+        Back to the home page
+        </button><br>
+    </a>
 
 {% endblock %}
