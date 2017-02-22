@@ -2,13 +2,15 @@
 {% block content %}
     <p><h1>Home page</h1></p><br>
 
-        <form action='/admin/'>
-            <input class="btn btn-primary" id="admin_menu" type="submit" value="Admin"/>
-        </form>
+        <a href='/admin/'>
+            <button class="btn btn-primary" id="admin_menu" type="submit">Admin menu</button>
+        </a><br>
 
-        <form action='/registration' method="GET">
-            <br><input class="btn btn-primary" id="applicant_registration" type="submit" value="Applicant registration" />
-        </form>
+        <a href='/registration' method="GET">
+            <br><button class="btn btn-primary" id="applicant_registration" type="submit">
+            Applicant registration
+            </button>
+        </a>
 
 
 {% endblock %}
