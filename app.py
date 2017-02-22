@@ -26,8 +26,11 @@ def show_admin_menu():
 
 
 @app.route('/admin/list_applicants')
-def list_applicants():
-    applicants = Applicant.select().order_by(Applicant.id)
+def list_applicants(applicants=None):
+    if applicants is None:
+        applicants = Applicant.select().order_by(Applicant.id)
+    else:
+        applicants = applicants
     cities = Applicant.select(fn.Distinct(Applicant.applicant_city)).order_by(Applicant.applicant_city)
     schools = Applicant.select(fn.Distinct(Applicant.applied_school)).order_by(Applicant.applied_school)
     statuses = Applicant.select(fn.Distinct(Applicant.status)).order_by(Applicant.status)
@@ -77,18 +80,16 @@ def show_sent_email():
 
 @app.route("/admin/filter_applicants", methods=["GET", "POST"])
 def filter_applicants():
-    query = None
+    name_list = []
+    subquery = Applicant.select()
     if request.form['filter_input_name']:
-        name_list = []
-        foo = request.form['filter_input_name']
-        subquery = Applicant.select()
-        for i in subquery:
-            match = re.search(foo, i.first_name)
-            if match:
-                name_list.append(i)
-        return render_template('applicants.html', applicants=name_list)
+        for i in request.form['filter_input_name'].split():
+            foo = Applicant.select().where((fn.lower(Applicant.first_name) == i.lower()) | (fn.lower(Applicant.last_name) == i.lower())).get()
+            if foo not in name_list:
+                name_list.append(foo)
+        return list_applicants(applicants=name_list)
     else:
-        return redirect(url_for('list_applicants'))
+        return list_applicants()
 
 
 if __name__ == '__main__':
