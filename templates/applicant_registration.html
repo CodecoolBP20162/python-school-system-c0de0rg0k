@@ -10,6 +10,10 @@
         <input type=text size=50 name="applicant_city" id="applicant_city"><br>
         <label for="email_address">E-mail address</label><br>
         <input type=text size=50 name="email_address" id="email_address"><br><br>
-        <button type="submit" id="submit_registration_button">Register</button>
+        <button class="btn btn-primary" type="submit" id="submit_registration_button">Register</button>
     </form>
+
+<form action="{{url_for('index')}}">
+          <br><button class="btn btn-primary" type="submit">Back</button>
+</form>
 {% endblock %}

@@ -35,11 +35,6 @@ def list_applicants():
                            schools=schools)
 
 
-@app.route('/registration', methods=['GET'])
-def show_registration_form():
-    return render_template('applicant_registration.html')
-
-
 @app.route('/admin/list_interviews')
 def list_interviews():
     interviews = Interview.select().join(InterviewSlot).join(Mentor)
@@ -53,6 +48,11 @@ def list_interviews():
                            applicant_codes=applicant_codes,
                            mentors=mentors,
                            schools=schools)
+
+
+@app.route('/registration', methods=['GET'])
+def show_registration_form():
+    return render_template('applicant_registration.html')
 
 
 @app.route('/registration', methods=['POST'])
