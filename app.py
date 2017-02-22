@@ -5,6 +5,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 from generator.app_code_generator import AppCodeGenerator
 from generator.applicant_generator import ApplicantGenerator
+from registration.email_for_new_users import SendEmail
 
 
 app = Flask(__name__)  # create the application instance :)
@@ -57,13 +58,14 @@ def show_registration_form():
 
 @app.route('/registration', methods=['POST'])
 def applicant_registration():
-    Applicant.create(first_name=request.form['first_name'],
+    new_applicant = Applicant.create(first_name=request.form['first_name'],
                      last_name=request.form['last_name'],
                      applicant_city=request.form['applicant_city'],
                      status="new",
                      applied_school = ApplicantGenerator().search_nearest_school(request.form['applicant_city']),
                      applicant_code= AppCodeGenerator().code_generator(),
                      email=request.form['email_address'])
+    SendEmail().send_applicant_email(new_applicant)
     return redirect(url_for('index'))
 
 
