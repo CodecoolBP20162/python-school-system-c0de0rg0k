@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"/>
+
+        <h1>{{ header }}</h1>
+        <table class="table table-bordered">
+            <tr>
+                <th> Subject </th>
+                <th> Message (140 character) </th>
+                <th> Person </th>
+                <th> Email address </th>
+                <th> Email type </th>
+                <th> Date </th>
+            </tr>
+            {% for email in emails %}
+                <tr>
+                    <td>{{ email.subject}}</td>
+                    <td>{{ email.message }}</td>
+                    <td>{{ email.person }}</td>
+                    <td>{{ email.email_address }}</td>
+                    <td>{{ email.email_type }}</td>
+                    <td>{{ email.date }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <a href="{{ url_for('show_admin_menu') }}">
+            <button class="btn btn-primary" type="submit" id="back_to_admin_menu">Back to the Admin menu</button>
+        </a>
+    {% endblock %}

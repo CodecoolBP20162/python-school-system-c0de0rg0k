@@ -1,6 +1,6 @@
 from generator.app_code_generator import AppCodeGenerator
 from models import *
-
+from unidecode import unidecode
 
 class ApplicantGenerator:
     """ First, generate the applicants: read from the file, then update the Applicant table with the applicants_list
@@ -21,7 +21,7 @@ class ApplicantGenerator:
     def generate_nearest_school(self):
         applicants = Applicant.select().where(Applicant.applied_school.is_null(True))
         for applicant in applicants:
-            closest_city = self.__search_nearest_school(applicant.applicant_city)
+            closest_city = self.search_nearest_school(applicant.applicant_city)
             applicant.applied_school = closest_city
             applicant.save()
 
@@ -44,10 +44,12 @@ class ApplicantGenerator:
 
     def __update_applicant_table(self, applicants_list):
         for applicant in applicants_list:
+            full_name = unidecode(applicant[0]) + unidecode(applicant[1])
             Applicant.create(first_name=applicant[0], last_name=applicant[1], applicant_city=applicant[2],
-                             status=applicant[3])
+                             status=applicant[3],
+                             email='tesztfiok.codeorgok+{0}@gmail.com'.format(full_name))
 
-    def __search_nearest_school(self, application_city):
+    def search_nearest_school(self, application_city):
         current_city = City.get(city_name=application_city)
         return current_city.nearest_school
 
@@ -69,5 +71,5 @@ class ApplicantGenerator:
         for applicant in applicants:
             # Create an instance, and the current applicant (from the table) get the generated application_code
             new_app_code = AppCodeGenerator()
-            applicant.applicant_code = new_app_code.application_code
+            applicant.applicant_code = new_app_code.code_generator()
             applicant.save()

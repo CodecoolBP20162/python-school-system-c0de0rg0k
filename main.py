@@ -1,11 +1,11 @@
-from generator.build_table import BuildTable
-from UserInterface import UserInterface
-from ApplicantQueries import ApplicantQueries
+from dao.ApplicantQueries import ApplicantQueries
+from dao.administrator_queries_applicants import AdministratorQueriesApplicants
+from dao.administrator_queries_interviews import AdministratorQueriesInterviews
+from dao.mentor_queries import MentorQueries
 from generator.applicant_generator import ApplicantGenerator
-from mentor_queries import MentorQueries
-from administrator_queries_interviews import AdministratorQueriesInterviews
-from registration import Register
-from administrator_queries_applicants import AdministratorQueriesApplicants
+from generator.build_table import BuildTable
+from registration.registration import Register
+from ui.UserInterface import UserInterface
 
 
 class Main:
@@ -203,3 +203,4 @@ class Main:
 
 if __name__ == '__main__':
     Main().main()
+    

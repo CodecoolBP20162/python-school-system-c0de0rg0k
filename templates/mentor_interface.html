@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"/>
+
+    <h1>Mentor menu</h1><br>
+
+    <a href="{{ url_for('show_mentor_interviews') }}">
+        <button class="btn btn-primary" type="submit" id="show_mentor_int">Mentors's interviews</button>
+    </a><br><br>
+
+    <a href="{{ url_for('index') }}">
+        <button class="btn btn-primary" type="submit" id="back_to_admin_menu">Back to the Home page</button>
+    </a>
+
+{% endblock %}

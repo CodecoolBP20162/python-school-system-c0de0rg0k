@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Admin interface</h1>
+
+    <a href="{{ url_for('list_applicants') }}">
+        <button type="submit" class="btn btn-primary" id="list_applicants">
+            List applicants
+        </button>
+    </a><br><br>
+
+    <a href="{{ url_for('list_interviews') }}">
+        <button type="submit" class="btn btn-primary" id="list_interviews">
+            List interviews
+        </button>
+    </a><br><br>
+
+    <a href="{{ url_for('show_sent_email') }}">
+        <button type="submit" class="btn btn-primary" id="list_emails">
+            List emails
+        </button>
+    </a><br><br>
+
+    <a href="{{ url_for('index') }}">
+        <button class="btn btn-primary" id="back_to_home" type="submit" style="float: left">Back to the home page</button>
+    </a>
+
+    <a href="{{ url_for('logout') }}">
+        <button class="btn btn-primary" id="back_to_home" type="submit" style="float: right"><i>Logout</i></button>
+    </a>
+
+{% endblock %}

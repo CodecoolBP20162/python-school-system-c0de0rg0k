@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE>
+<html>
+    <head>
+        <title>School system - Applicants</title>
+        <style>
+
+       
+        table, th, td {
+        border: 1px solid black;
+        }
+        
+        .header {
+        color:blue;
+        font-weight: bold;
+        }
+        
+        table {
+        width:100%;
+        table-layout:auto;
+
+        }
+       
+        td {
+        word-wrap: break-word;
+        max-width: 300px;
+        
+        }
+        </style>
+    </head>
+    <body>
+       
+        <p><h1>Applicants</h1></p>
+
+        <form method="post" action="filter_applicants">
+            
+            <p><label for="filter_input_name">Name:</label></p>
+            <p><input id="filter_input_name" name="filter_input_name" type="text" size="50" /></p>
+
+            <p><label for="filter_input_email">E-mail:</label></p>
+            <p><input id="filter_input_email" name="filter_input_email" type="text" size="50" value="tesztfiok.codeorgok+<username>@gmail.com"/></p>
+
+            <p><label for="filter_input_city">City:</label></p>
+            <p><select name="filter_input_city" id="filter_input_city">
+                <option name="all" selected >All</option>
+                {% for city in cities %}
+                    <option name="city" >{{ city.applicant_city }}</option>
+                {% endfor %}
+            </select></p>
+
+            <p><label for="filter_input_school">School:</label></p>
+            <p><select name="filter_input_school" id="filter_input_school">
+                <option name="all" selected >All</option>
+                {% for school in schools %}
+                    <option name="city" >{{ school.applied_school.city }}</option>
+                {% endfor %}
+            </select></p>
+
+            <p><label for="filter_input_status">Status:</label></p>
+            <p><select name="filter_input_status" id="filter_input_status">
+                <option name="all" selected >All</option>
+                {% for status in statuses %}
+                    <option name="city" >{{ status.status }}</option>
+                {% endfor %}
+            </select></p>
+
+            <input class="btn btn-primary" id="filter_button" type="submit" value="Filter" />
+        </form>
+
+        
+        <p><table class="table table-bordered">
+        <TR>
+        <TD><SPAN class="header">ID</SPAN></TD>
+        <TD><SPAN class="header">Name</SPAN></TD>
+        <TD><SPAN class="header">City</SPAN></TD>
+        <TD><SPAN class="header">Applicant code</SPAN></TD>
+        <TD><SPAN class="header">Email</SPAN></TD>
+        <TD><SPAN class="header">School</SPAN></TD>
+        <TD><SPAN class="header">Status</SPAN></TD>
+        </TR>
+        {% for applicant in applicants %}
+        <TR>
+        <TD>{{applicant.id}}</TD>
+        <TD>{{applicant.first_name}} {{applicant.last_name}}</TD>
+        <TD>{{applicant.applicant_city}}</TD>
+        <TD>{{applicant.applicant_code}}</TD>
+        <TD>{{applicant.email}}</TD>
+        <TD>{{applicant.applied_school.city}}</TD>
+        <TD>{{applicant.status}}</TD>
+        </TR>
+        {% endfor %}
+        </table></p><br>
+
+        <form action="{{ url_for('show_admin_menu') }}">
+              <input class="btn btn-primary" type="submit" value="Back to the admin menu">
+        </form><br>
+{% endblock %}

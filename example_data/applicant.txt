@@ -22,3 +22,6 @@ Lena;Trsky;Krakow;new
 Karolina;Knilky;Wadowice;new
 Nadia;Zrwzky;Zawoja;new
 Milena;Trwurinsky;Katowice;new
+Béla;Kovács;Budapest;new
+Béla;Kovács;Érd;new
+Aladár;Mézga;Budapest;in progress

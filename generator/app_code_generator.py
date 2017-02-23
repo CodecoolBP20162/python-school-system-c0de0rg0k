@@ -3,35 +3,36 @@ from models import *
 
 
 class AppCodeGenerator:
-    """This class generate the application code"""
+    """This class generate the application code. First, generate the application_code, then compare the earlier password
+       if the current app code equal with the earlier, generate a new one"""
 
-    def __init__(self):
-        # First, generate the application_code, then compare the earlier password
-        # if tha current app code equal with the earlier, generate a new one
-        self.__earlier_app_code = []
-        self.__query_the_earliest_app_code()
-        self.__is_valid_pass = False
+    def code_generator(self):
+        earlier_app_code = self.__query_the_earliest_app_code()
+        new_code = self.__code_generator()
+        is_valid = False
 
-        self.application_code = ""
-        self.__code_generator()
+        while is_valid is False:
+            new_code = self.__code_generator()
+            is_valid = self.__check_earlier_app_code(new_code, earlier_app_code)
+        return new_code
 
     def __query_the_earliest_app_code(self):
+        earlier_app_code = []
         applications = Applicant.select()
         for application in applications:
-            self.__earlier_app_code.append(application.applicant_code)
+            earlier_app_code.append(application.applicant_code)
+        return earlier_app_code
 
     def __code_generator(self):
+        application_code = ""
         counter = 0
         while counter != 6:
-            self.application_code += str(randint(0, 9))
+            application_code += str(randint(0, 9))
             counter += 1
-        self.__check_earlier_app_code()
+        return application_code
 
-    def __check_earlier_app_code(self):
-        # if the current password in the earlier,call the code generator again,
-        # what check the earlier app code again
-        while self.__is_valid_pass is False:
-            if self.application_code not in self.__earlier_app_code:
-                self.__is_valid_pass = True
-            else:
-                self.__code_generator()
+    def __check_earlier_app_code(self, new_code, earlier_app_code_list):
+        if new_code not in earlier_app_code_list:
+            return True
+        else:
+            return False
