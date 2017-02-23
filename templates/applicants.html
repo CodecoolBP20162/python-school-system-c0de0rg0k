@@ -96,6 +96,9 @@
         </TD>
         </TR>
         {% endfor %}
-        </table></p>
+        </table></p><br>
 
+        <form action="{{ url_for('show_admin_menu') }}">
+              <input class="btn btn-primary" type="submit" value="Back to the admin menu">
+        </form><br>
 {% endblock %}

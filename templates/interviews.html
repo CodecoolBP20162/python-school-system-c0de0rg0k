@@ -1,77 +1,129 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Interviews</h1>
-    <a class="btn btn-primary" href="{{ url_for('list_interviews') }}">Show Interviews</a>
-<br/>
-        <!--form action="/story">
-            <input id="add_story" type="submit" value="Add new story" />
-        </form-->
+    <h1>Interviews</h1>
+    <br/>
+
     <form action="/filter">
-            <p><label for="filter_input_applicant_code">Applicant Code:</label></p>
-            <p><input id="filter_input_applicant_code" name="filter_input_applicant_code" type="text" size="50" /></p>
+        <p><label for="filter_input_applicant_code">Applicant Code:</label></p>
+        <p><input onkeyup="myFunction1()" placeholder="Please, write your applicant code here" id="filter_input_applicant_code"
+                  name="filter_input_applicant_code" type="text" size="50"/></p>
 
-            <p><label for="filter_input_mentor">Mentor:</label></p>
-            <p><select name="filter_input_mentor" id="filter_input_mentor">
-                <option name="all" selected >All</option>
-                {% for mentor in mentors %}
-                    <option name="mentor" >{{ mentor.last_name }}</option>
-                {% endfor %}
-            </select></p>
+        <p><label for="filter_input_mentor">Mentor's Last Name:</label></p>
+        <p><input onkeyup="myFunction2()" placeholder="Please, write your mentor's last name here!" id="filter_input_mentor"
+                  name="filter_input_mentor" type="text" size="50"/></p>
 
-            <p><label for="filter_input_school">School:</label></p>
-            <p><select name="filter_input_school" id="filter_input_school">
-                <option name="all" selected >All</option>
-                {% for school in schools %}
-                    <option name="city" >{{ school.city }}</option>
-                {% endfor %}
-            </select></p>
+        <p><label for="filter_input_school">School:</label></p>
+        <p><input onkeyup="myFunction3()" placeholder="Please, write the city of your school here!" id="filter_input_school"
+                  name="filter_input_school" type="text" size="50"/></p>
 
-            <p><label for="filter_input_date">Interview's Start Time:</label></p>
-            <p><select name="filter_input_date" id="filter_input_date">
-                <option name="all" selected >All</option>
-                {% for date in dates %}
-                    <option name="date" >{{ interviews.start_time }}</option>
-                {% endfor %}
-            </select></p>
+        <p><label for="filter_input_date">Interview Date:</label></p>
+        <p><input onkeyup="myFunction4()" placeholder="Please, write the start time of the interview (Year-Month-Day)!" id="filter_input_date"
+                  name="filter_input_date" type="text" size="50"/></p>
+    </form>
 
-            <input id="filter_button" type="submit" value="Filter" />
-        </form>
+    <table id="myTable" class="table table-bordered">
+        <TR class="header">
+            <TD><SPAN class="header">Applicant_code</SPAN></TD>
+            <TD><SPAN class="header">Applicant First Name</SPAN></TD>
+            <TD><SPAN class="header">Applicant Last Name</SPAN></TD>
+            <TD><SPAN class="header">Interview Start Time</SPAN></TD>
+            <TD><SPAN class="header">Interview End Time</SPAN></TD>
+            <TD><SPAN class="header">School</SPAN></TD>
+            <TD><SPAN class="header">Mentor Last Name</SPAN></TD>
+            <TD><SPAN class="header">Status</SPAN></TD>
 
-        <table>
-        <TR>
-        <TD style="width:15px;"><SPAN class="header">Applicant_code</SPAN></TD>
-        <TD><SPAN class="header">Applicant First Name</SPAN></TD>
-        <TD><SPAN class="header">Applicant Last Name</SPAN></TD>
-        <TD><SPAN class="header">Interview Start Time</SPAN></TD>
-        <TD><SPAN class="header">Interview End Time</SPAN></TD>
-        <TD><SPAN class="header">School</SPAN></TD>
-        <TD><SPAN class="header">Mentor Last Name</SPAN></TD>
-        <TD><SPAN class="header">Status</SPAN></TD>
-        <TD><SPAN class="header">Edit</SPAN></TD>
-        <TD><SPAN class="header">Del</SPAN></TD>
         </TR>
         {% for interview in interviews %}
-        <TR>
-        <TD>{{interview.applicant_code.applicant_code}}</TD>
-        <TD>{{interview.applicant_code.first_name}}</TD>
-        <TD>{{interview.applicant_code.last_name}}</TD>
-        <TD>{{interview.slot_id.start_time}}</TD>
-        <TD>{{interview.slot_id.end_time}}</TD>
-        <TD>{{interview.applicant_code.applied_school.city}}</TD>
-        <TD>{{interview.slot_id.mentor.last_name}}</TD>
-        <TD>{{interview.applicant_code.status}}</TD>
-        <TD>
-            <form method="GET" action="/story">
-            <input id="edit_story" name="edit_story" type="submit" value="Edit" />
-            </form>
-        </TD>
-        <TD>
-            <form method="POST" action="/del_story">
-            <input id="del_story" name="del_story"  type="submit" value="Del" />
-            </form>
-        </TD>
-        </TR>
+            <TR>
+                <TD>{{ interview.applicant_code.applicant_code }}</TD>
+                <TD>{{ interview.applicant_code.first_name }}</TD>
+                <TD>{{ interview.applicant_code.last_name }}</TD>
+                <TD>{{ interview.slot_id.start_time }}</TD>
+                <TD>{{ interview.slot_id.end_time }}</TD>
+                <TD>{{ interview.applicant_code.applied_school.city }}</TD>
+                <TD>{{ interview.slot_id.mentor.last_name }}</TD>
+                <TD>{{ interview.applicant_code.status }}</TD>
+            </TR>
         {% endfor %}
-        </table>
+    </table>
 
+    <script>
+        function myFunction1() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("filter_input_applicant_code");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function myFunction2() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("filter_input_mentor");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[6];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function myFunction3() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("filter_input_school");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[5];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function myFunction4() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("filter_input_date");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[3];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <a href="{{ url_for('show_admin_menu') }}">
+            <button class="btn btn-primary" type="submit" id="back_to_admin_menu">Back to the Admin menu</button>
+        </a><br><br>
 {% endblock %}

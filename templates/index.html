@@ -1,9 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
-    <p><h1>Admin interface</h1></p>
+    <p><h1>Home page</h1></p><br>
 
-        <form action='/admin/list_applicants'>
-            <input id="list_applicants" type="submit" value="Admin" />
-        </form>
+        <a href='{{ url_for('check_login') }}'>
+            <button class="btn btn-primary" id="admin_menu" type="submit">Admin menu</button>
+        </a><br><br>
+
+        <a href='{{ url_for('show_mentor_menu') }}'>
+            <button class="btn btn-primary" id="mentor_menu" type="submit">Mentor menu</button>
+        </a><br>
+
+        <a href='/registration' method="GET">
+            <br><button class="btn btn-primary" id="applicant_registration" type="submit">
+            Applicant registration
+            </button>
+        </a>
+
 
 {% endblock %}
