@@ -19,7 +19,6 @@ class Filter_applicants:
                 continue
         return name_result
 
-
     @staticmethod
     def filter_applicants_email():
         input = request.form['filter_input_email']
@@ -36,7 +35,6 @@ class Filter_applicants:
         city_result = filter(bar, query)
         return city_result
 
-
     @staticmethod
     def filter_applicants_school():
         input = request.form['filter_input_school']
@@ -44,7 +42,6 @@ class Filter_applicants:
         query = Applicant.select().join(School).order_by(Applicant.first_name)
         city_result = filter(bar, query)
         return city_result
-
 
     @staticmethod
     def filter_applicants_status():
