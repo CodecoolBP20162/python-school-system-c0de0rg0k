@@ -78,7 +78,6 @@
         <TD><SPAN class="header">Email</SPAN></TD>
         <TD><SPAN class="header">School</SPAN></TD>
         <TD><SPAN class="header">Status</SPAN></TD>
-        <TD><SPAN class="header">Del</SPAN></TD>
         </TR>
         {% for applicant in applicants %}
         <TR>
@@ -89,11 +88,6 @@
         <TD>{{applicant.email}}</TD>
         <TD>{{applicant.applied_school.city}}</TD>
         <TD>{{applicant.status}}</TD>
-        <TD>
-            <form method="POST" action="/del_story">
-            <input id="del_story" name="del_story"  type="submit" value="Del" />
-            </form>
-        </TD>
         </TR>
         {% endfor %}
         </table></p><br>
