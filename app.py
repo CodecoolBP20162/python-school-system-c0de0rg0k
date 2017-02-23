@@ -9,7 +9,7 @@ from registration.email_for_new_users import SendEmail
 from validate_email import validate_email
 
 
-app = Flask(__name__)  # create the application instance :)
+app = Flask(__name__)
 app.config.from_object(__name__)  # load config from this file , flaskr.py
 
 # Load default config and override config from an environment variable
