@@ -1,45 +1,46 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>Interviews</h1>
-    <a class="btn btn-primary" href="{{ url_for('list_interviews') }}">Show Interviews</a>
     <br/>
     <!--form action="/story">
         <input id="add_story" type="submit" value="Add new story" />
     </form-->
+
+    <select>
+        <optgroup label="School">
+            <option value="Budapest">Budapest</option>
+            <option value="Miskolc">Miskolc</option>
+            <option value="Krakow">Krakow</option>
+        </optgroup>
+        <optgroup label="Mentors">
+            <option value="Laci">Laci</option>
+            <option value="Immi">Immi</option>
+        </optgroup>
+    </select>
+
+
+
+
     <form action="/filter">
         <p><label for="filter_input_applicant_code">Applicant Code:</label></p>
-        <p><input id="filter_input_applicant_code" name="filter_input_applicant_code" type="text" size="50"/></p>
+        <p><input onkeyup="myFunction1()" placeholder="Please, write your applicant code here" id="filter_input_applicant_code"
+                  name="filter_input_applicant_code" type="text" size="50"/></p>
 
-        <p><label for="filter_input_mentor">Mentor:</label></p>
-        <p><select class="form-control btn-primary" name="filter_input_mentor" id="filter_input_mentor">
-            <option name="all" selected>All</option>
-            {% for mentor in mentors %}
-                <option name="mentor">{{ mentor.last_name }}</option>
-            {% endfor %}
-        </select></p>
+        <p><label for="filter_input_mentor">Mentor's Last Name:</label></p>
+        <p><input onkeyup="myFunction2()" placeholder="Please, write your mentor's last name here!" id="filter_input_mentor"
+                  name="filter_input_mentor" type="text" size="50"/></p>
 
         <p><label for="filter_input_school">School:</label></p>
-        <p><select class="form-control btn-primary" name="filter_input_school" id="filter_input_school">
-            <option name="all" selected>All</option>
-            {% for school in schools %}
-                <option name="city">{{ school.city }}</option>
-            {% endfor %}
-        </select></p>
+        <p><input onkeyup="myFunction3()" placeholder="Please, write the city of your school here!" id="filter_input_school"
+                  name="filter_input_school" type="text" size="50"/></p>
 
-        <p><label for="filter_input_date">Interview's Start Time:</label></p>
-        <p><select class="form-control btn-primary" name="filter_input_date" id="filter_input_date">
-            <option name="all" selected>All</option>
-            {% for date in dates %}
-                <option name="date">{{ interviews.start_time }}</option>
-            {% endfor %}
-        </select></p>
-
-        <input class="btn btn-primary" href="{{ url_for('list_interviews') }}" id="filter_button" type="submit"
-               value="Filter"/>
+        <p><label for="filter_input_date">Interview Date:</label></p>
+        <p><input onkeyup="myFunction4()" placeholder="Please, write the start time of the interview (Year-Month-Day)!" id="filter_input_date"
+                  name="filter_input_date" type="text" size="50"/></p>
     </form>
 
-    <table class="table table-bordered">
-        <TR>
+    <table id="myTable" class="table table-bordered">
+        <TR class="header">
             <TD style="width:15px;"><SPAN class="table table-bordered">Applicant_code</SPAN></TD>
             <TD><SPAN class="header">Applicant First Name</SPAN></TD>
             <TD><SPAN class="header">Applicant Last Name</SPAN></TD>
@@ -48,7 +49,7 @@
             <TD><SPAN class="header">School</SPAN></TD>
             <TD><SPAN class="header">Mentor Last Name</SPAN></TD>
             <TD><SPAN class="header">Status</SPAN></TD>
-            <TD><SPAN class="header">Action</SPAN></TD>
+
         </TR>
         {% for interview in interviews %}
             <TR>
@@ -60,18 +61,84 @@
                 <TD>{{ interview.applicant_code.applied_school.city }}</TD>
                 <TD>{{ interview.slot_id.mentor.last_name }}</TD>
                 <TD>{{ interview.applicant_code.status }}</TD>
-                <TD>
-                    <a class="btn btn-primary btn-sm"
-                       href="{{ url_for('list_interviews', applicant_code=interview.applicant_code.applicant_code) }}"><span
-                            class="glyphicon glyphicon-pencil"></span>
-                    </a>
-                    <a class="btn btn-danger btn-sm"
-                       href="{{ url_for('list_interviews', applicant_code=interview.applicant_code.applicant_code) }}"><span
-                            class="glyphicon glyphicon-trash"></span>
-                    </a>
-                </TD>
             </TR>
         {% endfor %}
     </table>
 
+    <script>
+        function myFunction1() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("filter_input_applicant_code");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function myFunction2() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("filter_input_mentor");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[6];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function myFunction3() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("filter_input_school");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[5];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function myFunction4() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("filter_input_date");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[3];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 {% endblock %}
