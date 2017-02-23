@@ -96,7 +96,6 @@ def filter():
         return list_applicants()
 
 
-
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
