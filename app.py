@@ -5,6 +5,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash, session
 from generator.app_code_generator import AppCodeGenerator
 from generator.applicant_generator import ApplicantGenerator
+from filter_applicants import *
 from registration.email_for_new_users import SendEmail
 from validate_email import validate_email
 
@@ -19,7 +20,6 @@ app.config.update(dict(
     USERNAME='admin',
     PASSWORD='default'
 ))
-# app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
 def init_db():
@@ -65,6 +65,22 @@ def show_admin_menu():
 
 
 @app.route('/admin/list_applicants')
+def list_applicants(applicants=None):
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    if applicants is None:
+        applicants = Applicant.select().order_by(Applicant.first_name)
+    else:
+        applicants = applicants
+    cities = Applicant.select(fn.Distinct(Applicant.applicant_city)).order_by(Applicant.applicant_city)
+    schools = Applicant.select(fn.Distinct(Applicant.applied_school)).order_by(Applicant.applied_school)
+    statuses = Applicant.select(fn.Distinct(Applicant.status)).order_by(Applicant.status)
+    return render_template('applicants.html',
+                           applicants=applicants,
+                           cities=cities,
+                           schools=schools,
+                           statuses=statuses)
+
 def list_applicants():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
@@ -166,6 +182,26 @@ def show_applicants_interface():
 def logout():
     session.pop('logged_in', None)
     return redirect(url_for('login'))
+
+  
+@app.route("/admin/filter_applicants", methods=["GET", "POST"])
+def filter():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    default_email = "tesztfiok.codeorgok+<username>@gmail.com"
+    if request.form['filter_input_name']:
+        return list_applicants(Filter_applicants.filter_applicants_name())
+    elif request.form['filter_input_email'] != default_email:
+        return list_applicants(Filter_applicants.filter_applicants_email())
+    elif request.form['filter_input_city'] != "All":
+        return list_applicants(Filter_applicants.filter_applicants_city())
+    elif request.form['filter_input_school'] != "All":
+        return list_applicants(Filter_applicants.filter_applicants_school())
+    elif request.form['filter_input_status'] != "All":
+        return list_applicants(Filter_applicants.filter_applicants_status())
+    else:
+        return list_applicants()
+
 
 if __name__ == '__main__':
     init_db()
