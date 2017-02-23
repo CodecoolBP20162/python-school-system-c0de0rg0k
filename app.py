@@ -95,9 +95,23 @@ def list_interviews():
                                mentors=mentors,
                                schools=schools)
 
+
 @app.route('/mentor', methods=["GET"])
 def show_mentor_menu():
     return render_template('mentor_interface.html')
+
+
+@app.route('/mentor/interviews-list', methods=["GET"])
+def show_mentor_interviews():
+    slots = InterviewSlot.select().order_by(InterviewSlot.id)
+    interviews_list = []
+    for slot in slots:
+        for interview in Interview.select():
+            if interview.slot_id == slot:
+                interviews_list.append([str(slot.start_time), slot.mentor.last_name,
+                                        interview.applicant_code.first_name + ' ' + interview.applicant_code.last_name, interview.applicant_code.applicant_code])
+
+    return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
 
 
 @app.route('/registration', methods=['GET'])
