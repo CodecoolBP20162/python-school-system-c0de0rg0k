@@ -5,7 +5,8 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 from generator.app_code_generator import AppCodeGenerator
 from generator.applicant_generator import ApplicantGenerator
-import re
+from filter_applicants import *
+
 
 
 app = Flask(__name__)  # create the application instance :)
@@ -28,7 +29,7 @@ def show_admin_menu():
 @app.route('/admin/list_applicants')
 def list_applicants(applicants=None):
     if applicants is None:
-        applicants = Applicant.select().order_by(Applicant.id)
+        applicants = Applicant.select().order_by(Applicant.first_name)
     else:
         applicants = applicants
     cities = Applicant.select(fn.Distinct(Applicant.applicant_city)).order_by(Applicant.applicant_city)
@@ -79,21 +80,21 @@ def show_sent_email():
 
 
 @app.route("/admin/filter_applicants", methods=["GET", "POST"])
-def filter_applicants():
-    name_list = []
-    subquery = Applicant.select()
+def filter():
+    default_email = "tesztfiok.codeorgok+<username>@gmail.com"
     if request.form['filter_input_name']:
-        for i in request.form['filter_input_name'].split():
-            i.lower()
-            try:
-                foo = Applicant.select().where((fn.lower(Applicant.first_name) == i) | (fn.lower(Applicant.last_name) == i)).get()
-                if foo not in name_list:
-                    name_list.append(foo)
-            except:
-                continue
-        return list_applicants(applicants=name_list)
+        return list_applicants(Filter_applicants.filter_applicants_name())
+    elif request.form['filter_input_email'] != default_email:
+        return list_applicants(Filter_applicants.filter_applicants_email())
+    elif request.form['filter_input_city'] != "All":
+        return list_applicants(Filter_applicants.filter_applicants_city())
+    elif request.form['filter_input_school'] != "All":
+        return list_applicants(Filter_applicants.filter_applicants_school())
+    elif request.form['filter_input_status'] != "All":
+        return list_applicants(Filter_applicants.filter_applicants_status())
     else:
         return list_applicants()
+
 
 
 if __name__ == '__main__':
