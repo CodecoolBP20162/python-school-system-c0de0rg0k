@@ -95,6 +95,10 @@ def list_interviews():
                                mentors=mentors,
                                schools=schools)
 
+@app.route('/mentor', methods=["GET"])
+def show_mentor_menu():
+    return render_template('mentor_interface.html')
+
 
 @app.route('/registration', methods=['GET'])
 def show_registration_form():
