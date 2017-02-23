@@ -81,17 +81,6 @@ def list_applicants(applicants=None):
                            schools=schools,
                            statuses=statuses)
 
-def list_applicants():
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-    else:
-        applicants = Applicant.select().order_by(Applicant.id)
-        cities = Applicant.select(fn.Distinct(Applicant.applicant_city)).order_by(Applicant.applicant_city)
-        schools = Applicant.select(fn.Distinct(Applicant.applied_school)).join(School) # .order_by(Applicant.applied_school.city)
-        return render_template('applicants.html',
-                               applicants=applicants,
-                               cities=cities,
-                               schools=schools)
 
 
 @app.route('/admin/list_interviews')
@@ -188,19 +177,20 @@ def logout():
 def filter():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
-    default_email = "tesztfiok.codeorgok+<username>@gmail.com"
-    if request.form['filter_input_name']:
-        return list_applicants(Filter_applicants.filter_applicants_name())
-    elif request.form['filter_input_email'] != default_email:
-        return list_applicants(Filter_applicants.filter_applicants_email())
-    elif request.form['filter_input_city'] != "All":
-        return list_applicants(Filter_applicants.filter_applicants_city())
-    elif request.form['filter_input_school'] != "All":
-        return list_applicants(Filter_applicants.filter_applicants_school())
-    elif request.form['filter_input_status'] != "All":
-        return list_applicants(Filter_applicants.filter_applicants_status())
     else:
-        return list_applicants()
+        default_email = "tesztfiok.codeorgok+<username>@gmail.com"
+        if request.form['filter_input_name']:
+            return list_applicants(Filter_applicants.filter_applicants_name())
+        elif request.form['filter_input_email'] != default_email:
+            return list_applicants(Filter_applicants.filter_applicants_email())
+        elif request.form['filter_input_city'] != "All":
+            return list_applicants(Filter_applicants.filter_applicants_city())
+        elif request.form['filter_input_school'] != "All":
+            return list_applicants(Filter_applicants.filter_applicants_school())
+        elif request.form['filter_input_status'] != "All":
+            return list_applicants(Filter_applicants.filter_applicants_status())
+        else:
+            return list_applicants()
 
 
 if __name__ == '__main__':
