@@ -1,27 +1,31 @@
-{% extends "layout.html" %}
+{% extends "mentor_interface.html" %}
 {% block content %}
 
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"/>
+            <h1>{{ header }}</h1><br>
 
-    <h1>{{ header }}</h1><br>
-    <table class="table table-bordered">
-        <tr>
-            <th> Start time </th>
-            <th> Mentor </th>
-            <th> Applicant </th>
-            <th> Applicant code </th>
-        </tr>
-            {% for row in interviews %}
-            <tr>
-                {% for interview in row  %}
-                    <td>{{ interview}}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-    </table>
+            <div class="col-lg-6">
+                <div class="table-responsive"></div>
+                    <table class="table table-bordered table-hover table-striped">
+                        <tr>
+                            <th> Start time </th>
+                            <th> Mentor </th>
+                            <th> Applicant </th>
+                            <th> Applicant code </th>
+                        </tr>
+                            {% for row in interviews %}
+                            <tr>
+                                {% for interview in row  %}
+                                    <td>{{ interview}}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                    </table>
+                </div>
 
-    <a href="{{ url_for('show_mentor_menu') }}">
-        <button class="btn btn-primary" type="submit" id="back_to_admin_menu">Back to the Admin menu</button>
-    </a><br><br>
+            <div class="col-lg-6">
+                <a href="{{ url_for('show_mentor_menu') }}">
+                    <button class="btn btn-primary" type="submit" id="back_to_admin_menu">Back to the Admin menu</button>
+                </a>
+            </div>
 
 {% endblock %}
