@@ -103,7 +103,7 @@ def list_interviews():
 
 @app.route('/mentor', methods=["GET"])
 def show_mentor_menu():
-    return render_template('mentor_interface.html')
+    return render_template('mentors_home.html')
 
 
 @app.route('/mentor/interviews-list', methods=["GET"])
@@ -191,6 +191,34 @@ def filter():
             return list_applicants(Filter_applicants.filter_applicants_status())
         else:
             return list_applicants()
+
+
+@app.route("/applicant/login/", methods=["GET"])
+def applicant_login():
+    if not session.get('applicant_logged_in'):
+        error = ""
+        return render_template('applicant_login.html', error=error)
+    else:
+        return render_template('applicant_interface.html')
+
+
+@app.route("/applicant/login/", methods=["POST"])
+def validate_applicant():
+    applicant_email = request.form['email']
+    application_code = request.form['applicant_code']
+    try:
+        applicant = Applicant.select().where(Applicant.applicant_code== application_code, Applicant.email == applicant_email).get()
+    except:
+        error = "Wrong email or applicant code"
+        return render_template('applicant_login.html', error=error)
+    session['applicant_logged_in'] = True
+    return redirect(url_for('applicant_login'))
+
+
+@app.route('/applicant/logout')
+def applicant_logout():
+    session.pop('applicant_logged_in', None)
+    return redirect(url_for('applicant_login'))
 
 
 if __name__ == '__main__':
