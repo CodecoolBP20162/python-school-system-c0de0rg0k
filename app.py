@@ -42,7 +42,7 @@ def login():
         elif request.form['password'] != app.config['PASSWORD']:
             error = 'Invalid password'
         else:
-            session['logged_in'] = True
+            session['admin_logged_in'] = True
             return redirect(url_for('show_admin_menu'))
 
     return render_template('login.html', error=error)
@@ -50,7 +50,7 @@ def login():
 
 @app.route('/admin-login/', methods=["GET"])
 def check_login():
-    if not session.get('logged_in'):
+    if not session.get('admin_logged_in'):
         return redirect(url_for('login'))
     else:
         return redirect(url_for('show_admin_menu'))
@@ -58,7 +58,7 @@ def check_login():
 
 @app.route('/admin/', methods=["GET"])
 def show_admin_menu():
-    if not session.get('logged_in'):
+    if not session.get('admin_logged_in'):
         return redirect(url_for('login'))
     else:
         return render_template("admin_interface.html")
@@ -66,7 +66,7 @@ def show_admin_menu():
 
 @app.route('/admin/list_applicants')
 def list_applicants(applicants=None):
-    if not session.get('logged_in'):
+    if not session.get('admin_logged_in'):
         return redirect(url_for('login'))
     if applicants is None:
         applicants = Applicant.select().order_by(Applicant.first_name)
@@ -85,7 +85,7 @@ def list_applicants(applicants=None):
 
 @app.route('/admin/list_interviews')
 def list_interviews():
-    if not session.get('logged_in'):
+    if not session.get('admin_logged_in'):
         return redirect(url_for('login'))
     else:
         interviews = Interview.select().join(InterviewSlot).join(Mentor)
@@ -155,7 +155,7 @@ def applicant_registration():
 
 @app.route("/admin/e-mail-log", methods=["GET"])
 def show_sent_email():
-    if not session.get('logged_in'):
+    if not session.get('admin_logged_in'):
         return redirect(url_for('login'))
     else:
         emails_list = EmailDetails.select().order_by(EmailDetails.date)
@@ -169,13 +169,13 @@ def show_applicants_interface():
 
 @app.route('/logout')
 def logout():
-    session.pop('logged_in', None)
+    session.pop('admin_logged_in', None)
     return redirect(url_for('login'))
 
   
 @app.route("/admin/filter_applicants", methods=["GET", "POST"])
 def filter():
-    if not session.get('logged_in'):
+    if not session.get('admin_logged_in'):
         return redirect(url_for('login'))
     else:
         default_email = "tesztfiok.codeorgok+<username>@gmail.com"
@@ -219,6 +219,34 @@ def validate_applicant():
 def applicant_logout():
     session.pop('applicant_logged_in', None)
     return redirect(url_for('applicant_login'))
+
+
+@app.route("/mentor/login/", methods=["GET"])
+def mentor_login():
+    if not session.get('mentor_logged_in'):
+        error = ""
+        return render_template('mentor_login.html', error=error)
+    else:
+        return render_template('mentor_interface.html')
+
+
+@app.route("/mentor/login/", methods=["POST"])
+def validate_mentor():
+    mentor_email = request.form['email']
+    mentor_password = request.form['password']
+    try:
+        mentor = Mentor.select().where(Mentor.email== mentor_email, Mentor.password == mentor_password).get()
+    except:
+        error = "Wrong email or password"
+        return render_template('mentor_login.html', error=error)
+    session['mentor_logged_in'] = True
+    return redirect(url_for('mentor_login'))
+
+
+@app.route('/mentor/logout')
+def mentor_logout():
+    session.pop('mentor_logged_in', None)
+    return redirect(url_for('mentor_login'))
 
 
 if __name__ == '__main__':

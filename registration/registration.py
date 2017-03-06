@@ -16,6 +16,7 @@ class Register:
         self.nearest_school = ""
         self.applied_school = ""
         self.email = ""
+        self.password = ""
 
     def register_applicant(self):
         self.__input_applicant_data()
@@ -38,21 +39,24 @@ class Register:
         if self.school_id == "Budapest":
             self.school_id = "1"
             new_mentor = Mentor.create(first_name=self.first_name, last_name=self.last_name, school=self.school_id,
-                                       email='tesztfiok.codeorgok+{0}@gmail.com'.format(mentor_full_name))
+                                       email='tesztfiok.codeorgok+{0}@gmail.com'.format(mentor_full_name),
+                                       password=self.password)
             new_mentor.save()
             SendEmail().send_mentor_email(new_mentor)
             print("Registration was successful. E-mail was sent!")
         elif self.school_id == "Miskolc":
             self.school_id = "2"
             new_mentor = Mentor.create(first_name=self.first_name, last_name=self.last_name, school=self.school_id,
-                                       email='tesztfiok.codeorgok+{0}@gmail.com'.format(mentor_full_name))
+                                       email='tesztfiok.codeorgok+{0}@gmail.com'.format(mentor_full_name),
+                                       password=self.password)
             new_mentor.save()
             SendEmail().send_mentor_email(new_mentor)
             print("Registration was successful. E-mail was sent!")
         elif self.school_id == "Krakow":
             self.school_id = "3"
             new_mentor = Mentor.create(first_name=self.first_name, last_name=self.last_name, school=self.school_id,
-                                       email='tesztfiok.codeorgok+{0}@gmail.com'.format(mentor_full_name))
+                                       email='tesztfiok.codeorgok+{0}@gmail.com'.format(mentor_full_name),
+                                       password=self.password)
             new_mentor.save()
             SendEmail().send_mentor_email(new_mentor)
             print("Registration was successful. E-mail was sent!")
@@ -70,3 +74,4 @@ class Register:
         self.first_name = input("Tell me your first name: ")
         self.last_name = input("Tell me your last name: ")
         self.school_id = input("Which school would you like to attend (Budapest, Miskolc or Krakow): ")
+        self.password = input("Please choose a password: ")
