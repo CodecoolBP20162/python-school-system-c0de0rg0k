@@ -28,7 +28,7 @@ def init_db():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('home_page_interface.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
