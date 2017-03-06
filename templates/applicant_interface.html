@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Applicant interface</h1>
+
+    <a href="{{ url_for('index') }}">
+        <button class="btn btn-primary" id="back_to_home" type="submit" style="float: left">Back to the home page</button>
+    </a>
+
+    <a href="{{ url_for('applicant_logout') }}">
+        <button class="btn btn-primary" id="back_to_home" type="submit" style="float: right"><i>Logout</i></button>
+    </a>
+
+{% endblock %}
