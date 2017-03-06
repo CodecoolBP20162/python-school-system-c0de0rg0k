@@ -103,7 +103,7 @@ def list_interviews():
 
 @app.route('/mentor', methods=["GET"])
 def show_mentor_menu():
-    return render_template('mentor_interface.html')
+    return render_template('mentors_home.html')
 
 
 @app.route('/mentor/interviews-list', methods=["GET"])
