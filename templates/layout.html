@@ -28,6 +28,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="{{ url_for("index") }}"><img src="/static/images/logo_mini.png"></a>
             </div>
+
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
@@ -41,7 +42,11 @@
                 </div>
         </nav>
 
+        </nav>
+    </div>
+
     {% block interface %} {% endblock %}
+
 </div>
 </div>
 </body>
