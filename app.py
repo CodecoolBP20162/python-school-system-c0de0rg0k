@@ -214,7 +214,7 @@ def filter():
 
 
 @app.route("/applicant/login/", methods=["GET"])
-def applicant_login():
+def applicant_login(user=None):
     if session.get('admin_logged_in'):
         error = "You are already logged in as admin. Please log out first"
         return render_template('already_logged_in.html', error=error)
@@ -222,7 +222,7 @@ def applicant_login():
         error = "You are already logged in as mentor. Please log out first"
         return render_template('already_logged_in.html', error=error)
     elif session.get('applicant_logged_in'):
-        return render_template('applicant_interface.html')
+        return render_template('applicant_interface.html', user=user)
     else:
         error = ""
         return render_template('applicant_login.html', error=error)
@@ -233,12 +233,12 @@ def validate_applicant():
     applicant_email = request.form['email']
     application_code = request.form['applicant_code']
     try:
-        applicant = Applicant.select().where(Applicant.applicant_code== application_code, Applicant.email == applicant_email).get()
+        user = Applicant.select().where(Applicant.applicant_code== application_code, Applicant.email == applicant_email).get()
     except:
         error = "Wrong email or applicant code"
         return render_template('applicant_login.html', error=error)
     session['applicant_logged_in'] = True
-    return redirect(url_for('applicant_login'))
+    return applicant_login(user)
 
 
 @app.route('/applicant/logout/')
