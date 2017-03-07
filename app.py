@@ -31,13 +31,19 @@ def index():
     return render_template('homepage_home.html')
 
 
-@app.route('/about_the_training')
+@app.route('/about-the-training')
 def about_training():
     return render_template("homepage_about_training.html")
+
 
 @app.route('/principles')
 def principles():
     return render_template("homepage_principles.html")
+
+
+@app.route('/about-us')
+def about_us():
+    return render_template("homepage_about_us.html")
 
 
 @app.route('/login', methods=['GET', 'POST'])
