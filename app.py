@@ -31,6 +31,10 @@ def index():
     return render_template('homepage_home.html')
 
 
+@app.route('/about_the_training')
+def about_training():
+    return render_template("homepage_about_training.html")
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     print(app.config['USERNAME'])
