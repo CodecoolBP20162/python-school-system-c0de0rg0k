@@ -164,7 +164,16 @@ def show_sent_email():
 
 @app.route('/applicant', methods=["GET"])
 def show_applicants_interface():
-    return redirect(url_for('index'))
+    return render_template('applicant_interface.html')
+
+@app.route('/applicant/profile')
+def profile():
+    return render_template('profile.html')
+
+@app.route('/applicant/interview')
+def interview():
+    return render_template('app_interview.html')
+
 
 
 @app.route('/logout')
