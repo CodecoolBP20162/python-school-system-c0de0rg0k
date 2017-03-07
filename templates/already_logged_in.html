@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>Login error</h2>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+    <br><a href="{{ url_for('index') }}" methods="GET">
+        <button type="submit" class="btn btn-primary">Back to home page</button>
+    </a>
+{% endblock %}
