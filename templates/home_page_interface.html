@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block interface %}
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ url_for("index") }}"><img src="/static/images/logo_mini.png"></a>
+                </div>
+                <!-- Top Menu Items -->
+                <ul class="nav navbar-right top-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav side-nav">
+                        <li>
+                            <a href="{{ url_for('show_admin_menu') }}"><i class="fa fa-fw fa-wrench"></i> Admin's menu</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('show_mentor_interviews') }}"><i class="fa fa-fw fa-desktop"></i> Mentor's menu</a>
+                        </li>
+                        <li class="active">
+                            <a href="{{ url_for('show_registration_form') }}"><i class="fa fa-fw fa-desktop"></i> Registration</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>   <!-- /.navbar-collapse -->
+
+
+        <div id="page-wrapper">
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Become a programmer <small>What a beatiful day</small>
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li class="active">
+                                    <i class="fa fa-dashboard"></i> Welcome
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    {% block content %}{% endblock %}   <!-- block content!! -->
+                </div>
+            </div> <!-- page wrapper -->
+        </div> <!-- wrapper -->
+
+{% endblock %}
