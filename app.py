@@ -116,15 +116,18 @@ def show_mentor_menu():
 
 @app.route('/mentor/interviews-list', methods=["GET"])
 def show_mentor_interviews():
-    slots = InterviewSlot.select().order_by(InterviewSlot.id)
-    interviews_list = []
-    for slot in slots:
-        for interview in Interview.select():
-            if interview.slot_id == slot:
-                interviews_list.append([str(slot.start_time), slot.mentor.last_name,
-                                        interview.applicant_code.first_name + ' ' + interview.applicant_code.last_name, interview.applicant_code.applicant_code])
+    if not session.get('mentor_logged_in'):
+        return redirect(url_for('mentor_login'))
+    else:
+        slots = InterviewSlot.select().order_by(InterviewSlot.id)
+        interviews_list = []
+        for slot in slots:
+            for interview in Interview.select():
+                if interview.slot_id == slot:
+                    interviews_list.append([str(slot.start_time), slot.mentor.last_name,
+                                            interview.applicant_code.first_name + ' ' + interview.applicant_code.last_name, interview.applicant_code.applicant_code])
 
-    return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
+        return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
 
 
 @app.route('/registration', methods=['GET'])
@@ -238,7 +241,7 @@ def validate_applicant():
     return redirect(url_for('applicant_login'))
 
 
-@app.route('/applicant/logout')
+@app.route('/applicant/logout/')
 def applicant_logout():
     session.pop('applicant_logged_in', None)
     return redirect(url_for('applicant_login'))
@@ -272,7 +275,7 @@ def validate_mentor():
     return redirect(url_for('mentor_login'))
 
 
-@app.route('/mentor/logout')
+@app.route('/mentor/logout/')
 def mentor_logout():
     session.pop('mentor_logged_in', None)
     return redirect(url_for('mentor_login'))
