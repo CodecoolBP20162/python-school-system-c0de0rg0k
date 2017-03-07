@@ -17,13 +17,13 @@
                             <a href="{{ url_for('show_registration_form') }}"><i class="fa fa-fw fa-desktop"></i> Registration</a>
                         </li>
                         <li class="">
-                            <a href="#"><i class="fa fa-fw fa-desktop"></i> Applicant's menu</a>
+                            <a href="{{ url_for('applicant_login')}}"><i class="fa fa-fw fa-desktop"></i> Applicant login</a>
                         </li>
                         <li>
-                            <a href="{{ url_for('show_admin_menu') }}"><i class="fa fa-fw fa-wrench"></i> Admin's menu</a>
+                            <a href="{{ url_for('login') }}"><i class="fa fa-fw fa-wrench"></i> Admin login</a>
                         </li>
                         <li>
-                            <a href="{{ url_for('show_mentor_interviews') }}"><i class="fa fa-fw fa-desktop"></i> Mentor's menu</a>
+                            <a href="{{ url_for('mentor_login') }}"><i class="fa fa-fw fa-desktop"></i> Mentor login</a>
                         </li>
                 </ul>
                 <ul class="nav navbar-right top-nav">
@@ -35,17 +35,7 @@
                 </ul>
             </div>
 
-                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav side-nav">
-                        <li><a href="#">Homepage<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">About the training<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Our princilpes<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">About us<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Registration<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Contact<span class="sr-only">(current)</span></a></li>
-                    </ul>
-                </div>
+
             </nav>   <!-- /.navbar-collapse -->
 
 
