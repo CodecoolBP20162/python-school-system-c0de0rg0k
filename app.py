@@ -202,14 +202,15 @@ def show_sent_email():
 def show_applicants_interface():
     return render_template('applicant_interface.html')
 
+
 @app.route('/applicant/profile')
 def profile():
     return render_template('profile.html')
 
+
 @app.route('/applicant/interview')
 def interview():
     return render_template('app_interview.html')
-
 
 
 @app.route('/logout')
