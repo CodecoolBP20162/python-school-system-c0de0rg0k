@@ -1,7 +1,5 @@
-{% extends "layout.html" %}
-
-{% block interface %}
-<div id="wrapper">
+{% extends "homepage_interface.html" %}
+{% block content %}
   <h2>Mentor Login</h2>
   {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
   <form action="{{ url_for('mentor_login') }}" method=post>
@@ -16,6 +14,4 @@
     <a href="{{ url_for('index') }}" methods="GET">
         <button type="submit" class="btn btn-primary">Back to home page</button>
     </a>
-</div>
-
 {% endblock %}
