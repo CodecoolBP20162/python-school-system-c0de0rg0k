@@ -85,7 +85,7 @@ def show_admin_menu():
     if not session.get('admin_logged_in'):
         return redirect(url_for('login'))
     else:
-        return render_template("admin_interface.html")
+        return render_template("admin_home.html")
 
 
 @app.route('/admin/list_applicants')
@@ -99,7 +99,7 @@ def list_applicants(applicants=None):
     cities = Applicant.select(fn.Distinct(Applicant.applicant_city)).order_by(Applicant.applicant_city)
     schools = Applicant.select(fn.Distinct(Applicant.applied_school)).order_by(Applicant.applied_school)
     statuses = Applicant.select(fn.Distinct(Applicant.status)).order_by(Applicant.status)
-    return render_template('applicants.html',
+    return render_template('admin_applicants.html',
                            applicants=applicants,
                            cities=cities,
                            schools=schools,
@@ -116,7 +116,7 @@ def list_interviews():
         applicant_codes = Applicant.select(fn.Distinct(Applicant.applicant_code)).order_by(Applicant.applicant_code)
         mentors = Mentor.select(fn.Distinct(Mentor.last_name)).join(InterviewSlot).join(Interview)
         schools = School.select(fn.Distinct(School.city)) # .order_by(Applicant.applied_school.city)
-        return render_template('interviews.html',
+        return render_template('admin_interviews.html',
                                interviews=interviews,
                                dates=dates,
                                applicant_codes=applicant_codes,
@@ -195,7 +195,7 @@ def show_sent_email():
         return redirect(url_for('login'))
     else:
         emails_list = EmailDetails.select().order_by(EmailDetails.date)
-        return render_template('show_email.html', header="List of all emails", emails=emails_list)
+        return render_template('admin_show_email.html', header="List of all emails", emails=emails_list)
 
 
 @app.route('/applicant', methods=["GET"])

@@ -1,7 +1,8 @@
-{% extends "layout.html" %}
+{% extends "admin_interface.html" %}
 {% block content %}
-    <h1>Interviews</h1>
-    <br/>
+    <div>
+        <h1 class="modal-header">Interviews</h1>
+    </div>
 
     <form action="/filter">
         <p><label for="filter_input_applicant_code">Applicant Code:</label></p>
@@ -23,14 +24,14 @@
 
     <table id="myTable" class="table table-bordered">
         <TR class="header">
-            <TD><SPAN class="header">Applicant_code</SPAN></TD>
-            <TD><SPAN class="header">Applicant First Name</SPAN></TD>
-            <TD><SPAN class="header">Applicant Last Name</SPAN></TD>
-            <TD><SPAN class="header">Interview Start Time</SPAN></TD>
-            <TD><SPAN class="header">Interview End Time</SPAN></TD>
-            <TD><SPAN class="header">School</SPAN></TD>
-            <TD><SPAN class="header">Mentor Last Name</SPAN></TD>
-            <TD><SPAN class="header">Status</SPAN></TD>
+            <TH><SPAN class="header">Applicant_code</SPAN></TH>
+            <TH><SPAN class="header">Applicant First Name</SPAN></TH>
+            <TH><SPAN class="header">Applicant Last Name</SPAN></TH>
+            <TH><SPAN class="header">Interview Start Time</SPAN></TH>
+            <TH><SPAN class="header">Interview End Time</SPAN></TH>
+            <TH><SPAN class="header">School</SPAN></TH>
+            <TH><SPAN class="header">Mentor Last Name</SPAN></TH>
+            <TH><SPAN class="header">Status</SPAN></TH>
 
         </TR>
         {% for interview in interviews %}
