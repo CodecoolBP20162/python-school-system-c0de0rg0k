@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% block content %}
+{% block interface %}
+<div id="wrapper">
 <h1> Applicant registration </h1>
 <p>{{ message }}</p>
     <form action="/registration" method="POST">
@@ -17,4 +18,5 @@
 <a href="{{url_for('index')}}">
           <br><button class="btn btn-primary" type="submit">Back</button>
 </a>
+</div>
 {% endblock %}

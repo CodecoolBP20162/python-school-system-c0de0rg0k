@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block interface %}
+<div id="wrapper">
+  <h2>Login error</h2>
+    {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}</p>
+    <br><a href="{{ url_for('index') }}" methods="GET">
+        <button type="submit" class="btn btn-primary">Back to home page</button>
+    </a>
+</div>
+{% endblock %}
