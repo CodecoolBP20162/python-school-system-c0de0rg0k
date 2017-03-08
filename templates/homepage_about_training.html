@@ -1,12 +1,14 @@
 {% extends "homepage_interface.html" %}
 {% block content %}
-
+    <div>
+        <h1 class="modal-header">A képzésről</h1>
+    </div>
         <div class="col-lg-6" style="float: left">
-            <br><img src="/static/images/miki2.jpg" width="400" height="400">
+            <br><img src="/static/images/miki2.jpg" width="400" height="400"; style="border-radius: 50%">
         </div>
 
     <div class="col-lg-6" style="float: right">
-        <div class="panel panel-primary" style="width: 400px; background-color: lightblue">
+        <div class="panel panel-primary" style="width: 400px;">
             <div class="panel-heading">
                 <h1 class="panel-title" style="text-align: center">A képzésről</h1>
             </div>
@@ -26,7 +28,9 @@
 
 
     <div class="col-lg-12">
-        <br><h1 align="middle">Timeline</h1>
-        <br><img src="/static/images/timeline_transparent.png" width="800" height="600" style="border: 2px solid black">
+        <div>
+            <h1 class="modal-header">Timeline</h1>
+            <br><img src="/static/images/timeline_transparent.png" width="800" height="600" style="border: 2px solid black">
+        </div>
     </div>
 {% endblock %}
