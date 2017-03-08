@@ -1,7 +1,5 @@
-{% extends "layout.html" %}
-
-{% block interface %}
-<div id="wrapper">
+{% extends "homepage_interface.html" %}
+{% block content %}
         <div>
             <h1 class="modal-header">Applicant login</h1>
         </div>
@@ -19,5 +17,4 @@
     <a href="{{ url_for('index') }}" methods="GET">
         <button type="submit" class="btn btn-primary">Back to home page</button>
     </a>
-</div>
 {% endblock %}
