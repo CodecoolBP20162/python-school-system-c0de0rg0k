@@ -1,0 +1,92 @@
+{% extends "homepage_interface.html" %}
+{% block content %}
+
+    <div class="col-lg-12">
+        <h1 class="modal-header">Alapelveink</h1>
+    </div>
+
+    <div class="first row">
+        <div class="col-lg-6" style="float: right">
+            <div class="panel panel-green" style="width: 400px;">
+                <div class="panel-heading">
+                    <h1 class="panel-title" style="text-align: center"><img src="/static/images/igenyesseg.png"> „craftsmanship” / igényesség</h1>
+                </div>
+                    <div class="panel-body">
+                        <p style="text-align: left"> Csak hogy már ide is behozzunk egy kis angolt. Nem minden kód egyenlő. A szépen megírt, jól átlátható kód nagy érték, a cégek pedig keresik az olyan szakembereket, akikben megvan az igényesség – mert könnyebben dolgoznak csapatban, egyszerűbben javíthatók a hibáik, és jól átadhatók a projektjeik.</p>
+                    </div>
+            </div>
+        </div>
+        <div class="col-lg-6" style="float: left">
+            <div class="panel panel-green" style="width: 400px;">
+                <div class="panel-heading">
+                    <h1 class="panel-title" style="text-align: center"><img src="/static/images/experience_first.png"> „Experience first, understand later”</h1>
+                </div>
+                    <div class="panel-body">
+                        <p style="text-align: left"> Hiszünk benne, hogy a lehető legfontosabb dolog az oktatásban maga a gyakorlat – hiszen ha ráérzünk, hogy kell valamit csinálni, utána sokkal könnyebben is értjük meg, hogyan működik.</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="second row">
+        <div class="col-lg-6" style="float: left">
+            <div class="panel panel-primary" style="width: 400px;">
+                <div class="panel-heading">
+                    <h1 class="panel-title" style="text-align: center"><img src="/static/images/growth_mindset.png"> „Growth mindset”</h1>
+                </div>
+                    <div class="panel-body">
+                        <p style="text-align: left"> A growth mindset az, ha valaki hisz benne, hogy kemény munkával és elszántsággal bármilyen képesség fejleszthető, az ész vagy a tehetség csak kiindulási pont. A hibázás pedig nem tragédia, hanem egy lépés a célhoz vezető úton – mindig arra kell koncentrálni, mit tanulhatunk belőle.</p>
+                    </div>
+            </div>
+        </div>
+        <div class="col-lg-6" style="float: left">
+            <div class="panel panel-primary" style="width: 400px;">
+                <div class="panel-heading">
+                    <h1 class="panel-title" style="text-align: center"><img src="/static/images/teamwork.png"> Csapatmunka</h1>
+                </div>
+                    <div class="panel-body">
+                        <p style="text-align: left"> Az önálló tanulás mellett a csapatmunka is kiemelten fontos, hiszen a legtöbb munkahelyen egy csapat része leszel, így nemcsak szakmailag, de emberileg is meg kell találnod a helyed a csapatban, értened kell, hogyan működik a munka felosztása és dinamikája több ember között.</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="third row">
+        <div class="col-lg-6" style="float: left">
+            <div class="panel panel-yellow" style="width: 400px;">
+                <div class="panel-heading">
+                    <h1 class="panel-title" style="text-align: center"><img src="/static/images/frontal_teach.png"> Nem frontális oktatás</h1>
+                </div>
+                    <div class="panel-body">
+                        <p style="text-align: left"> Az azonos anyagot azonos ütemben, uniform módon feldolgozó oktatás ideje lejárt. Fontos a csoport igényeire szabni a tananyagot, amiben mindenki saját képességei szerint, együttműködve és egymást segítve haladhat a lehető legjobb végeredmény felé.</p>
+                    </div>
+            </div>
+        </div>
+        <div class="col-lg-6" style="float: left">
+            <div class="panel panel-yellow" style="width: 400px;">
+                <div class="panel-heading">
+                    <h1 class="panel-title" style="text-align: center"><img src="/static/images/self_learning.png"> Önálló tanulás</h1>
+                </div>
+                    <div class="panel-body">
+                        <p style="text-align: left"> A tanulók minden második héten önállóan dolgozzák fel a számukra kijelölt anyagot – ez pedig nem csak a mi oktatási módszerünk miatt fontos. Az önálló problémamegoldás és fejlődés megalapozza a későbbi munkahelyi sikereket is.</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div> <!-- Application button -->
+        <div class="col-lg-12">
+            <h1 class="modal-header">Felkeltettük az érdeklődést?</h1>
+            <div class="col-lg-12" style="background-image: url('/static/images/yellow.svg')">
+                <div class="modal-body">
+                    <br><br><h2 style="text-align: center"><strong>Jelentkezés</strong></h2>
+                    <h4 style="text-align: center"> Átolvastál mindent, és úgy érzed, ezt a képzést neked találták ki?<br>Már csak egy dolgod maradt: jelentkezz – és rögtön küldünk is egy emailt a következő lépésekkel.</h4><br>
+                    <div>
+                        <h5><a href="/registration" methods="GET"><button class="btn btn-lg btn-danger" style="position: relative; left: 33%; background-color: darkred; width: 250px; height: 55px">
+                            <strong>Jelentkezés</strong></button></a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

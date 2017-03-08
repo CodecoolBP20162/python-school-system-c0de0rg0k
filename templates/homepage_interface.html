@@ -11,51 +11,38 @@
 
                 <!-- Top menu bar! -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav">
 
-                        <li class="active">
-                            <a href="{{ url_for('show_registration_form') }}"><i class="fa fa-fw fa-desktop"></i> Registration</a>
-                        </li>
-                        <li class="">
-                            <a href="{{ url_for('applicant_login')}}"><i class="fa fa-fw fa-desktop"></i> Applicant login</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('login') }}"><i class="fa fa-fw fa-wrench"></i> Admin login</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('mentor_login') }}"><i class="fa fa-fw fa-desktop"></i> Mentor login</a>
-                        </li>
-                </ul>
-                <ul class="nav navbar-right top-nav">
-                    <li><a href="https://www.facebook.com/CodecoolOfficial/?fref=ts" target="_blank"><img src="/static/images/fb_logo.png" alt="fb_logo"
-                                                                                                          width="25" height="25"><span class="sr-only"></span></img></a></li>
+                            <li class="active">
+                                <a href="{{ url_for('show_registration_form') }}"><i class="fa fa-fw fa-desktop"></i> Registration</a>
+                            </li>
+                            <li class="">
+                                <a href="{{ url_for('applicant_login')}}"><i class="fa fa-fw fa-desktop"></i> Applicant login</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('login') }}"><i class="fa fa-fw fa-wrench"></i> Admin login</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('mentor_login') }}"><i class="fa fa-fw fa-desktop"></i> Mentor login</a>
+                            </li>
+                    </ul>
+                    <ul class="nav navbar-right top-nav">
+                        <li><a href="https://www.facebook.com/CodecoolOfficial/?fref=ts" target="_blank"><img src="/static/images/fb_logo.png" alt="fb_logo"
+                                                                                                              width="25" height="25"><span class="sr-only"></span></img></a></li>
 
-                    <li><a href="https://www.linkedin.com/school/6376789?pathWildcard=6376789" target="_blank"><img src="/static/images/linkedin_logo.png" alt="linkedin_logo"
-                                                                                                          width="25" height="25"><span class="sr-only"></span></img></a></li>
-                </ul>
-            </div>
-
-
+                        <li><a href="https://www.linkedin.com/school/6376789?pathWildcard=6376789" target="_blank"><img src="/static/images/linkedin_logo.png" alt="linkedin_logo"
+                                                                                                              width="25" height="25"><span class="sr-only"></span></img></a></li>
+                    </ul>
+                </div>
             </nav>   <!-- /.navbar-collapse -->
 
 
         <div id="page-wrapper">
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">
-                                Become a programmer <small>What a beatiful day</small>
-                            </h1>
-                            <ol class="breadcrumb">
-                                <li class="active">
-                                    <i class="fa fa-dashboard"></i> Welcome
-                                </li>
-                            </ol>
-                        </div>
+                    <div style="background-color: ghostwhite">
+                        {% block content %}{% endblock %}   <!-- block content!! -->
                     </div>
-                    {% block content %}{% endblock %}   <!-- block content!! -->
-                </div>
             </div> <!-- page wrapper -->
         </div> <!-- wrapper -->
 
