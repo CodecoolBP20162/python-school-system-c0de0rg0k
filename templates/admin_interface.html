@@ -1,32 +1,33 @@
 {% extends "layout.html" %}
 
-{% block content %}
-    <h1>Admin interface</h1>
+{% block interface %}
+    <div id="wrapper">
+        <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ url_for("index") }}"><img src="/static/images/logo_mini.png"></a>
+                </div>
 
-    <a href="{{ url_for('list_applicants') }}">
-        <button type="submit" class="btn btn-primary" id="list_applicants">
-            List applicants
-        </button>
-    </a><br><br>
+                <!-- Top menu bar! -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-right top-nav">
+                        <li><a href="https://www.facebook.com/CodecoolOfficial/?fref=ts" target="_blank"><img src="/static/images/fb_logo.png" alt="fb_logo"
+                                                                                                              width="25" height="25"><span class="sr-only"></span></img></a></li>
+                        <li><a href="https://www.linkedin.com/school/6376789?pathWildcard=6376789" target="_blank"><img src="/static/images/linkedin_logo.png" alt="linkedin_logo"
+                                                                                                              width="25" height="25"><span class="sr-only"></span></img></a></li>
+                    </ul>
+                </div>
+            </nav>   <!-- /.navbar-collapse -->
 
-    <a href="{{ url_for('list_interviews') }}">
-        <button type="submit" class="btn btn-primary" id="list_interviews">
-            List interviews
-        </button>
-    </a><br><br>
 
-    <a href="{{ url_for('show_sent_email') }}">
-        <button type="submit" class="btn btn-primary" id="list_emails">
-            List emails
-        </button>
-    </a><br><br>
-
-    <a href="{{ url_for('index') }}">
-        <button class="btn btn-primary" id="back_to_home" type="submit" style="float: left">Back to the home page</button>
-    </a>
-
-    <a href="{{ url_for('logout') }}">
-        <button class="btn btn-primary" id="back_to_home" type="submit" style="float: right"><i>Logout</i></button>
-    </a>
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div style="background-color: ghostwhite">
+                        {% block content %}{% endblock %}   <!-- block content!! -->
+                    </div>
+            </div> <!-- page wrapper -->
+    </div>
 
 {% endblock %}

@@ -85,7 +85,7 @@ def show_admin_menu():
     if not session.get('admin_logged_in'):
         return redirect(url_for('login'))
     else:
-        return render_template("admin_interface.html")
+        return render_template("admin_home.html")
 
 
 @app.route('/admin/list_applicants')
