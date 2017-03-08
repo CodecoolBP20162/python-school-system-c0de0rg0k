@@ -116,7 +116,7 @@ def list_interviews():
         applicant_codes = Applicant.select(fn.Distinct(Applicant.applicant_code)).order_by(Applicant.applicant_code)
         mentors = Mentor.select(fn.Distinct(Mentor.last_name)).join(InterviewSlot).join(Interview)
         schools = School.select(fn.Distinct(School.city)) # .order_by(Applicant.applied_school.city)
-        return render_template('interviews.html',
+        return render_template('admin_interviews.html',
                                interviews=interviews,
                                dates=dates,
                                applicant_codes=applicant_codes,

@@ -18,6 +18,23 @@
                                                                                                               width="25" height="25"><span class="sr-only"></span></img></a></li>
                     </ul>
                 </div>
+
+                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav side-nav">
+                        <li><a href="{{ url_for("index") }}">Homepage<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ url_for("about_training") }}">About the training<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ url_for("principles") }}">Our princilpes<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ url_for('about_us') }}">About us<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ url_for('applicant_registration') }}">Registration<span class="sr-only">(current)</span></a></li>
+                        <li>-----------------------------------------------</li>
+
+                        <li><a href="{{ url_for('list_interviews') }}">Filter interviews<span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Filter applicants<span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">List emails<span class="sr-only">(current)</span></a></li>
+                    </ul>
+
+                </div>
             </nav>   <!-- /.navbar-collapse -->
 
 
