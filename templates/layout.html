@@ -46,12 +46,12 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li><a href="{{ url_for("index") }}">Homepage<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for("about_training") }}">About the training<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for("principles") }}">Our princilpes<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for('about_us') }}">About us<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for('applicant_registration') }}">Registration<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                        <li {% if page=="home" %}class="active"{%endif%}><a href="{{ url_for("index") }}">Homepage</a></li>
+                        <li {% if page=="training" %}class="active"{%endif%}><a href="{{ url_for("about_training") }}">About the training</a></li>
+                        <li {% if page=="principles" %}class="active"{%endif%}><a href="{{ url_for("principles") }}">Our principles</a></li>
+                        <li {% if page=="aboutus" %}class="active"{%endif%}><a href="{{ url_for('about_us') }}">About us</a></li>
+                        <li {% if page=="reg" %}class="active"{%endif%}><a href="{{ url_for('applicant_registration') }}">Registration</a></li>
+                        <li {% if page=="contact" %}class="active"{%endif%}><a href="{{ url_for('contact') }}">Contact</a></li>
 
                         {% block navbar %}
 
