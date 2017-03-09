@@ -231,8 +231,8 @@ def profile():
 
 @app.route('/applicant/interview')
 def interview():
-    user = Applicant.select().where(Applicant.id == session['user_id']).get()
-    interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['user_id']).get()
+    user = Applicant.select().where(Applicant.id == session['applicant_id']).get()
+    interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['applicant_id']).get()
 
     return render_template('app_interview.html', user=user, interview=interview)
 
