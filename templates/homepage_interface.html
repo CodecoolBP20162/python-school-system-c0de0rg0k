@@ -11,22 +11,28 @@
 
                 <!-- Top menu bar! -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    
                     <ul class="nav navbar-nav">
-
-                            <li class="active">
+                            
+                            <li>
                                 <a href="{{ url_for('show_registration_form') }}"><i class="fa fa-fw fa-desktop"></i> Registration</a>
                             </li>
-                            <li class="">
-                                <a href="{{ url_for('applicant_login')}}"><i class="fa fa-fw fa-desktop"></i> Applicant login</a>
+                            <li>
+                                <a href="{{ url_for('applicant_login')}}"><i class="fa fa-fw fa-desktop"></i> Applicant menu</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('login') }}"><i class="fa fa-fw fa-wrench"></i> Admin login</a>
+                                <a href="{{ url_for('login') }}"><i class="fa fa-fw fa-wrench"></i> Admin menu</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('mentor_login') }}"><i class="fa fa-fw fa-desktop"></i> Mentor login</a>
+                                <a href="{{ url_for('mentor_login') }}"><i class="fa fa-fw fa-desktop"></i> Mentor menu</a>
                             </li>
+                             
                     </ul>
+                   
                     <ul class="nav navbar-right top-nav">
+                        {% if session %}
+                        <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Logout</a></li>
+                        {% endif %}
                         <li><a href="https://www.facebook.com/CodecoolOfficial/?fref=ts" target="_blank"><img src="/static/images/fb_logo.png" alt="fb_logo"
                                                                                                               width="25" height="25"><span class="sr-only"></span></img></a></li>
 
@@ -42,6 +48,7 @@
                     <!-- Page Heading -->
                     <div style="background-color: ghostwhite">
                         {% block content %}{% endblock %}   <!-- block content!! -->
+                        
                     </div>
             </div> <!-- page wrapper -->
         </div> <!-- wrapper -->
