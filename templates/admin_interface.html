@@ -1,51 +1,23 @@
 {% extends "layout.html" %}
 
+{% block navbar %}         <!-- Navigation -->
+    <li>-----------------------------------------------</li>
+    <li><a href="{{ url_for('list_interviews') }}"><i class="fa fa-fw fa-table"></i>Filter interviews<span class="sr-only">(current)</span></a></li>
+    <li><a href="{{ url_for('list_applicants') }}"><i class="fa fa-fw fa-table"></i>Filter applicants<span class="sr-only">(current)</span></a></li>
+    <li><a href="{{ url_for('show_sent_email') }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> List emails</a></li>
+    <li class="active"><a href="{{ url_for('show_admin_menu') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Back to admin menu</a></li>
+{% endblock %}
+
 {% block interface %}
+
     <div id="wrapper">
-        <!-- Navigation -->
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ url_for("index") }}"><img src="/static/images/logo_mini.png"></a>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div style="background-color: ghostwhite">
+                    {% block content %}{% endblock %}   <!-- block content!! -->
                 </div>
-
-                <!-- Top menu bar! -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-right top-nav">
-                        <li><a href="https://www.facebook.com/CodecoolOfficial/?fref=ts" target="_blank"><img src="/static/images/fb_logo.png" alt="fb_logo"
-                                                                                                              width="25" height="25"><span class="sr-only"></span></img></a></li>
-                        <li><a href="https://www.linkedin.com/school/6376789?pathWildcard=6376789" target="_blank"><img src="/static/images/linkedin_logo.png" alt="linkedin_logo"
-                                                                                                              width="25" height="25"><span class="sr-only"></span></img></a></li>
-                    </ul>
-                </div>
-
-                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav side-nav">
-                        <li><a href="{{ url_for("index") }}">Homepage<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for("about_training") }}">About the training<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for("principles") }}">Our princilpes<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for('about_us') }}">About us<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for('applicant_registration') }}">Registration<span class="sr-only">(current)</span></a></li>
-                        <li>-----------------------------------------------</li>
-
-                        <li><a href="{{ url_for('list_interviews') }}"><i class="fa fa-fw fa-table"></i>Filter interviews<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for('list_applicants') }}"><i class="fa fa-fw fa-table"></i>Filter applicants<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for('show_sent_email') }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> List emails</a></li>
-                        <li class="active"><a href="{{ url_for('show_admin_menu') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Back to admin menu</a></li>
-
-                    </ul>
-
-                </div>
-            </nav>   <!-- /.navbar-collapse -->
-
-            <div id="page-wrapper">
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <div style="background-color: ghostwhite">
-                        {% block content %}{% endblock %}   <!-- block content!! -->
-                    </div>
-            </div> <!-- page wrapper -->
+        </div> <!-- page wrapper -->
     </div>
 
 {% endblock %}

@@ -51,7 +51,7 @@ def login():
     if session.get('applicant_logged_in'):
         error = "You are already logged in as applicant. Please log out first"
         return render_template('already_logged_in.html', error=error)
-    elif session.get('mentor_logged_in'):
+    elif session.get('mentor_id'):
         error = "You are already logged in as mentor. Please log out first"
         return render_template('already_logged_in.html', error=error)
     elif session.get('admin_logged_in'):
@@ -124,14 +124,14 @@ def list_interviews():
                                schools=schools)
 
 
-@app.route('/mentor', methods=["GET"])
+@app.route('/mentor/', methods=["GET"])
 def show_mentor_menu():
     return render_template('mentors_home.html')
 
 
-@app.route('/mentor/interviews-list', methods=["GET"])
-def show_mentor_interviews():
-    if not session.get('mentor_logged_in'):
+@app.route('/mentor/list-interview', methods=["GET"])
+def show_mentors_interviews():
+    if not session.get('mentor_id'):
         return redirect(url_for('mentor_login'))
     else:
         slots = InterviewSlot.select().order_by(InterviewSlot.id)
@@ -141,6 +141,25 @@ def show_mentor_interviews():
                 if interview.slot_id == slot:
                     interviews_list.append([str(slot.start_time), slot.mentor.last_name,
                                             interview.applicant_code.first_name + ' ' + interview.applicant_code.last_name, interview.applicant_code.applicant_code])
+
+        return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
+
+
+# ez új def!
+@app.route('/mentor/interview', methods=["GET"])
+def show_mentor_interview():
+    if not session.get('mentor_id'):
+        return redirect(url_for('mentor_login'))
+    else:
+        slot = InterviewSlot.select().join(Mentor).where(Mentor.id == session['mentor_id']).get()
+        interviews_list = []
+        # where(Mentor.id = session['mentor_id']).get()
+        for s in slot:
+            print(s)
+            # for interview in Interview.select():
+            #     if interview.slot_id == slot:
+            #         interviews_list.append([str(slot.start_time), slot.mentor.last_name,
+            #                                 interview.applicant_code.first_name + ' ' + interview.applicant_code.last_name, interview.applicant_code.applicant_code])
 
         return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
 
@@ -244,7 +263,7 @@ def applicant_login():
     if session.get('admin_logged_in'):
         error = "You are already logged in as admin. Please log out first"
         return render_template('already_logged_in.html', error=error)
-    elif session.get('mentor_logged_in'):
+    elif session.get('mentor_id'):
         error = "You are already logged in as mentor. Please log out first"
         return render_template('already_logged_in.html', error=error)
     elif session.get('applicant_logged_in'):
@@ -281,8 +300,8 @@ def mentor_login():
     elif session.get('applicant_logged_in'):
         error = "You are already logged in as applicant. Please log out first"
         return render_template('already_logged_in.html', error=error)
-    elif session.get('mentor_logged_in'):
-        return render_template('mentor_interface.html')
+    elif session.get('mentor_id'):
+        return render_template('mentors_home.html')
     else:
         error = ""
         return render_template('mentor_login.html', error=error)
@@ -297,13 +316,13 @@ def validate_mentor():
     except:
         error = "Wrong email or password"
         return render_template('mentor_login.html', error=error)
-    session['mentor_logged_in'] = True
+    session['mentor_id'] = mentor.id
     return redirect(url_for('mentor_login'))
 
 
 @app.route('/mentor/logout/')
 def mentor_logout():
-    session.pop('mentor_logged_in', None)
+    session.pop('mentor_id', None)
     return redirect(url_for('mentor_login'))
 
 
