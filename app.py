@@ -173,10 +173,6 @@ def show_sent_email():
         return render_template('show_email.html', header="List of all emails", emails=emails_list)
 
 
-@app.route('/applicant', methods=["GET"])
-def show_applicants_interface():
-    return render_template('applicant_interface.html')
-
 @app.route('/applicant/profile')
 def profile():
     user = Applicant.select().where(Applicant.id == session['user_id']).get()
@@ -184,9 +180,12 @@ def profile():
 
 @app.route('/applicant/interview')
 def interview():
-    user = Applicant.select().where(Applicant.id == session['user_id']).get()
-    return render_template('app_interview.html', user=user)
-
+    try:
+        interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['user_id']).get()
+    except:
+        error = "You don't have an interview slot yet!"
+        return render_template('app_interview.html', error = error)
+    return render_template('app_interview.html', interview=interview)
 
 
 @app.route('/logout')
