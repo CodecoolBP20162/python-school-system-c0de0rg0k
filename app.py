@@ -307,6 +307,10 @@ def mentor_logout():
     return redirect(url_for('mentor_login'))
 
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 
 if __name__ == '__main__':
     init_db()
