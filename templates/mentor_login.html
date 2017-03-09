@@ -1,17 +1,23 @@
 {% extends "homepage_interface.html" %}
 {% block content %}
-  <h2>Mentor Login</h2>
-  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
-  <form action="{{ url_for('mentor_login') }}" method=post>
-    <dl>
-      <dt>E-mail address:
-      <dd><input type=text name=email>
-      <dt>Password:
-      <dd><input type=password name=password><br><br>
-      <dd><input type=submit class="btn btn-primary" value=Login><br>
-    </dl>
+<div class="col-lg-6">
+  <h1 class="modal-header">Mentor Login</h1>
+  {% if error %}
+  <div class="alert alert-danger">
+  <strong>Error: {{ error }}</strong>
+  </div>
+  {% endif %}
+  <form role="form" action="{{ url_for('mentor_login') }}" method=post>
+    <div class="form-group">
+      <label>E-mail address</label>
+      <input class="form-control" placeholder="Example: registered_email@codeorgok.com" type=text name=email><br>
+      <label>Password</label>
+      <input class="form-control" placeholder="Example: ******" type=password name=password><br>
+      <input type=submit class="btn btn-lg btn-success" value=Login><br>
+    </div>
   </form>
     <a href="{{ url_for('index') }}" methods="GET">
-        <button type="submit" class="btn btn-primary">Back to home page</button>
+        <button type="submit" class="btn btn-danger">Back to home page</button>
     </a>
+</div>
 {% endblock %}

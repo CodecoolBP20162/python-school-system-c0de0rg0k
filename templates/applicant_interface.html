@@ -25,6 +25,12 @@
                         
                 </ul>
                 <ul class="nav navbar-right top-nav">
+                    <li class="active">
+                        <a href="{{ url_for('logout') }}"><i class="fa fa-fw fa-desktop"></i> Logout</a>
+                    </li>
+
+
+
                     <li><a href="https://www.facebook.com/CodecoolOfficial/?fref=ts" target="_blank"><img src="/static/images/fb_logo.png" alt="fb_logo"
                                                                                                           width="25" height="25"><span class="sr-only"></span></img></a></li>
 
@@ -36,12 +42,15 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li><a href="#">Homepage<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">About the training<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Our principles<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">About us<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Registration<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Contact<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ url_for("index") }}">Homepage<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ url_for("about_training") }}">About the training<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ url_for("principles") }}">Our princilpes<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ url_for('about_us') }}">About us<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ url_for('applicant_registration') }}">Registration<span class="sr-only">(current)</span></a></li>
+                    <li>-----------------------------------------------</li>
+                        <li><a href="/applicant/profile"> My profile</a></li>
+                        <li><a href="/applicant/interview"> My interview</a></li>
+                        <li class="active"><a href="{{ url_for('logout') }}"> Logout</a></li>
                     </ul>
                 </div>
             </nav>   <!-- /.navbar-collapse -->
@@ -53,7 +62,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Become a programmer <small>What a beatiful day</small>
+                                Hello {{ .first_name }}!<small> What a beatiful day</small>
                             </h1>
                             <ol class="breadcrumb">
                                 <li class="active">
@@ -62,11 +71,11 @@
                             </ol>
                         </div>
                     </div>
-                    {% block content %}{% endblock %}   <!-- block content!! -->
-                </div>
-
+                    
+                    
                 {% block profile %} {% endblock %}
                 {% block interview %} {% endblock %}
+                </div>
             </div> <!-- page wrapper -->
         </div> <!-- wrapper -->
 

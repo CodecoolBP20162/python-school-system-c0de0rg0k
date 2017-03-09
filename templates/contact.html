@@ -1,0 +1,46 @@
+{% extends "homepage_interface.html" %}
+{% block content %}
+    <div>
+        <h1 class="modal-header">Kapcsolat</h1>
+    </div>
+        <div class="col-lg-6" style="float: left">
+            <br><iframe width="400" height="500" frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBKHSQ_1V97Gc9jIzcaZu3sQpVlhNU7rwg
+            &q=Codecool, Budapest" allowfullscreen>
+            </iframe>
+        </div>
+
+    <div class="col-lg-6" style="float: right">
+        <div class="panel panel-primary" style="width: 400px;">
+            <div class="panel-heading">
+                <h1 class="panel-title" style="text-align: center">Van még kérdésed?</h1>
+            </div>
+            <div class="panel-body">
+                <p class="text-center text-danger"><strong>1065 Budapest, Nagymező utca 44.</strong></p>
+                <p class="text-center">Telefon: +36 1 588-8588</p>
+                <p class="text-center"><strong>E-mail:</strong> <a href="mailto:hello@codecool.com">hello@codecool.com</a></p>
+
+                <form>
+                <p><label for="name">Név:</label></p>
+                <p><textarea class="form-control" placeholder="Please, write your full name here" id="name"
+                             name="name" type="text" size="40" row="1"></textarea></p>
+                <p><label for="email">E-mail:</label></p>
+                <p><textarea class="form-control" placeholder="someone@something.com" id="email"
+                          name="email" type="text" size="40" rows="1"></textarea></p>
+                <p><label for="msg">Üzenet:</label></p>
+                <p><textarea class="form-control" placeholder="Please, write your message here" id="msg"
+                          name="msg" type="text" size="40" class="form-control" id="msg" name="msg" rows="4"></textarea></p>
+
+                </form>
+                <a href="{{url_for('contact')}}">
+                          <br><button class="btn btn-danger btn-lg btn-block" type="submit">Küldj üzenetet!</button>
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
