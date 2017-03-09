@@ -1,17 +1,46 @@
 {% extends "homepage_interface.html" %}
 {% block content %}
-  <h2>Login</h2>
-  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
-  <form action="{{ url_for('login') }}" method=post>
-    <dl>
-      <dt>Username:
-      <dd><input type=text name=username>
-      <dt>Password:
-      <dd><input type=password name=password><br><br>
-      <dd><input type=submit class="btn btn-primary" value=Login><br>
-    </dl>
+<div class="col-lg-6">
+  <h1 class="modal-header">Admin login</h1>
+  {% if error %}
+  <div class="alert alert-danger">
+  <strong>Error:{{ error }}</strong>
+  </div>
+  {% endif %}
+  <form role="form" action="{{ url_for('login') }}" method=post>
+  <div class="form-group">
+    <label>Username</label>
+    <input class="form-control" placeholder="Example: user1020" type=text name=username><br>
+    <label>Password</label>
+    <input class="form-control" placeholder="Example: ******" type=password name=password><br>
+    <input type=submit class="btn btn-lg btn-success" value=Login><br>
+  </div>
   </form>
     <a href="{{ url_for('index') }}" methods="GET">
-        <button type="submit" class="btn btn-primary">Back to home page</button>
+        <button type="submit" class="btn btn-danger">Back to home page</button>
     </a>
+</div>
 {% endblock %}
+
+                    <div class="col-lg-6">
+                        <form role="form">
+
+                            <div class="form-group">
+                                <label>Text Input</label>
+                                <input class="form-control">
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Text Input with Placeholder</label>
+                                <input class="form-control" placeholder="Enter text">
+                            </div>
+
+
+                            <button type="button" class="btn btn-lg btn-success">Success</button>
+
+                            <button type="button" class="btn btn-danger">Danger</button>
+
+                            <div class="alert alert-danger">
+                    <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                    </div>
