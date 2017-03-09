@@ -231,11 +231,11 @@ def profile():
 def interview():
     try:
         interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['user_id']).get()
+        user = Applicant.select().where(Applicant.id == session['user_id']).get()
     except:
         error = "You don't have an interview slot yet!"
         return render_template('app_interview.html', error = error)
-    return render_template('app_interview.html', interview=interview)
-
+    return render_template('app_interview.html', interview=interview, user=user)
 
   
 @app.route("/admin/filter_applicants", methods=["GET", "POST"])
