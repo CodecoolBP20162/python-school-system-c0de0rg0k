@@ -1,6 +1,16 @@
 {% extends "applicant_interface.html" %}
 {% block interview %}
 
-<h1>Interview</h1>
+<h3>Your Interview Details are:</h3>
 
+    <ul class="lead">
+        <li>Your mentor is {{ interview.slot_id.mentor.last_name }}</li>
+        <li>Your school is CodeCool {{ user.applied_school.city }}</li>
+        <li>The start time of your interview is {{ interview.slot_id.start_time }}</li>
+    </ul>
+
+
+    <div class="col-lg-6" style="float: left">
+            <br><img src="/static/images/stress-interview.jpg" width="500" height="400"; style="border-radius: 50%">
+    </div>
 {% endblock %}
