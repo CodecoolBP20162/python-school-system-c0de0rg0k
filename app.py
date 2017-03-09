@@ -217,7 +217,9 @@ def show_sent_email():
         return redirect(url_for('login'))
     else:
         emails_list = EmailDetails.select().order_by(EmailDetails.date)
-        return render_template('admin_show_email.html', header="List of all emails", emails=emails_list)
+
+        return render_template('show_email.html', header="List of all emails", emails=emails_list)
+
 
 
 @app.route('/applicant/profile')
@@ -228,15 +230,11 @@ def profile():
 
 @app.route('/applicant/interview')
 def interview():
-    try:
-        interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['applicant_id']).get()
-        user = Applicant.select().where(Applicant.id == session['applicant_id']).get()
-    except:
-        error = "You don't have an interview slot yet!"
-        return render_template('app_interview.html', error = error)
-    return render_template('app_interview.html', interview=interview, user=user)
+    user = Applicant.select().where(Applicant.id == session['applicant_id']).get()
+    interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['applicant_id']).get()
+    return render_template('app_interview.html', user=user, interview=interview)
 
-  
+ 
 @app.route("/admin/filter_applicants", methods=["GET", "POST"])
 def filter():
     if not session.get('admin_logged_in'):

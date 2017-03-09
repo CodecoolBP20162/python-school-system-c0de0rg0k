@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--LAYOUT-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -51,9 +52,14 @@
                         <li><a href="{{ url_for('about_us') }}">About us<span class="sr-only">(current)</span></a></li>
                         <li><a href="{{ url_for('applicant_registration') }}">Registration<span class="sr-only">(current)</span></a></li>
                         <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
                         {% block navbar %}
+
                         {% endblock %}
+
                     </ul>
+
+
                 </div>
         </nav>   <!-- /.navbar-collapse -->
 
@@ -64,4 +70,3 @@
 </div>
 </body>
 </html>
-
