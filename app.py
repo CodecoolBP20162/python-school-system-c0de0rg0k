@@ -151,15 +151,19 @@ def show_mentor_interview():
     if not session.get('mentor_id'):
         return redirect(url_for('mentor_login'))
     else:
-        slot = InterviewSlot.select().join(Mentor).where(Mentor.id == session['mentor_id']).get()
+        slots = InterviewSlot.select()
         interviews_list = []
-        # where(Mentor.id = session['mentor_id']).get()
-        for s in slot:
-            print(s)
-            # for interview in Interview.select():
-            #     if interview.slot_id == slot:
-            #         interviews_list.append([str(slot.start_time), slot.mentor.last_name,
-            #                                 interview.applicant_code.first_name + ' ' + interview.applicant_code.last_name, interview.applicant_code.applicant_code])
+        interviews = Interview.select()
+
+        for slot in slots:
+            if slot.mentor.id == session['mentor_id']:
+                for interview in interviews:
+                    if interview.slot_id == slot:
+                        interviews_list.append([str(slot.start_time),
+                                                slot.mentor.last_name,
+                                                interview.applicant_code.first_name + ' ' + interview.applicant_code.last_name,
+                                                interview.applicant_code.applicant_code])
+
 
         return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
 
