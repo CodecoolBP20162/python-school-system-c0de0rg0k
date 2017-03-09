@@ -303,6 +303,10 @@ def logout():
         session.pop('mentor_logged_in', None)
         return redirect(url_for('mentor_login'))
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 
 if __name__ == '__main__':
     init_db()
