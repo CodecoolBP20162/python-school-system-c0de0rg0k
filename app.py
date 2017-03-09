@@ -218,7 +218,7 @@ def show_sent_email():
     else:
         emails_list = EmailDetails.select().order_by(EmailDetails.date)
 
-        return render_template('show_email.html', header="List of all emails", emails=emails_list)
+        return render_template('admin_show_email.html', header="List of all emails", emails=emails_list)
 
 
 
