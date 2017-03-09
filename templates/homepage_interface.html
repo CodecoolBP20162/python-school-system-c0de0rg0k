@@ -14,9 +14,7 @@
                     
                     <ul class="nav navbar-nav">
                             
-                            <li>
-                                <a href="{{ url_for('show_registration_form') }}"><i class="fa fa-fw fa-desktop"></i> Registration</a>
-                            </li>
+                           
                             <li>
                                 <a href="{{ url_for('applicant_login')}}"><i class="fa fa-fw fa-desktop"></i> Applicant menu</a>
                             </li>
@@ -32,6 +30,8 @@
                     <ul class="nav navbar-right top-nav">
                         {% if session %}
                         <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Logout</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('show_registration_form') }}"><i class="fa fa-fw fa-desktop"></i> Registration</a></li>
                         {% endif %}
                         <li><a href="https://www.facebook.com/CodecoolOfficial/?fref=ts" target="_blank"><img src="/static/images/fb_logo.png" alt="fb_logo"
                                                                                                               width="25" height="25"><span class="sr-only"></span></img></a></li>

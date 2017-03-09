@@ -35,7 +35,11 @@
             <!-- Top menu bar! -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-right top-nav">
+                    {% if session %}
                     <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Logout</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('show_registration_form') }}"><i class="fa fa-fw fa-desktop"></i> Registration</a></li>
+                    {% endif %}
                                                                                                           
                     <li><a href="https://www.facebook.com/CodecoolOfficial/?fref=ts" target="_blank"><img src="/static/images/fb_logo.png" alt="fb_logo"
                                                                                                           width="25" height="25"></img></a></li>
@@ -52,7 +56,6 @@
                         <li {% if page=="training" %}class="active"{%endif%}><a href="{{ url_for("about_training") }}">About the training</a></li>
                         <li {% if page=="principles" %}class="active"{%endif%}><a href="{{ url_for("principles") }}">Our principles</a></li>
                         <li {% if page=="aboutus" %}class="active"{%endif%}><a href="{{ url_for('about_us') }}">About us</a></li>
-                        <li {% if page=="reg" %}class="active"{%endif%}><a href="{{ url_for('applicant_registration') }}">Registration</a></li>
                         <li {% if page=="contact" %}class="active"{%endif%}><a href="{{ url_for('contact') }}">Contact</a></li>
 
                         {% block navbar %}
