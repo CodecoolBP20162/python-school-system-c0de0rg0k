@@ -145,7 +145,6 @@ def show_mentors_interviews():
         return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
 
 
-# ez új def!
 @app.route('/mentor/interview', methods=["GET"])
 def show_mentor_interview():
     if not session.get('mentor_id'):
@@ -157,6 +156,7 @@ def show_mentor_interview():
 
         for slot in slots:
             if slot.mentor.id == session['mentor_id']:
+                header = slot.mentor.last_name + "'s interviews"
                 for interview in interviews:
                     if interview.slot_id == slot:
                         interviews_list.append([str(slot.start_time),
@@ -164,8 +164,7 @@ def show_mentor_interview():
                                                 interview.applicant_code.first_name + ' ' + interview.applicant_code.last_name,
                                                 interview.applicant_code.applicant_code])
 
-
-        return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
+        return render_template('mentors_interviews.html', header=header, interviews=interviews_list)
 
 
 @app.route('/registration', methods=['GET'])
