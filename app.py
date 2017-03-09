@@ -225,7 +225,7 @@ def show_sent_email():
 @app.route('/applicant/profile')
 def profile():
     user = Applicant.select().where(Applicant.id == session['applicant_id']).get()
-    return render_template('profile.html', user=user)
+    return render_template('applicant_profile.html', user=user)
 
 
 @app.route('/applicant/interview')

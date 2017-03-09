@@ -13,14 +13,12 @@
     <link href="/static/bootstrap/css2/plugins/morris.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="/static/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Our custom CSS for this project -->
+    <link href="/static/bootstrap/css2/school-sys.css" rel="stylesheet">
 
     <link rel="icon" type="image/gif" href="/static/images/favicon-16x16.png" />
 
-    <style>
-        body {
-            background-color: ghostwhite;
-        }
-    </style>
+    
 </head>
 <body>
 <div class="container">
@@ -29,7 +27,11 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{ url_for("index") }}"><img src="/static/images/logo_mini.png"></a>
+                <a class="navbar-brand" href="{{ url_for("index") }}">
+                    <div class="img-hover">
+                        <img class="img-responsive" style="width:160px;height:16px;" src="/static/images/logo_mini.png">
+                    </div>
+                </a>                   
             </div>
 
             <!-- Top menu bar! -->
@@ -45,6 +47,7 @@
                                                                                                           width="25" height="25"></img></a></li>
                     <li><a href="https://www.linkedin.com/school/6376789?pathWildcard=6376789" target="_blank"><img src="/static/images/linkedin_logo.png" alt="linkedin_logo"
                                                                                                                     width="25" height="25"></img></a></li>
+                
                 </ul>
             </div>
 
@@ -57,10 +60,8 @@
                         <li {% if page=="principles" %}class="active"{%endif%}><a href="{{ url_for("principles") }}">Our principles</a></li>
                         <li {% if page=="aboutus" %}class="active"{%endif%}><a href="{{ url_for('about_us') }}">About us</a></li>
                         <li {% if page=="contact" %}class="active"{%endif%}><a href="{{ url_for('contact') }}">Contact</a></li>
-
-                        {% block navbar %}
-
-                        {% endblock %}
+                        
+                        {% block navbar %} {% endblock %}
 
                     </ul>
 
