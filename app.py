@@ -325,6 +325,8 @@ def logout():
     elif session.get('mentor_id'):
         session.pop('mentor_id', None)
         return redirect(url_for('mentor_login'))
+    else:
+        return redirect(url_for('index'))
 
       
 @app.route('/contact')
