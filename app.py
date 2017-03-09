@@ -31,6 +31,21 @@ def index():
     return render_template('homepage_home.html')
 
 
+@app.route('/about-the-training')
+def about_training():
+    return render_template("homepage_about_training.html")
+
+
+@app.route('/principles')
+def principles():
+    return render_template("homepage_principles.html")
+
+
+@app.route('/about-us')
+def about_us():
+    return render_template("homepage_about_us.html")
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if session.get('user_id'):
@@ -70,7 +85,7 @@ def show_admin_menu():
     if not session.get('admin_logged_in'):
         return redirect(url_for('login'))
     else:
-        return render_template("admin_interface.html")
+        return render_template("admin_home.html")
 
 
 @app.route('/admin/list_applicants')
@@ -84,7 +99,7 @@ def list_applicants(applicants=None):
     cities = Applicant.select(fn.Distinct(Applicant.applicant_city)).order_by(Applicant.applicant_city)
     schools = Applicant.select(fn.Distinct(Applicant.applied_school)).order_by(Applicant.applied_school)
     statuses = Applicant.select(fn.Distinct(Applicant.status)).order_by(Applicant.status)
-    return render_template('applicants.html',
+    return render_template('admin_applicants.html',
                            applicants=applicants,
                            cities=cities,
                            schools=schools,
@@ -101,7 +116,7 @@ def list_interviews():
         applicant_codes = Applicant.select(fn.Distinct(Applicant.applicant_code)).order_by(Applicant.applicant_code)
         mentors = Mentor.select(fn.Distinct(Mentor.last_name)).join(InterviewSlot).join(Interview)
         schools = School.select(fn.Distinct(School.city)) # .order_by(Applicant.applied_school.city)
-        return render_template('interviews.html',
+        return render_template('admin_interviews.html',
                                interviews=interviews,
                                dates=dates,
                                applicant_codes=applicant_codes,
@@ -144,24 +159,34 @@ def show_registration_form():
 @app.route('/registration', methods=['POST'])
 def applicant_registration():
     is_valid_email = validate_email(request.form['email_address'])
-    if is_valid_email:
-        new_applicant = Applicant.create(first_name=request.form['first_name'],
-                         last_name=request.form['last_name'],
-                         applicant_city=request.form['applicant_city'],
-                         status="new",
-                         applied_school = ApplicantGenerator().search_nearest_school(request.form['applicant_city']),
-                         applicant_code= AppCodeGenerator().code_generator(),
-                         email=request.form['email_address'])
-        SendEmail().send_applicant_email(new_applicant)
-        return redirect(url_for('index'))
+    if request.form['first_name'] != "" and request.form['last_name'] != "" and \
+                    request.form['applicant_city'] != "" and request.form['email_address'] != "":
+        if is_valid_email:
+            new_applicant = Applicant.create(first_name=request.form['first_name'],
+                             last_name=request.form['last_name'],
+                             applicant_city=request.form['applicant_city'],
+                             status="new",
+                             applied_school = ApplicantGenerator().search_nearest_school(request.form['applicant_city']),
+                             applicant_code= AppCodeGenerator().code_generator(),
+                             email=request.form['email_address'])
+            SendEmail().send_applicant_email(new_applicant)
+            return redirect(url_for('index'))
+        else:
+            message = "E-mail address is not valid! Please add a valid e-mail!"
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            applicant_city = request.form['applicant_city']
+            email_address = request.form['email_address']
+            return render_template('applicant_registration.html', message=message, first_name=first_name, last_name=last_name,
+                                   applicant_city=applicant_city, email_address=email_address)
     else:
-        message = "E-mail address is not valid! Please add a valid e-mail!"
+        message = "All fields are required to fill!"
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         applicant_city = request.form['applicant_city']
         email_address = request.form['email_address']
         return render_template('applicant_registration.html', message=message, first_name=first_name, last_name=last_name,
-                               applicant_city=applicant_city, email_address=email_address)
+                                applicant_city=applicant_city, email_address=email_address)
 
 
 @app.route("/admin/e-mail-log", methods=["GET"])
@@ -170,13 +195,14 @@ def show_sent_email():
         return redirect(url_for('login'))
     else:
         emails_list = EmailDetails.select().order_by(EmailDetails.date)
-        return render_template('show_email.html', header="List of all emails", emails=emails_list)
+        return render_template('admin_show_email.html', header="List of all emails", emails=emails_list)
 
 
 @app.route('/applicant/profile')
 def profile():
     user = Applicant.select().where(Applicant.id == session['user_id']).get()
     return render_template('profile.html', user=user)
+
 
 @app.route('/applicant/interview')
 def interview():
@@ -186,7 +212,6 @@ def interview():
         error = "You don't have an interview slot yet!"
         return render_template('app_interview.html', error = error)
     return render_template('app_interview.html', interview=interview)
-
 
 @app.route('/logout')
 def logout():

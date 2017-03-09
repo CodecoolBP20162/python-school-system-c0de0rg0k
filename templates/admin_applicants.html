@@ -1,39 +1,10 @@
-{% extends "layout.html" %}
+{% extends "admin_interface.html" %}
 {% block content %}
+        <div>
+            <h1 class="modal-header">Applicants</h1>
+        </div>
 
-    <!DOCTYPE>
-<html>
-    <head>
-        <title>School system - Applicants</title>
-        <style>
-
-       
-        table, th, td {
-        border: 1px solid black;
-        }
-        
-        .header {
-        color:blue;
-        font-weight: bold;
-        }
-        
-        table {
-        width:100%;
-        table-layout:auto;
-
-        }
-       
-        td {
-        word-wrap: break-word;
-        max-width: 300px;
-        
-        }
-        </style>
-    </head>
-    <body>
-        <p><h1>Applicants</h1></p>
-
-        <form method="post" action="filter_applicants">
+        <form method="post" action="/admin/filter_applicants">
             
             <p><label for="filter_input_name">Name:</label></p>
             <p><input id="filter_input_name" name="filter_input_name" type="text" size="50" /></p>
@@ -71,28 +42,30 @@
         
         <p><table class="table table-bordered">
         <TR>
-        <TD><SPAN class="header">ID</SPAN></TD>
-        <TD><SPAN class="header">Name</SPAN></TD>
-        <TD><SPAN class="header">City</SPAN></TD>
-        <TD><SPAN class="header">Applicant code</SPAN></TD>
-        <TD><SPAN class="header">Email</SPAN></TD>
-        <TD><SPAN class="header">School</SPAN></TD>
-        <TD><SPAN class="header">Status</SPAN></TD>
+            <TD><SPAN class="header">ID</SPAN></TD>
+            <TD><SPAN class="header">Name</SPAN></TD>
+            <TD><SPAN class="header">City</SPAN></TD>
+            <TD><SPAN class="header">Applicant code</SPAN></TD>
+            <TD><SPAN class="header">Email</SPAN></TD>
+            <TD><SPAN class="header">School</SPAN></TD>
+            <TD><SPAN class="header">Status</SPAN></TD>
         </TR>
         {% for applicant in applicants %}
         <TR>
-        <TD>{{applicant.id}}</TD>
-        <TD>{{applicant.first_name}} {{applicant.last_name}}</TD>
-        <TD>{{applicant.applicant_city}}</TD>
-        <TD>{{applicant.applicant_code}}</TD>
-        <TD>{{applicant.email}}</TD>
-        <TD>{{applicant.applied_school.city}}</TD>
-        <TD>{{applicant.status}}</TD>
+            <TD>{{applicant.id}}</TD>
+            <TD>{{applicant.first_name}} {{applicant.last_name}}</TD>
+            <TD>{{applicant.applicant_city}}</TD>
+            <TD>{{applicant.applicant_code}}</TD>
+            <TD>{{applicant.email}}</TD>
+            <TD>{{applicant.applied_school.city}}</TD>
+            <TD>{{applicant.status}}</TD>
         </TR>
         {% endfor %}
         </table></p><br>
 
-        <form action="{{ url_for('show_admin_menu') }}">
-              <input class="btn btn-primary" type="submit" value="Back to the admin menu">
-        </form><br>
+        <div>
+            <a href="{{ url_for('show_admin_menu') }}">
+                  <input class="btn btn-primary" type="submit" value="Back to the admin menu">
+            </a>
+        </div>
 {% endblock %}

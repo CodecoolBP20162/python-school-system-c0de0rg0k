@@ -1,0 +1,52 @@
+{% extends "homepage_interface.html" %}
+{% block content %}
+    <div>
+        <h1 class="modal-header">A képzésről</h1>
+    </div>
+        <div class="col-lg-6" style="float: left">
+            <br><img src="/static/images/miki2.jpg" width="400" height="400"; style="border-radius: 50%">
+        </div>
+
+    <div class="col-lg-6" style="float: right">
+        <div class="panel panel-primary" style="width: 400px;">
+            <div class="panel-heading">
+                <h1 class="panel-title" style="text-align: center">A képzésről</h1>
+            </div>
+                <div class="panel-body">
+                    <p style="text-align: left"> A programunk 18 hónapos, intenzív nappali képzésre épül.
+                        Az egész kicsit olyan, mintha bekerültél volna egy modern vállalat gyakornoki programjába.
+                        A csoportokat mentorok vezetik, akik közvetlenül követik az egyes tanulók fejlődését, és folyamatosan a csoport érdeklődéséhez igazítják a tantervet.
+                        Mert a programozást ezerféleképpen meg lehet tanulni, de <strong>mi hiszünk benne, hogy akkor a legegyszerűbb, ha érdekel is a példa, amin tanultok</strong>.<br><br>
+                        Egy évfolyamra 50-60 főt veszünk fel, két csoportot alakítunk, és váltott hetekben dolgozunk a két
+                        csapattal a Codecoolban gyakorlati, illetve otthoni, önálló tanulással. (De persze akik épp az otthoni héten vannak, azok is bármikor bejöhetnek az iskolába találkozni/gyakorolni.)
+                        Eleinte a <strong>Python, Java és Javascript</strong> programozási nyelvekkel fogtok megismerkedni, de a legfontosabb,
+                        hogy átadjunk egy önálló, problémamegoldásra fókuszáló programozói szemléletmódot – hiszen ez az iparág folyamatosan fejlődik, így fontos,
+                        hogy a karriered során később önállóan is tovább tudd majd képezni magad.</p>
+                </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-12">
+        <div>
+            <h1 class="modal-header">Timeline</h1>
+            <br><img src="/static/images/timeline_transparent.png" width="800" height="600" style="border: 2px solid black">
+        </div>
+    </div>
+
+    <div> <!-- Application button -->
+        <div class="col-lg-12">
+            <h1 class="modal-header">Felkeltettük az érdeklődést?</h1>
+            <div class="col-lg-12" style="background-image: url('/static/images/yellow.svg')">
+                <div class="modal-body">
+                    <br><br><h2 style="text-align: center"><strong>Jelentkezés</strong></h2>
+                    <h4 style="text-align: center"> Átolvastál mindent, és úgy érzed, ezt a képzést neked találták ki?<br>Már csak egy dolgod maradt: jelentkezz – és rögtön küldünk is egy emailt a következő lépésekkel.</h4><br>
+                    <div>
+                        <h5><a href="/registration" methods="GET"><button class="btn btn-lg btn-danger" style="position: relative; left: 33%; background-color: darkred; width: 250px; height: 55px">
+                            <strong>Jelentkezés</strong></button></a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
