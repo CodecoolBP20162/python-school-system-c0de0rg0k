@@ -8,11 +8,31 @@
 {% endblock %}
 
 
+
 {% block interface %}
+
+                        
+                        <li class="">
+                            <a href="/applicant/profile"><i class="fa fa-fw fa-desktop"></i> My profile</a>
+                        </li>
+                        <li>
+                            <a href="/applicant/interview"><i class="fa fa-fw fa-calendar"></i> My interview</a>
+                        </li>
+                        
+                </ul>
+                <ul class="nav navbar-right top-nav">
+                    <li class="active">
+                        <a href="{{ url_for('logout') }}"><i class="fa fa-fw fa-desktop"></i> Logout</a>
+                    </li>
+
+
+
+                    <li><a href="https://www.facebook.com/CodecoolOfficial/?fref=ts" target="_blank"><img src="/static/images/fb_logo.png" alt="fb_logo"
+                                                                                                          width="25" height="25"><span class="sr-only"></span></img></a></li>
+
 
         <div id="wrapper">
 
-        
 
 
         <div id="page-wrapper">
@@ -21,7 +41,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
+
                                 Hello {{ user.first_name }}! <small>What a beatiful day</small>
+
                             </h1>
                             
                         </div>
