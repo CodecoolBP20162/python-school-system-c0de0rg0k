@@ -145,7 +145,6 @@ def show_mentors_interviews():
         return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
 
 
-# ez új def!
 @app.route('/mentor/interview', methods=["GET"])
 def show_mentor_interview():
     if not session.get('mentor_id'):
@@ -154,9 +153,10 @@ def show_mentor_interview():
         slots = InterviewSlot.select()
         interviews_list = []
         interviews = Interview.select()
-
+        header = "You are free now"
         for slot in slots:
             if slot.mentor.id == session['mentor_id']:
+                header = slot.mentor.last_name + "'s interviews"
                 for interview in interviews:
                     if interview.slot_id == slot:
                         interviews_list.append([str(slot.start_time),
@@ -164,8 +164,7 @@ def show_mentor_interview():
                                                 interview.applicant_code.first_name + ' ' + interview.applicant_code.last_name,
                                                 interview.applicant_code.applicant_code])
 
-
-        return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
+        return render_template('mentors_interviews.html', header=header, interviews=interviews_list)
 
 
 @app.route('/registration', methods=['GET'])
@@ -233,13 +232,9 @@ def profile():
 def interview():
     user = Applicant.select().where(Applicant.id == session['applicant_id']).get()
     interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['applicant_id']).get()
-
     return render_template('app_interview.html', user=user, interview=interview)
 
-
-
-
-  
+ 
 @app.route("/admin/filter_applicants", methods=["GET", "POST"])
 def filter():
     if not session.get('admin_logged_in'):
@@ -327,6 +322,8 @@ def logout():
     elif session.get('mentor_id'):
         session.pop('mentor_id', None)
         return redirect(url_for('mentor_login'))
+    else:
+        return redirect(url_for('index'))
 
       
 @app.route('/contact')
