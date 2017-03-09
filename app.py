@@ -198,9 +198,9 @@ def show_sent_email():
         return render_template('show_email.html', header="List of all emails", emails=emails_list)
 
 
-@app.route('/applicant', methods=["GET"])
-def show_applicants_interface():
-    return render_template('applicant_interface.html')
+# @app.route('/applicant', methods=["GET"])
+# def show_applicants_interface():
+#     return render_template('applicant_interface.html')
 
 
 @app.route('/applicant/profile')
@@ -212,7 +212,9 @@ def profile():
 @app.route('/applicant/interview')
 def interview():
     user = Applicant.select().where(Applicant.id == session['user_id']).get()
-    return render_template('app_interview.html', user=user)
+    interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['user_id']).get()
+
+    return render_template('app_interview.html', user=user, interview=interview)
 
 
 @app.route('/logout')
