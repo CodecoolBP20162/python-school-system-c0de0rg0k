@@ -69,7 +69,7 @@ def login():
                 session['admin_logged_in'] = True
                 return redirect(url_for('show_admin_menu'))
 
-        return render_template('login.html', error=error)
+        return render_template('admin_login.html', error=error)
 
 
 @app.route('/admin-login/', methods=["GET"])
