@@ -333,7 +333,7 @@ def logout():
       
 @app.route('/contact')
 def contact():
-    return render_template('contact.html', page="cont")
+    return render_template('contact.html', page="contact")
 
 
 if __name__ == '__main__':
