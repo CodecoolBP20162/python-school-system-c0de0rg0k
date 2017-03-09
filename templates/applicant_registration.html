@@ -1,20 +1,28 @@
 {% extends "homepage_interface.html" %}
 {% block content %}
-<h1> Applicant registration </h1>
-<p>{{ message }}</p>
-    <form action="/registration" method="POST">
-        <label for="first_name">First name:</label><br>
-        <input type=text size=50 name="first_name" id="first_name" value="{{ first_name }}"><br>
+<div class="col-lg-6">
+<h1 class="modal-header">Applicant registration </h1>
+    {% if message %}
+    <div class="alert alert-danger">
+        <strong>{{ message }}</strong>
+    </div>
+    {% endif %}
+    <form role="form" action="/registration" method="POST">
+        <div class="form-group">
+        <label for="first_name">First name</label><br>
+        <input class="form-control" placeholder="Example: Andrea" type=text size=50 name="first_name" id="first_name" value="{{ first_name }}"><br>
         <label for="last_name">Last name</label><br>
-        <input type=text size=50 name="last_name" id="last_name" value="{{ last_name }}"><br>
+        <input class="form-control" placeholder="Example: Bock" type=text size=50 name="last_name" id="last_name" value="{{ last_name }}"><br>
         <label for="applicant_city">Your city</label><br>
-        <input type=text size=50 name="applicant_city" id="applicant_city" value="{{ applicant_city }}"><br>
+        <input class="form-control" placeholder="Example: Szolnok" type=text size=50 name="applicant_city" id="applicant_city" value="{{ applicant_city }}"><br>
         <label for="email_address">E-mail address</label><br>
-        <input type=text size=50 name="email_address" id="email_address" value="{{ email_address }}"><br><br>
-        <button class="btn btn-primary" type="submit" id="submit_registration_button">Register</button>
+        <input class="form-control" placeholder="Example: andrea.bock@codeorgok.com" type=text size=50 name="email_address" id="email_address" value="{{ email_address }}"><br>
+        <button class="btn btn-lg btn-success" type="submit" id="submit_registration_button">Register</button>
+        </div>
     </form>
 
 <a href="{{url_for('index')}}">
-          <br><button class="btn btn-primary" type="submit">Back</button>
+          <button class="btn btn-danger" type="submit">Back</button>
 </a>
+</div>
 {% endblock %}
