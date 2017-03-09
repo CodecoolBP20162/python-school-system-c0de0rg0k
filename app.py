@@ -231,7 +231,12 @@ def profile():
 @app.route('/applicant/interview')
 def interview():
     user = Applicant.select().where(Applicant.id == session['applicant_id']).get()
-    interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['applicant_id']).get()
+    try:
+        interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['applicant_id']).get()
+    except:
+        error = "You don't have an interview yet."
+        return render_template('app_interview.html', user=user, error=error)
+
     return render_template('app_interview.html', user=user, interview=interview)
 
  

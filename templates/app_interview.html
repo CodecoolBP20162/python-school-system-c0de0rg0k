@@ -2,12 +2,15 @@
 {% block interview %}
 
 <h3>Your Interview Details are:</h3>
-
+    {% if not error %}
     <ul class="lead">
         <li>Your mentor is {{ interview.slot_id.mentor.last_name }}</li>
         <li>Your school is CodeCool {{ user.applied_school.city }}</li>
         <li>The start time of your interview is {{ interview.slot_id.start_time }}</li>
     </ul>
+    {% else %}
+    <h4 class="lead">{{ error }}</h4>
+    {% endif %}
 
 
     <div class="col-lg-6" style="float: left">
