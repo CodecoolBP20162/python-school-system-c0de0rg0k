@@ -1,7 +1,10 @@
 {% extends "applicant_interface.html" %}
 {% block profile %}
 
-<h1>Profile</h1>
-Hello {{ user.first_name }}{{  user.last_name  }}
+
+<ul class="lead">
+    <li>Your status is: {{ user.status }}</li>
+    <li>Your school is: Codecool {{ user.applied_school.city}}</li>
+</ul>
 
 {% endblock %}
