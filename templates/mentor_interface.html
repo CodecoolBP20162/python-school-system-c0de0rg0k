@@ -26,9 +26,9 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="{{ url_for('show_mentor_interviews') }}"><i class="fa fa-fw fa-table"></i> List interviews</a>
-                    </li>
+                    <li><a href="{{ url_for('show_mentor_interviews') }}"><i class="fa fa-fw fa-table"></i> List interviews</a></li>
+                    <li>-----------------------------------------------</li>
+                    <li class="active"><a href="{{ url_for('logout') }}"> Logout</a></li>
                 </ul>
             </div>
         </nav>   <!-- /.navbar-collapse -->
