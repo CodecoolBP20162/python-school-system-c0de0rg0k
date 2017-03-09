@@ -48,7 +48,7 @@ def about_us():
 
 @app.route('/admin/login', methods=['GET', 'POST'])
 def login():
-    if session.get('applicant_logged_in'):
+    if session.get('user_id'):
         error = "You are already logged in as applicant. Please log out first"
         return render_template('already_logged_in.html', error=error)
     elif session.get('mentor_logged_in'):
@@ -198,20 +198,20 @@ def show_sent_email():
         return render_template('admin_show_email.html', header="List of all emails", emails=emails_list)
 
 
-@app.route('/applicant', methods=["GET"])
-def show_applicants_interface():
-    return render_template('applicant_interface.html')
-
-
 @app.route('/applicant/profile')
 def profile():
-    return render_template('profile.html')
+    user = Applicant.select().where(Applicant.id == session['user_id']).get()
+    return render_template('profile.html', user=user)
 
 
 @app.route('/applicant/interview')
 def interview():
-    return render_template('app_interview.html')
-
+    try:
+        interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['user_id']).get()
+    except:
+        error = "You don't have an interview slot yet!"
+        return render_template('app_interview.html', error = error)
+    return render_template('app_interview.html', interview=interview)
 
 
   
@@ -243,8 +243,8 @@ def applicant_login():
     elif session.get('mentor_logged_in'):
         error = "You are already logged in as mentor. Please log out first"
         return render_template('already_logged_in.html', error=error)
-    elif session.get('applicant_logged_in'):
-        return render_template('applicant_interface.html')
+    elif session.get('user_id'):
+        return redirect(url_for('profile'))
     else:
         error = ""
         return render_template('applicant_login.html', error=error)
@@ -255,20 +255,20 @@ def validate_applicant():
     applicant_email = request.form['email']
     application_code = request.form['applicant_code']
     try:
-        applicant = Applicant.select().where(Applicant.applicant_code== application_code, Applicant.email == applicant_email).get()
+        user = Applicant.select().where(Applicant.applicant_code== application_code, Applicant.email == applicant_email).get()
     except:
         error = "Wrong email or applicant code"
         return render_template('applicant_login.html', error=error)
-    session['applicant_logged_in'] = True
-    return redirect(url_for('applicant_login'))
+    session['user_id'] = user.id
+    return applicant_login()
 
-
+  
 @app.route("/mentor/login/", methods=["GET"])
 def mentor_login():
     if session.get('admin_logged_in'):
         error = "You are already logged in as admin. Please log out first"
         return render_template('already_logged_in.html', error=error)
-    elif session.get('applicant_logged_in'):
+    elif session.get('user_id'):
         error = "You are already logged in as applicant. Please log out first"
         return render_template('already_logged_in.html', error=error)
     elif session.get('mentor_logged_in'):
