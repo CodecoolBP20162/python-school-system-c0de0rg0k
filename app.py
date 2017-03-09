@@ -145,7 +145,6 @@ def show_mentors_interviews():
         return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
 
 
-# ez új def!
 @app.route('/mentor/interview', methods=["GET"])
 def show_mentor_interview():
     if not session.get('mentor_id'):
