@@ -153,7 +153,7 @@ def show_mentor_interview():
         slots = InterviewSlot.select()
         interviews_list = []
         interviews = Interview.select()
-
+        header = "You are free now"
         for slot in slots:
             if slot.mentor.id == session['mentor_id']:
                 header = slot.mentor.last_name + "'s interviews"
@@ -324,6 +324,8 @@ def logout():
     elif session.get('mentor_id'):
         session.pop('mentor_id', None)
         return redirect(url_for('mentor_login'))
+    else:
+        return redirect(url_for('index'))
 
       
 @app.route('/contact')
