@@ -48,7 +48,7 @@ def about_us():
 
 @app.route('/admin/login', methods=['GET', 'POST'])
 def login():
-    if session.get('user_id'):
+    if session.get('applicant_id'):
         error = "You are already logged in as applicant. Please log out first"
         return render_template('already_logged_in.html', error=error)
     elif session.get('mentor_id'):
@@ -145,7 +145,6 @@ def show_mentors_interviews():
         return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
 
 
-# ez új def!
 @app.route('/mentor/interview', methods=["GET"])
 def show_mentor_interview():
     if not session.get('mentor_id'):
@@ -154,9 +153,10 @@ def show_mentor_interview():
         slots = InterviewSlot.select()
         interviews_list = []
         interviews = Interview.select()
-
+        header = "You are free now"
         for slot in slots:
             if slot.mentor.id == session['mentor_id']:
+                header = slot.mentor.last_name + "'s interviews"
                 for interview in interviews:
                     if interview.slot_id == slot:
                         interviews_list.append([str(slot.start_time),
@@ -164,8 +164,7 @@ def show_mentor_interview():
                                                 interview.applicant_code.first_name + ' ' + interview.applicant_code.last_name,
                                                 interview.applicant_code.applicant_code])
 
-
-        return render_template('mentors_interviews.html', header="Mentor's interviews", interviews=interviews_list)
+        return render_template('mentors_interviews.html', header=header, interviews=interviews_list)
 
 
 @app.route('/registration', methods=['GET'])
@@ -223,15 +222,15 @@ def show_sent_email():
 
 @app.route('/applicant/profile')
 def profile():
-    user = Applicant.select().where(Applicant.id == session['user_id']).get()
+    user = Applicant.select().where(Applicant.id == session['applicant_id']).get()
     return render_template('profile.html', user=user)
 
 
 @app.route('/applicant/interview')
 def interview():
     try:
-        interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['user_id']).get()
-        user = Applicant.select().where(Applicant.id == session['user_id']).get()
+        interview = Interview.select().join(InterviewSlot).join(Mentor).where(Interview.applicant_code == session['applicant_id']).get()
+        user = Applicant.select().where(Applicant.id == session['applicant_id']).get()
     except:
         error = "You don't have an interview slot yet!"
         return render_template('app_interview.html', error = error)
@@ -266,7 +265,7 @@ def applicant_login():
     elif session.get('mentor_id'):
         error = "You are already logged in as mentor. Please log out first"
         return render_template('already_logged_in.html', error=error)
-    elif session.get('user_id'):
+    elif session.get('applicant_id'):
         return redirect(url_for('profile'))
     else:
         error = ""
@@ -282,7 +281,7 @@ def validate_applicant():
     except:
         error = "Wrong email or applicant code"
         return render_template('applicant_login.html', error=error)
-    session['user_id'] = user.id
+    session['applicant_id'] = user.id
     return applicant_login()
 
   
@@ -291,7 +290,7 @@ def mentor_login():
     if session.get('admin_logged_in'):
         error = "You are already logged in as admin. Please log out first"
         return render_template('already_logged_in.html', error=error)
-    elif session.get('user_id'):
+    elif session.get('applicant_id'):
         error = "You are already logged in as applicant. Please log out first"
         return render_template('already_logged_in.html', error=error)
     elif session.get('mentor_id'):
@@ -314,17 +313,19 @@ def validate_mentor():
     return redirect(url_for('mentor_login'))
 
 
-@app.route('/logout')
+@app.route('/logout/')
 def logout():
     if session.get('admin_logged_in'):
         session.pop('admin_logged_in', None)
         return redirect(url_for('login'))
-    elif session.get('applicant_logged_in'):
-        session.pop('applicant_logged_in', None)
+    elif session.get('applicant_id'):
+        session.pop('applicant_id', None)
         return redirect(url_for('applicant_login'))
     elif session.get('mentor_id'):
         session.pop('mentor_id', None)
         return redirect(url_for('mentor_login'))
+    else:
+        return redirect(url_for('index'))
 
       
 @app.route('/contact')
