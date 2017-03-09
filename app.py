@@ -28,22 +28,22 @@ def init_db():
 
 @app.route('/')
 def index():
-    return render_template('homepage_home.html')
+    return render_template('homepage_home.html', page="home")
 
 
 @app.route('/about-the-training')
 def about_training():
-    return render_template("homepage_about_training.html")
+    return render_template("homepage_about_training.html", page="training")
 
 
 @app.route('/principles')
 def principles():
-    return render_template("homepage_principles.html")
+    return render_template("homepage_principles.html", page="principles")
 
 
 @app.route('/about-us')
 def about_us():
-    return render_template("homepage_about_us.html")
+    return render_template("homepage_about_us.html", page="aboutus")
 
 
 @app.route('/admin/login', methods=['GET', 'POST'])
@@ -175,7 +175,7 @@ def show_registration_form():
     applicant_city = ""
     email_address = ""
     return render_template('applicant_registration.html', message = message, first_name=first_name, last_name=last_name,
-                           applicant_city=applicant_city, email_address=email_address)
+                           applicant_city=applicant_city, email_address=email_address, page="reg")
 
 
 @app.route('/registration', methods=['POST'])
@@ -333,7 +333,7 @@ def logout():
       
 @app.route('/contact')
 def contact():
-    return render_template('contact.html')
+    return render_template('contact.html', page="contact")
 
 
 if __name__ == '__main__':
